@@ -5,7 +5,7 @@ nixPkgs = ["nodejs_20"]
 cmds = ["npm install --legacy-peer-deps --no-scripts"]
 
 [phases.build]
-cmds = ["NEXT_TELEMETRY_DISABLED=1 npm run build --no-lint"]
+cmds = ["npm run build"]
 
 [start]
 cmd = "npm run start"

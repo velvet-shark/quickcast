@@ -3,13 +3,12 @@ import { getPageContent } from "@/app/lib/getContent";
 import { Markdown } from "@/app/components/Markdown";
 
 export default async function Page() {
-  const dirName = path.basename(path.dirname(import.meta.url));
-  const content = await getPageContent(`${dirName}.md`);
+    const dirName = path.basename(path.dirname(import.meta.url));
+    const content = await getPageContent(`${dirName}.md`);
 
-  return (
-    <div className="p-4">
-      Examples of usage
-      <Markdown content={content ?? ""} />
-    </div>
-  );
+    return (
+        <div className="p-4">
+            <Markdown content={content ?? ""} />
+        </div>
+    );
 }

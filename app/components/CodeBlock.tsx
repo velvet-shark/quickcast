@@ -11,8 +11,7 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ children, language }) => {
         <SyntaxHighlighter
             style={darkTheme}
             className="rounded-none"
-            // language={language}
-            language="shell"
+            language={language}
             lineProps={{
                 style: {
                     wordBreak: "break-word",

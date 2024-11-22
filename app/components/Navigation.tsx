@@ -6,8 +6,8 @@ export function Navigation() {
                     <img src="/quickcast-logo.svg" alt="QuickCast" className="h-8" />
                 </a>
             </div>
-            <h3 className="text-l font-semibold my-2">Chain Commands</h3>
-            <ul>
+            <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Chain Commands</h3>
+            <ul className="text-sm space-y-1">
                 <li>
                     <a href="/commands/cast-chain-id">
                         <code>cast chain-id</code>
@@ -24,8 +24,8 @@ export function Navigation() {
                     </a>
                 </li>
             </ul>
-            <h3 className="text-l font-semibold my-2">Transaction Commands</h3>
-            <ul>
+            <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Transaction Commands</h3>
+            <ul className="text-sm space-y-1">
                 <li>
                     <a href="/commands/cast-publish">
                         <code>cast publish</code>
@@ -77,8 +77,8 @@ export function Navigation() {
                     </a>
                 </li>
             </ul>
-            <h3 className="text-l font-semibold my-2">Block Commands</h3>
-            <ul>
+            <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Block Commands</h3>
+            <ul className="text-sm space-y-1">
                 <li>
                     <a href="/commands/cast-find-block">
                         <code>cast find-block</code>
@@ -110,8 +110,8 @@ export function Navigation() {
                     </a>
                 </li>
             </ul>
-            <h3 className="text-l font-semibold my-2">Account Commands</h3>
-            <ul>
+            <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Account Commands</h3>
+            <ul className="text-sm space-y-1">
                 <li>
                     <a href="/commands/cast-balance">
                         <code>cast balance</code>
@@ -138,8 +138,8 @@ export function Navigation() {
                     </a>
                 </li>
             </ul>
-            <h3 className="text-l font-semibold my-2">ENS Commands</h3>
-            <ul>
+            <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">ENS Commands</h3>
+            <ul className="text-sm space-y-1">
                 <li>
                     <a href="/commands/cast-lookup-address">
                         <code>cast lookup-address</code>
@@ -156,16 +156,16 @@ export function Navigation() {
                     </a>
                 </li>
             </ul>
-            <h3 className="text-l font-semibold my-2">Etherscan Commands</h3>
-            <ul>
+            <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Etherscan Commands</h3>
+            <ul className="text-sm space-y-1">
                 <li>
                     <a href="/commands/cast-etherscan-source">
                         <code>cast etherscan-source</code>
                     </a>
                 </li>
             </ul>
-            <h3 className="text-l font-semibold my-2">ABI Commands</h3>
-            <ul>
+            <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">ABI Commands</h3>
+            <ul className="text-sm space-y-1">
                 <li>
                     <a href="/commands/cast-abi-decode">
                         <code>cast abi-decode</code>
@@ -217,8 +217,8 @@ export function Navigation() {
                     </a>
                 </li>
             </ul>
-            <h3 className="text-l font-semibold my-2">Conversion Commands</h3>
-            <ul>
+            <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Conversion Commands</h3>
+            <ul className="text-sm space-y-1">
                 <li>
                     <a href="/commands/cast-format-bytes32-string">
                         <code>cast format-bytes32-string</code>
@@ -315,8 +315,8 @@ export function Navigation() {
                     </a>
                 </li>
             </ul>
-            <h3 className="text-l font-semibold my-2">Utility Commands</h3>
-            <ul>
+            <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Utility Commands</h3>
+            <ul className="text-sm space-y-1">
                 <li>
                     <a href="/commands/cast-address-zero">
                         <code>cast address-zero</code>
@@ -383,8 +383,8 @@ export function Navigation() {
                     </a>
                 </li>
             </ul>
-            <h3 className="text-l font-semibold my-2">Wallet Commands</h3>
-            <ul>
+            <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Wallet Commands</h3>
+            <ul className="text-sm space-y-1">
                 <li>
                     <a href="/commands/cast-wallet">
                         <code>cast wallet</code>
@@ -416,8 +416,8 @@ export function Navigation() {
                     </a>
                 </li>
             </ul>
-            <h3 className="text-l font-semibold my-2">General Commands</h3>
-            <ul>
+            <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">General Commands</h3>
+            <ul className="text-sm space-y-1">
                 <li>
                     <a href="/commands/cast-help">
                         <code>cast help</code>

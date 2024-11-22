@@ -1,4 +1,3 @@
-import path from "path";
 import { getPageContent } from "@/app/lib/getContent";
 import { Markdown } from "@/app/components/Markdown";
 

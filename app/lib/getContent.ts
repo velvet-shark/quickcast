@@ -1,6 +1,10 @@
 import fs from "fs";
 import path from "path";
 
+function stripMdExtensions(text: string): string {
+  return text.replaceAll(/\.md/g, "");
+}
+
 async function resolveInclude(
   basePath: string,
   includePath: string,
@@ -65,7 +69,7 @@ export async function getPageContent(pagePath: string) {
       }
     }
 
-    return content;
+    return stripMdExtensions(content);
   } catch (error) {
     console.error("Error reading file:", error);
     return null;

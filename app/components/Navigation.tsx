@@ -60,17 +60,17 @@ export function Navigation() {
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Chain Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/commands/cast-chain-id">
+            <Link href="/cast-chain-id">
               <code>cast chain-id</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-chain">
+            <Link href="/cast-chain">
               <code>cast chain</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-client">
+            <Link href="/cast-client">
               <code>cast client</code>
             </Link>
           </li>
@@ -78,52 +78,52 @@ export function Navigation() {
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Transaction Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/commands/cast-publish">
+            <Link href="/cast-publish">
               <code>cast publish</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-receipt">
+            <Link href="/cast-receipt">
               <code>cast receipt</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-send">
+            <Link href="/cast-send">
               <code>cast send</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-call">
+            <Link href="/cast-call">
               <code>cast call</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-rpc">
+            <Link href="/cast-rpc">
               <code>cast rpc</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-tx">
+            <Link href="/cast-tx">
               <code>cast tx</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-run">
+            <Link href="/cast-run">
               <code>cast run</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-estimate">
+            <Link href="/cast-estimate">
               <code>cast estimate</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-access-list">
+            <Link href="/cast-access-list">
               <code>cast access-list</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-logs">
+            <Link href="/cast-logs">
               <code>cast logs</code>
             </Link>
           </li>
@@ -131,32 +131,32 @@ export function Navigation() {
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Block Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/commands/cast-find-block">
+            <Link href="/cast-find-block">
               <code>cast find-block</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-gas-price">
+            <Link href="/cast-gas-price">
               <code>cast gas-price</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-block-number">
+            <Link href="/cast-block-number">
               <code>cast block-number</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-basefee">
+            <Link href="/cast-basefee">
               <code>cast basefee</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-block">
+            <Link href="/cast-block">
               <code>cast block</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-age">
+            <Link href="/cast-age">
               <code>cast age</code>
             </Link>
           </li>
@@ -164,32 +164,32 @@ export function Navigation() {
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Account Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/commands/cast-balance">
+            <Link href="/cast-balance">
               <code>cast balance</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-storage">
+            <Link href="/cast-storage">
               <code>cast storage</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-proof">
+            <Link href="/cast-proof">
               <code>cast proof</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-nonce">
+            <Link href="/cast-nonce">
               <code>cast nonce</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-code">
+            <Link href="/cast-code">
               <code>cast code</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-codesize">
+            <Link href="/cast-codesize">
               <code>cast codesize</code>
             </Link>
           </li>
@@ -197,17 +197,17 @@ export function Navigation() {
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">ENS Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/commands/cast-lookup-address">
+            <Link href="/cast-lookup-address">
               <code>cast lookup-address</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-resolve-name">
+            <Link href="/cast-resolve-name">
               <code>cast resolve-name</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-namehash">
+            <Link href="/cast-namehash">
               <code>cast namehash</code>
             </Link>
           </li>
@@ -215,7 +215,7 @@ export function Navigation() {
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Etherscan Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/commands/cast-etherscan-source">
+            <Link href="/cast-etherscan-source">
               <code>cast etherscan-source</code>
             </Link>
           </li>
@@ -223,52 +223,52 @@ export function Navigation() {
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">ABI Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/commands/cast-abi-decode">
+            <Link href="/cast-abi-decode">
               <code>cast abi-decode</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-abi-encode">
+            <Link href="/cast-abi-encode">
               <code>cast abi-encode</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-4byte">
+            <Link href="/cast-4byte">
               <code>cast 4byte</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-4byte-decode">
+            <Link href="/cast-4byte-decode">
               <code>cast 4byte-decode</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-4byte-event">
+            <Link href="/cast-4byte-event">
               <code>cast 4byte-event</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-calldata">
+            <Link href="/cast-calldata">
               <code>cast calldata</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-calldata-decode">
+            <Link href="/cast-calldata-decode">
               <code>cast calldata-decode</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-pretty-calldata">
+            <Link href="/cast-pretty-calldata">
               <code>cast pretty-calldata</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-selectors">
+            <Link href="/cast-selectors">
               <code>cast selectors</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-upload-signature">
+            <Link href="/cast-upload-signature">
               <code>cast upload-signature</code>
             </Link>
           </li>
@@ -276,107 +276,107 @@ export function Navigation() {
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Conversion Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/commands/cast-format-bytes32-string">
+            <Link href="/cast-format-bytes32-string">
               <code>cast format-bytes32-string</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-from-bin">
+            <Link href="/cast-from-bin">
               <code>cast from-bin</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-from-fixed-point">
+            <Link href="/cast-from-fixed-point">
               <code>cast from-fixed-point</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-from-utf8">
+            <Link href="/cast-from-utf8">
               <code>cast from-utf8</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-from-wei">
+            <Link href="/cast-from-wei">
               <code>cast from-wei</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-parse-bytes32-address">
+            <Link href="/cast-parse-bytes32-address">
               <code>cast parse-bytes32-address</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-parse-bytes32-string">
+            <Link href="/cast-parse-bytes32-string">
               <code>cast parse-bytes32-string</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-to-ascii">
+            <Link href="/cast-to-ascii">
               <code>cast to-ascii</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-to-base">
+            <Link href="/cast-to-base">
               <code>cast to-base</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-to-bytes32">
+            <Link href="/cast-to-bytes32">
               <code>cast to-bytes32</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-to-dec">
+            <Link href="/cast-to-dec">
               <code>cast to-dec</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-to-fixed-point">
+            <Link href="/cast-to-fixed-point">
               <code>cast to-fixed-point</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-to-hex">
+            <Link href="/cast-to-hex">
               <code>cast to-hex</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-to-hexdata">
+            <Link href="/cast-to-hexdata">
               <code>cast to-hexdata</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-to-int256">
+            <Link href="/cast-to-int256">
               <code>cast to-int256</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-to-rlp">
+            <Link href="/cast-to-rlp">
               <code>cast to-rlp</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-to-uint256">
+            <Link href="/cast-to-uint256">
               <code>cast to-uint256</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-to-uint">
+            <Link href="/cast-to-uint">
               <code>cast to-uint</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-to-wei">
+            <Link href="/cast-to-wei">
               <code>cast to-wei</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-shl">
+            <Link href="/cast-shl">
               <code>cast shl</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-shr">
+            <Link href="/cast-shr">
               <code>cast shr</code>
             </Link>
           </li>
@@ -384,67 +384,67 @@ export function Navigation() {
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Utility Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/commands/cast-address-zero">
+            <Link href="/cast-address-zero">
               <code>cast address-zero</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-sig">
+            <Link href="/cast-sig">
               <code>cast sig</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-sig-event">
+            <Link href="/cast-sig-event">
               <code>cast sig-event</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-keccak">
+            <Link href="/cast-keccak">
               <code>cast keccak</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-compute-address">
+            <Link href="/cast-compute-address">
               <code>cast compute-address</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-create2">
+            <Link href="/cast-create2">
               <code>cast create2</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-interface">
+            <Link href="/cast-interface">
               <code>cast interface</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-index">
+            <Link href="/cast-index">
               <code>cast index</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-concat-hex">
+            <Link href="/cast-concat-hex">
               <code>cast concat-hex</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-max-int">
+            <Link href="/cast-max-int">
               <code>cast max-int</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-min-int">
+            <Link href="/cast-min-int">
               <code>cast min-int</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-max-uint">
+            <Link href="/cast-max-uint">
               <code>cast max-uint</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-to-check-sum-address">
+            <Link href="/cast-to-check-sum-address">
               <code>cast to-check-sum-address</code>
             </Link>
           </li>
@@ -452,32 +452,32 @@ export function Navigation() {
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Wallet Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/commands/cast-wallet">
+            <Link href="/cast-wallet">
               <code>cast wallet</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-wallet-new">
+            <Link href="/cast-wallet-new">
               <code>cast wallet new</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-wallet-address">
+            <Link href="/cast-wallet-address">
               <code>cast wallet address</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-wallet-sign">
+            <Link href="/cast-wallet-sign">
               <code>cast wallet sign</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-wallet-vanity">
+            <Link href="/cast-wallet-vanity">
               <code>cast wallet vanity</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-wallet-verify">
+            <Link href="/cast-wallet-verify">
               <code>cast wallet verify</code>
             </Link>
           </li>
@@ -485,12 +485,12 @@ export function Navigation() {
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">General Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/commands/cast-help">
+            <Link href="/cast-help">
               <code>cast help</code>
             </Link>
           </li>
           <li>
-            <Link href="/commands/cast-completions">
+            <Link href="/cast-completions">
               <code>cast completions</code>
             </Link>
           </li>

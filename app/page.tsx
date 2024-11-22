@@ -1,7 +1,17 @@
-export default function Home() {
+import path from "path";
+import { getPageContent } from "@/app/lib/getContent";
+import { Markdown } from "@/app/components/Markdown";
+
+export default async function Home() {
+  const content = await getPageContent("cast.md");
+
   return (
     <div className="h-full flex dark:bg-[#1F1F1F] font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-2 items-center sm:items-start">
+      <div>What's this site about.</div>
+      <div className="p-4">
+        <Markdown content={content ?? ""} />
+      </div>
+      {/* <main className="flex flex-col gap-2 items-center sm:items-start">
         <h1 className="text-4xl font-bold">
           Quick<code className="bg-neutral-100 dark:bg-neutral-900 px-1 rounded">cast</code>.dev
         </h1>
@@ -274,7 +284,7 @@ export default function Home() {
             <code>cast wallet verify</code> Verify the signature of a message.
           </li>
         </ul>
-      </main>
+      </main> */}
     </div>
   );
 }

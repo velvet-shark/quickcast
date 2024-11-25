@@ -1,5 +1,5 @@
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { CopyButton } from "./CopyButton";
 
 interface Props {
@@ -16,7 +16,7 @@ export function CodeBlock({ children, className, language }: Props) {
     <div className="relative group font-mono">
       <SyntaxHighlighter
         language={lang}
-        style={oneDark}
+        style={dracula}
         customStyle={{
           margin: 0,
           borderRadius: "0.375rem",

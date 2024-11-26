@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Navigation } from "./components/Navigation";
+import PlausibleProvider from "next-plausible";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,6 +29,12 @@ export default function RootLayout({
     <html lang="en" className="h-full">
       <head>
         <link rel="icon" href="/favicon.png" />
+        <PlausibleProvider
+          domain="eip.directory"
+          selfHosted
+          trackOutboundLinks
+          customDomain="https://pls.velvetshark.com"
+        />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}>
         <div className="min-h-full flex flex-col sm:flex-row dark:bg-[#1F1F1F]">

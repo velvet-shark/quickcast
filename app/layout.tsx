@@ -26,6 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full">
+      <head>
+        <link rel="icon" href="/favicon.png" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}>
         <div className="min-h-full flex flex-col sm:flex-row dark:bg-[#1F1F1F]">
           <Navigation />

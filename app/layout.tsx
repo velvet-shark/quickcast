@@ -30,7 +30,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.png" />
         <PlausibleProvider
-          domain="eip.directory"
+          domain="quickcast.dev"
           selfHosted
           trackOutboundLinks
           customDomain="https://pls.velvetshark.com"

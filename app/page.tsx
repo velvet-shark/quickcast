@@ -12,7 +12,7 @@ export default async function Home() {
         <a href="https://getfoundry.sh/" className="text-blue-500 underline" target="_blank">
           Foundry
         </a>
-        ’s command-line tool for performing Ethereum RPC calls.
+        &apos;s command-line tool for performing Ethereum RPC calls.
       </p>
 
       <h2 className="text-2xl font-bold mb-2 mt-8">Documentation</h2>

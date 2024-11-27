@@ -2,8 +2,30 @@ import path from "path";
 import { getPageContent } from "@/app/lib/getContent";
 import { Markdown } from "@/app/components/Markdown";
 import { Example } from "@/app/components/Example";
+import { getCommandMetadata } from "@/app/lib/getCommandMetadata";
+import { Metadata } from "next";
 
-export default async function CastToDecPage() {
+export async function generateMetadata(): Promise<Metadata> {
+  const dirName = path.basename(path.dirname(import.meta.url));
+  const { title, description } = getCommandMetadata(dirName);
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article"
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description
+    }
+  };
+}
+
+export default async function CommandPage() {
   const dirName = path.basename(path.dirname(import.meta.url));
   const content = await getPageContent(`${dirName}.md`);
 

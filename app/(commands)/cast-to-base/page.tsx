@@ -1,59 +1,29 @@
 import path from "path";
 import { getPageContent } from "@/app/lib/getContent";
-import { Markdown } from "@/app/components/Markdown";
+import { CommandPageTemplate, generateCommandMetadata } from "../components/CommandPageTemplate";
 import { Example } from "@/app/components/Example";
-import { getCommandMetadata } from "@/app/lib/getCommandMetadata";
-import { Metadata } from "next";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const dirName = path.basename(path.dirname(import.meta.url));
-  const { title, description } = getCommandMetadata(dirName);
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: "article"
-    },
-    twitter: {
-      card: "summary",
-      title,
-      description
-    }
-  };
-}
+export const generateMetadata = () => generateCommandMetadata(import.meta.url);
 
 export default async function CommandPage() {
   const dirName = path.basename(path.dirname(import.meta.url));
   const content = await getPageContent(`${dirName}.md`);
 
-  return (
-    <>
-      {/* Run command */}
-      {/* <div>
-      </div> */}
+  //   const examples = (
+  //     <>
+  //       <Example description="Description:" command="cast command arguments" output="output" />
 
-      {/* Examples */}
-      {/* <div>
-        <h2 className="text-2xl font-bold mb-2">Examples</h2>
-        <section className="bg-white dark:bg-neutral-900 rounded-lg p-6 border dark:border-neutral-800">
-          <div className="space-y-6">
-            <Example description="Description:" command="cast command arguments" output="output" />
-          </div>
-        </section>
-      </div> */}
+  //       <Example
+  //         description="Convert multiple values with --json:"
+  //         command="cast to-dec --json 0xff 0xdeadbeef 0x1234"
+  //         output={`{
+  //   "0xff": "255",
+  //   "0xdeadbeef": "3735928559",
+  //   "0x1234": "4660"
+  // }`}
+  //       />
+  //     </>
+  //   );
 
-      {/* Command Documentation */}
-      <div>
-        <h2 className="text-2xl font-bold mb-2">Documentation</h2>
-        <section className="bg-yellow-50 dark:bg-neutral-900 rounded-lg px-4 py-2 border dark:border-neutral-800">
-          <div className="prose dark:prose-invert max-w-none">
-            <Markdown content={content ?? ""} className="bg-yellow-50" />
-          </div>
-        </section>
-      </div>
-    </>
-  );
+  return <CommandPageTemplate content={content} examples={typeof examples !== "undefined" ? examples : undefined} />;
 }

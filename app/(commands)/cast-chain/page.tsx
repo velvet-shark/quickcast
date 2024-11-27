@@ -14,14 +14,23 @@ export default async function CastToDecPage() {
       </div> */}
 
       {/* Examples */}
-      {/* <div>
+      <div>
         <h2 className="text-2xl font-bold mb-2">Examples</h2>
         <section className="bg-white dark:bg-neutral-900 rounded-lg p-6 border dark:border-neutral-800">
           <div className="space-y-6">
-            <Example description="Description:" command="cast command arguments" output="output" />
+            <Example
+              description="When providing a RPC endpoint URL:"
+              command="cast chain --rpc-url https://eth.llamarpc.com"
+              output="ethlive"
+            />
+            <Example
+              description="Works with -r too:"
+              command="cast chain -r https://polygon-rpc.com"
+              output="polygon"
+            />
           </div>
         </section>
-      </div> */}
+      </div>
 
       {/* Command Documentation */}
       <div>

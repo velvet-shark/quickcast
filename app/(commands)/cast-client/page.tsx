@@ -14,14 +14,18 @@ export default async function CastToDecPage() {
       </div> */}
 
       {/* Examples */}
-      {/* <div>
+      <div>
         <h2 className="text-2xl font-bold mb-2">Examples</h2>
         <section className="bg-white dark:bg-neutral-900 rounded-lg p-6 border dark:border-neutral-800">
           <div className="space-y-6">
-            <Example description="Description:" command="cast command arguments" output="output" />
+            <Example
+              description="Current client version (as of November 2024):"
+              command="cast client"
+              output="anvil/v0.2.0"
+            />
           </div>
         </section>
-      </div> */}
+      </div>
 
       {/* Command Documentation */}
       <div>

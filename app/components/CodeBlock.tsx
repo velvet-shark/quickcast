@@ -10,13 +10,17 @@ type CodeBlockProps = {
 export const CodeBlock: React.FC<CodeBlockProps> = ({ children, language }) => {
   return (
     <div className="relative group font-mono">
+      <div className="absolute right-0 top-0 p-2 z-10">
+        <CopyButton text={children} />
+      </div>
       <SyntaxHighlighter
         style={theme}
-        className="rounded-none"
+        className="rounded-none !pr-12"
         // language={language}
         language="shell"
         customStyle={{
-          fontFamily: "var(--font-mono)"
+          fontFamily: "var(--font-mono)",
+          margin: 0
         }}
         codeTagProps={{
           style: {
@@ -33,9 +37,6 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ children, language }) => {
       >
         {children}
       </SyntaxHighlighter>
-      <div className="absolute right-2 top-2">
-        <CopyButton text={children} />
-      </div>
     </div>
   );
 };

@@ -20,17 +20,20 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ children, language }) => {
         language="shell"
         customStyle={{
           fontFamily: "var(--font-mono)",
-          margin: 0
+          margin: 0,
+          fontSize: "0.875rem",
+          lineHeight: "1.25rem"
         }}
         codeTagProps={{
           style: {
-            fontFamily: "inherit"
+            fontFamily: "var(--font-mono)"
           }
         }}
         lineProps={{
           style: {
             wordBreak: "break-word",
-            whiteSpace: "pre-wrap"
+            whiteSpace: "pre-wrap",
+            fontFamily: "var(--font-mono)"
           }
         }}
         wrapLines={true}

@@ -1,9 +1,93 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+
+// Command features configuration
+const commandFeatures: Record<string, { hasExamples?: boolean; hasOnlineExecution?: boolean }> = {
+  "/cast-chain-id": { hasExamples: true, hasOnlineExecution: false },
+  "/cast-chain": { hasExamples: true },
+  "/cast-client": { hasExamples: true, hasOnlineExecution: false },
+  "/cast-publish": { hasExamples: false },
+  "/cast-receipt": { hasExamples: true },
+  "/cast-send": { hasExamples: false, hasOnlineExecution: false },
+  "/cast-call": { hasExamples: false, hasOnlineExecution: false },
+  "/cast-rpc": { hasExamples: false, hasOnlineExecution: false },
+  "/cast-tx": { hasExamples: false, hasOnlineExecution: false },
+  "/cast-run": { hasExamples: false, hasOnlineExecution: false },
+  "/cast-estimate": { hasExamples: false, hasOnlineExecution: false },
+  "/cast-access-list": { hasExamples: false, hasOnlineExecution: false },
+  "/cast-logs": { hasExamples: false },
+  "/cast-find-block": { hasExamples: false },
+  "/cast-gas-price": { hasExamples: false },
+  "/cast-block-number": { hasExamples: false },
+  "/cast-basefee": { hasExamples: false },
+  "/cast-block": { hasExamples: false },
+  "/cast-age": { hasExamples: false },
+  "/cast-balance": { hasExamples: false },
+  "/cast-storage": { hasExamples: false },
+  "/cast-proof": { hasExamples: false },
+  "/cast-nonce": { hasExamples: false },
+  "/cast-code": { hasExamples: false },
+  "/cast-codesize": { hasExamples: false },
+  "/cast-lookup-address": { hasExamples: false },
+  "/cast-resolve-name": { hasExamples: false },
+  "/cast-namehash": { hasExamples: false },
+  "/cast-etherscan-source": { hasExamples: false },
+  "/cast-abi-decode": { hasExamples: false },
+  "/cast-abi-encode": { hasExamples: false },
+  "/cast-4byte": { hasExamples: false },
+  "/cast-4byte-decode": { hasExamples: false },
+  "/cast-4byte-event": { hasExamples: false },
+  "/cast-calldata": { hasExamples: false },
+  "/cast-calldata-decode": { hasExamples: false },
+  "/cast-pretty-calldata": { hasExamples: false },
+  "/cast-selectors": { hasExamples: false },
+  "/cast-upload-signature": { hasExamples: false },
+  "/cast-format-bytes32-string": { hasExamples: false },
+  "/cast-from-bin": { hasExamples: false },
+  "/cast-from-fixed-point": { hasExamples: false },
+  "/cast-from-utf8": { hasExamples: false },
+  "/cast-from-wei": { hasExamples: false },
+  "/cast-parse-bytes32-address": { hasExamples: false },
+  "/cast-parse-bytes32-string": { hasExamples: false },
+  "/cast-to-ascii": { hasExamples: false },
+  "/cast-to-base": { hasExamples: false },
+  "/cast-to-bytes32": { hasExamples: false },
+  "/cast-to-dec": { hasExamples: false },
+  "/cast-to-fixed-point": { hasExamples: false },
+  "/cast-to-hex": { hasExamples: false },
+  "/cast-to-hexdata": { hasExamples: false },
+  "/cast-to-int256": { hasExamples: false },
+  "/cast-to-rlp": { hasExamples: false },
+  "/cast-to-uint256": { hasExamples: false },
+  "/cast-to-uint": { hasExamples: false },
+  "/cast-to-wei": { hasExamples: false },
+  "/cast-shl": { hasExamples: false },
+  "/cast-shr": { hasExamples: false },
+  "/cast-address-zero": { hasExamples: false },
+  "/cast-sig": { hasExamples: false },
+  "/cast-sig-event": { hasExamples: false },
+  "/cast-keccak": { hasExamples: false },
+  "/cast-compute-address": { hasExamples: false },
+  "/cast-create2": { hasExamples: false },
+  "/cast-interface": { hasExamples: false },
+  "/cast-index": { hasExamples: false },
+  "/cast-concat-hex": { hasExamples: false },
+  "/cast-max-int": { hasExamples: false },
+  "/cast-min-int": { hasExamples: false },
+  "/cast-max-uint": { hasExamples: false },
+  "/cast-to-check-sum-address": { hasExamples: false },
+  "/cast-wallet": { hasExamples: false },
+  "/cast-wallet-new": { hasExamples: false },
+  "/cast-wallet-address": { hasExamples: false },
+  "/cast-wallet-sign": { hasExamples: false },
+  "/cast-wallet-vanity": { hasExamples: false },
+  "/cast-wallet-verify": { hasExamples: false },
+  "/cast-help": { hasExamples: false },
+  "/cast-completions": { hasExamples: false }
+};
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +109,48 @@ export function Navigation() {
       document.body.style.overflow = "unset";
     };
   }, [isOpen]);
+
+  const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
+    const features = commandFeatures[href];
+
+    return (
+      <Link href={href} className="group flex items-center justify-between py-0.5">
+        <code>{children}</code>
+        <span className="flex gap-1.5 ml-2">
+          {features?.hasExamples && (
+            <div className="relative flex items-center group/tooltip">
+              <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                />
+              </svg>
+              <div className="absolute right-0 top-0 -mt-8 px-2 py-1 bg-neutral-800 text-white text-xs rounded-md opacity-0 group-hover/tooltip:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                Extra examples
+              </div>
+            </div>
+          )}
+          {features?.hasOnlineExecution && (
+            <div className="relative flex items-center group/tooltip">
+              <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              <div className="absolute right-0 top-0 -mt-8 px-2 py-1 bg-neutral-800 text-white text-xs rounded-md opacity-0 group-hover/tooltip:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                Run it online
+              </div>
+            </div>
+          )}
+        </span>
+      </Link>
+    );
+  };
 
   return (
     <>
@@ -60,439 +186,277 @@ export function Navigation() {
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Chain Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/cast-chain-id">
-              <code>cast chain-id</code>
-            </Link>
+            <NavLink href="/cast-chain-id">cast chain-id</NavLink>
           </li>
           <li>
-            <Link href="/cast-chain">
-              <code>cast chain</code>
-            </Link>
+            <NavLink href="/cast-chain">cast chain</NavLink>
           </li>
           <li>
-            <Link href="/cast-client">
-              <code>cast client</code>
-            </Link>
+            <NavLink href="/cast-client">cast client</NavLink>
           </li>
         </ul>
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Transaction Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/cast-publish">
-              <code>cast publish</code>
-            </Link>
+            <NavLink href="/cast-publish">cast publish</NavLink>
           </li>
           <li>
-            <Link href="/cast-receipt">
-              <code>cast receipt</code>
-            </Link>
+            <NavLink href="/cast-receipt">cast receipt</NavLink>
           </li>
           <li>
-            <Link href="/cast-send">
-              <code>cast send</code>
-            </Link>
+            <NavLink href="/cast-send">cast send</NavLink>
           </li>
           <li>
-            <Link href="/cast-call">
-              <code>cast call</code>
-            </Link>
+            <NavLink href="/cast-call">cast call</NavLink>
           </li>
           <li>
-            <Link href="/cast-rpc">
-              <code>cast rpc</code>
-            </Link>
+            <NavLink href="/cast-rpc">cast rpc</NavLink>
           </li>
           <li>
-            <Link href="/cast-tx">
-              <code>cast tx</code>
-            </Link>
+            <NavLink href="/cast-tx">cast tx</NavLink>
           </li>
           <li>
-            <Link href="/cast-run">
-              <code>cast run</code>
-            </Link>
+            <NavLink href="/cast-run">cast run</NavLink>
           </li>
           <li>
-            <Link href="/cast-estimate">
-              <code>cast estimate</code>
-            </Link>
+            <NavLink href="/cast-estimate">cast estimate</NavLink>
           </li>
           <li>
-            <Link href="/cast-access-list">
-              <code>cast access-list</code>
-            </Link>
+            <NavLink href="/cast-access-list">cast access-list</NavLink>
           </li>
           <li>
-            <Link href="/cast-logs">
-              <code>cast logs</code>
-            </Link>
+            <NavLink href="/cast-logs">cast logs</NavLink>
           </li>
         </ul>
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Block Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/cast-find-block">
-              <code>cast find-block</code>
-            </Link>
+            <NavLink href="/cast-find-block">cast find-block</NavLink>
           </li>
           <li>
-            <Link href="/cast-gas-price">
-              <code>cast gas-price</code>
-            </Link>
+            <NavLink href="/cast-gas-price">cast gas-price</NavLink>
           </li>
           <li>
-            <Link href="/cast-block-number">
-              <code>cast block-number</code>
-            </Link>
+            <NavLink href="/cast-block-number">cast block-number</NavLink>
           </li>
           <li>
-            <Link href="/cast-basefee">
-              <code>cast basefee</code>
-            </Link>
+            <NavLink href="/cast-basefee">cast basefee</NavLink>
           </li>
           <li>
-            <Link href="/cast-block">
-              <code>cast block</code>
-            </Link>
+            <NavLink href="/cast-block">cast block</NavLink>
           </li>
           <li>
-            <Link href="/cast-age">
-              <code>cast age</code>
-            </Link>
+            <NavLink href="/cast-age">cast age</NavLink>
           </li>
         </ul>
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Account Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/cast-balance">
-              <code>cast balance</code>
-            </Link>
+            <NavLink href="/cast-balance">cast balance</NavLink>
           </li>
           <li>
-            <Link href="/cast-storage">
-              <code>cast storage</code>
-            </Link>
+            <NavLink href="/cast-storage">cast storage</NavLink>
           </li>
           <li>
-            <Link href="/cast-proof">
-              <code>cast proof</code>
-            </Link>
+            <NavLink href="/cast-proof">cast proof</NavLink>
           </li>
           <li>
-            <Link href="/cast-nonce">
-              <code>cast nonce</code>
-            </Link>
+            <NavLink href="/cast-nonce">cast nonce</NavLink>
           </li>
           <li>
-            <Link href="/cast-code">
-              <code>cast code</code>
-            </Link>
+            <NavLink href="/cast-code">cast code</NavLink>
           </li>
           <li>
-            <Link href="/cast-codesize">
-              <code>cast codesize</code>
-            </Link>
+            <NavLink href="/cast-codesize">cast codesize</NavLink>
           </li>
         </ul>
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">ENS Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/cast-lookup-address">
-              <code>cast lookup-address</code>
-            </Link>
+            <NavLink href="/cast-lookup-address">cast lookup-address</NavLink>
           </li>
           <li>
-            <Link href="/cast-resolve-name">
-              <code>cast resolve-name</code>
-            </Link>
+            <NavLink href="/cast-resolve-name">cast resolve-name</NavLink>
           </li>
           <li>
-            <Link href="/cast-namehash">
-              <code>cast namehash</code>
-            </Link>
+            <NavLink href="/cast-namehash">cast namehash</NavLink>
           </li>
         </ul>
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Etherscan Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/cast-etherscan-source">
-              <code>cast etherscan-source</code>
-            </Link>
+            <NavLink href="/cast-etherscan-source">cast etherscan-source</NavLink>
           </li>
         </ul>
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">ABI Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/cast-abi-decode">
-              <code>cast abi-decode</code>
-            </Link>
+            <NavLink href="/cast-abi-decode">cast abi-decode</NavLink>
           </li>
           <li>
-            <Link href="/cast-abi-encode">
-              <code>cast abi-encode</code>
-            </Link>
+            <NavLink href="/cast-abi-encode">cast abi-encode</NavLink>
           </li>
           <li>
-            <Link href="/cast-4byte">
-              <code>cast 4byte</code>
-            </Link>
+            <NavLink href="/cast-4byte">cast 4byte</NavLink>
           </li>
           <li>
-            <Link href="/cast-4byte-decode">
-              <code>cast 4byte-decode</code>
-            </Link>
+            <NavLink href="/cast-4byte-decode">cast 4byte-decode</NavLink>
           </li>
           <li>
-            <Link href="/cast-4byte-event">
-              <code>cast 4byte-event</code>
-            </Link>
+            <NavLink href="/cast-4byte-event">cast 4byte-event</NavLink>
           </li>
           <li>
-            <Link href="/cast-calldata">
-              <code>cast calldata</code>
-            </Link>
+            <NavLink href="/cast-calldata">cast calldata</NavLink>
           </li>
           <li>
-            <Link href="/cast-calldata-decode">
-              <code>cast calldata-decode</code>
-            </Link>
+            <NavLink href="/cast-calldata-decode">cast calldata-decode</NavLink>
           </li>
           <li>
-            <Link href="/cast-pretty-calldata">
-              <code>cast pretty-calldata</code>
-            </Link>
+            <NavLink href="/cast-pretty-calldata">cast pretty-calldata</NavLink>
           </li>
           <li>
-            <Link href="/cast-selectors">
-              <code>cast selectors</code>
-            </Link>
+            <NavLink href="/cast-selectors">cast selectors</NavLink>
           </li>
           <li>
-            <Link href="/cast-upload-signature">
-              <code>cast upload-signature</code>
-            </Link>
+            <NavLink href="/cast-upload-signature">cast upload-signature</NavLink>
           </li>
         </ul>
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Conversion Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/cast-format-bytes32-string">
-              <code>cast format-bytes32-string</code>
-            </Link>
+            <NavLink href="/cast-format-bytes32-string">cast format-bytes32-string</NavLink>
           </li>
           <li>
-            <Link href="/cast-from-bin">
-              <code>cast from-bin</code>
-            </Link>
+            <NavLink href="/cast-from-bin">cast from-bin</NavLink>
           </li>
           <li>
-            <Link href="/cast-from-fixed-point">
-              <code>cast from-fixed-point</code>
-            </Link>
+            <NavLink href="/cast-from-fixed-point">cast from-fixed-point</NavLink>
           </li>
           <li>
-            <Link href="/cast-from-utf8">
-              <code>cast from-utf8</code>
-            </Link>
+            <NavLink href="/cast-from-utf8">cast from-utf8</NavLink>
           </li>
           <li>
-            <Link href="/cast-from-wei">
-              <code>cast from-wei</code>
-            </Link>
+            <NavLink href="/cast-from-wei">cast from-wei</NavLink>
           </li>
           <li>
-            <Link href="/cast-parse-bytes32-address">
-              <code>cast parse-bytes32-address</code>
-            </Link>
+            <NavLink href="/cast-parse-bytes32-address">cast parse-bytes32-address</NavLink>
           </li>
           <li>
-            <Link href="/cast-parse-bytes32-string">
-              <code>cast parse-bytes32-string</code>
-            </Link>
+            <NavLink href="/cast-parse-bytes32-string">cast parse-bytes32-string</NavLink>
           </li>
           <li>
-            <Link href="/cast-to-ascii">
-              <code>cast to-ascii</code>
-            </Link>
+            <NavLink href="/cast-to-ascii">cast to-ascii</NavLink>
           </li>
           <li>
-            <Link href="/cast-to-base">
-              <code>cast to-base</code>
-            </Link>
+            <NavLink href="/cast-to-base">cast to-base</NavLink>
           </li>
           <li>
-            <Link href="/cast-to-bytes32">
-              <code>cast to-bytes32</code>
-            </Link>
+            <NavLink href="/cast-to-bytes32">cast to-bytes32</NavLink>
           </li>
           <li>
-            <Link href="/cast-to-dec">
-              <code>cast to-dec</code>
-            </Link>
+            <NavLink href="/cast-to-dec">cast to-dec</NavLink>
           </li>
           <li>
-            <Link href="/cast-to-fixed-point">
-              <code>cast to-fixed-point</code>
-            </Link>
+            <NavLink href="/cast-to-fixed-point">cast to-fixed-point</NavLink>
           </li>
           <li>
-            <Link href="/cast-to-hex">
-              <code>cast to-hex</code>
-            </Link>
+            <NavLink href="/cast-to-hex">cast to-hex</NavLink>
           </li>
           <li>
-            <Link href="/cast-to-hexdata">
-              <code>cast to-hexdata</code>
-            </Link>
+            <NavLink href="/cast-to-hexdata">cast to-hexdata</NavLink>
           </li>
           <li>
-            <Link href="/cast-to-int256">
-              <code>cast to-int256</code>
-            </Link>
+            <NavLink href="/cast-to-int256">cast to-int256</NavLink>
           </li>
           <li>
-            <Link href="/cast-to-rlp">
-              <code>cast to-rlp</code>
-            </Link>
+            <NavLink href="/cast-to-rlp">cast to-rlp</NavLink>
           </li>
           <li>
-            <Link href="/cast-to-uint256">
-              <code>cast to-uint256</code>
-            </Link>
+            <NavLink href="/cast-to-uint256">cast to-uint256</NavLink>
           </li>
           <li>
-            <Link href="/cast-to-uint">
-              <code>cast to-uint</code>
-            </Link>
+            <NavLink href="/cast-to-uint">cast to-uint</NavLink>
           </li>
           <li>
-            <Link href="/cast-to-wei">
-              <code>cast to-wei</code>
-            </Link>
+            <NavLink href="/cast-to-wei">cast to-wei</NavLink>
           </li>
           <li>
-            <Link href="/cast-shl">
-              <code>cast shl</code>
-            </Link>
+            <NavLink href="/cast-shl">cast shl</NavLink>
           </li>
           <li>
-            <Link href="/cast-shr">
-              <code>cast shr</code>
-            </Link>
+            <NavLink href="/cast-shr">cast shr</NavLink>
           </li>
         </ul>
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Utility Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/cast-address-zero">
-              <code>cast address-zero</code>
-            </Link>
+            <NavLink href="/cast-address-zero">cast address-zero</NavLink>
           </li>
           <li>
-            <Link href="/cast-sig">
-              <code>cast sig</code>
-            </Link>
+            <NavLink href="/cast-sig">cast sig</NavLink>
           </li>
           <li>
-            <Link href="/cast-sig-event">
-              <code>cast sig-event</code>
-            </Link>
+            <NavLink href="/cast-sig-event">cast sig-event</NavLink>
           </li>
           <li>
-            <Link href="/cast-keccak">
-              <code>cast keccak</code>
-            </Link>
+            <NavLink href="/cast-keccak">cast keccak</NavLink>
           </li>
           <li>
-            <Link href="/cast-compute-address">
-              <code>cast compute-address</code>
-            </Link>
+            <NavLink href="/cast-compute-address">cast compute-address</NavLink>
           </li>
           <li>
-            <Link href="/cast-create2">
-              <code>cast create2</code>
-            </Link>
+            <NavLink href="/cast-create2">cast create2</NavLink>
           </li>
           <li>
-            <Link href="/cast-interface">
-              <code>cast interface</code>
-            </Link>
+            <NavLink href="/cast-interface">cast interface</NavLink>
           </li>
           <li>
-            <Link href="/cast-index">
-              <code>cast index</code>
-            </Link>
+            <NavLink href="/cast-index">cast index</NavLink>
           </li>
           <li>
-            <Link href="/cast-concat-hex">
-              <code>cast concat-hex</code>
-            </Link>
+            <NavLink href="/cast-concat-hex">cast concat-hex</NavLink>
           </li>
           <li>
-            <Link href="/cast-max-int">
-              <code>cast max-int</code>
-            </Link>
+            <NavLink href="/cast-max-int">cast max-int</NavLink>
           </li>
           <li>
-            <Link href="/cast-min-int">
-              <code>cast min-int</code>
-            </Link>
+            <NavLink href="/cast-min-int">cast min-int</NavLink>
           </li>
           <li>
-            <Link href="/cast-max-uint">
-              <code>cast max-uint</code>
-            </Link>
+            <NavLink href="/cast-max-uint">cast max-uint</NavLink>
           </li>
           <li>
-            <Link href="/cast-to-check-sum-address">
-              <code>cast to-check-sum-address</code>
-            </Link>
+            <NavLink href="/cast-to-check-sum-address">cast to-check-sum-address</NavLink>
           </li>
         </ul>
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Wallet Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/cast-wallet">
-              <code>cast wallet</code>
-            </Link>
+            <NavLink href="/cast-wallet">cast wallet</NavLink>
           </li>
           <li>
-            <Link href="/cast-wallet-new">
-              <code>cast wallet new</code>
-            </Link>
+            <NavLink href="/cast-wallet-new">cast wallet new</NavLink>
           </li>
           <li>
-            <Link href="/cast-wallet-address">
-              <code>cast wallet address</code>
-            </Link>
+            <NavLink href="/cast-wallet-address">cast wallet address</NavLink>
           </li>
           <li>
-            <Link href="/cast-wallet-sign">
-              <code>cast wallet sign</code>
-            </Link>
+            <NavLink href="/cast-wallet-sign">cast wallet sign</NavLink>
           </li>
           <li>
-            <Link href="/cast-wallet-vanity">
-              <code>cast wallet vanity</code>
-            </Link>
+            <NavLink href="/cast-wallet-vanity">cast wallet vanity</NavLink>
           </li>
           <li>
-            <Link href="/cast-wallet-verify">
-              <code>cast wallet verify</code>
-            </Link>
+            <NavLink href="/cast-wallet-verify">cast wallet verify</NavLink>
           </li>
         </ul>
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">General Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <Link href="/cast-help">
-              <code>cast help</code>
-            </Link>
+            <NavLink href="/cast-help">cast help</NavLink>
           </li>
           <li>
-            <Link href="/cast-completions">
-              <code>cast completions</code>
-            </Link>
+            <NavLink href="/cast-completions">cast completions</NavLink>
           </li>
         </ul>
       </nav>

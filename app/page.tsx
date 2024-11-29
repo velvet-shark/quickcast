@@ -7,14 +7,17 @@ export default async function Home() {
 
   return (
     <div className="p-4 sm:p-6 max-w-4xl mx-auto">
-      <div className="sm:hidden mb-6 flex justify-center">
-        <Image src="/quickcast-logo.svg" alt="QuickCast Logo" width={225} height={60} priority />
+      <div className="mb-6 flex justify-center">
+        <Image src="/quickcast-logo.svg" alt="QuickCast Logo" width={300} height={80} priority />
       </div>
 
       <div className="space-y-8 mb-12">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
-            <code className="font-mono font-normal">cast</code> commands at your fingertips
+            <code className="font-mono font-normal bg-gray-100 border border-gray-300 p-1 rounded-md text-purple-600">
+              cast
+            </code>{" "}
+            commands at your fingertips
           </h1>
           <p className="text-lg text-neutral-600">
             Your guide to mastering{" "}
@@ -39,9 +42,8 @@ export default async function Home() {
             </div>
             <h3 className="font-bold text-lg mb-2">Learn from real-world usage</h3>
             <p className="text-neutral-600 dark:text-neutral-300">
-              All the examples and options you ever wanted, for every{" "}
-              <code className="text-blue-600 font-mono">cast</code> command, from basic conversions to complex
-              blockchain queries.
+              All the examples and options you ever wanted, or didn&apos;t even know existed. For every{" "}
+              <code className="text-blue-600 font-mono">cast</code> command.
             </p>
           </div>
 
@@ -58,8 +60,8 @@ export default async function Home() {
             </div>
             <h3 className="font-bold text-lg mb-2">Execute without installation</h3>
             <p className="text-neutral-600 dark:text-neutral-300">
-              Run <code className="text-blue-600 dark:text-blue-400 font-mono">cast</code> commands directly in your
-              browser. No Foundry setup, no terminal needed—just instant blockchain interactions and data conversions.
+              Run (some) <code className="text-blue-600 dark:text-blue-400 font-mono">cast</code> commands in your
+              browser. No Foundry setup, no terminal needed. Just instant blockchain interactions and data conversions.
             </p>
           </div>
         </div>

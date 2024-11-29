@@ -9,6 +9,37 @@ const commandFeatures: Record<string, { hasExamples?: boolean; hasOnlineExecutio
   "/cast-chain-id": { hasExamples: true, hasOnlineExecution: false },
   "/cast-chain": { hasExamples: true },
   "/cast-client": { hasExamples: true, hasOnlineExecution: false },
+  "/cast-abi-decode": { hasExamples: true },
+  "/cast-abi-encode": { hasExamples: false },
+  "/cast-4byte": { hasExamples: false },
+  "/cast-4byte-decode": { hasExamples: false },
+  "/cast-4byte-event": { hasExamples: false },
+  "/cast-calldata": { hasExamples: false },
+  "/cast-calldata-decode": { hasExamples: false },
+  "/cast-pretty-calldata": { hasExamples: false },
+  "/cast-selectors": { hasExamples: false },
+  "/cast-upload-signature": { hasExamples: false },
+  "/cast-format-bytes32-string": { hasExamples: false },
+  "/cast-from-bin": { hasExamples: false },
+  "/cast-from-fixed-point": { hasExamples: false },
+  "/cast-from-utf8": { hasExamples: false },
+  "/cast-from-wei": { hasExamples: false },
+  "/cast-parse-bytes32-address": { hasExamples: false },
+  "/cast-parse-bytes32-string": { hasExamples: false },
+  "/cast-to-ascii": { hasExamples: false },
+  "/cast-to-base": { hasExamples: false },
+  "/cast-to-bytes32": { hasExamples: true, hasOnlineExecution: true },
+  "/cast-to-dec": { hasExamples: false },
+  "/cast-to-fixed-point": { hasExamples: false },
+  "/cast-to-hex": { hasExamples: false },
+  "/cast-to-hexdata": { hasExamples: false },
+  "/cast-to-int256": { hasExamples: false },
+  "/cast-to-rlp": { hasExamples: false },
+  "/cast-to-uint256": { hasExamples: false },
+  "/cast-to-uint": { hasExamples: false },
+  "/cast-to-wei": { hasExamples: false },
+  "/cast-shl": { hasExamples: false },
+  "/cast-shr": { hasExamples: false },
   "/cast-publish": { hasExamples: false },
   "/cast-receipt": { hasExamples: true },
   "/cast-send": { hasExamples: false, hasOnlineExecution: false },
@@ -35,37 +66,6 @@ const commandFeatures: Record<string, { hasExamples?: boolean; hasOnlineExecutio
   "/cast-resolve-name": { hasExamples: false },
   "/cast-namehash": { hasExamples: false },
   "/cast-etherscan-source": { hasExamples: false },
-  "/cast-abi-decode": { hasExamples: false },
-  "/cast-abi-encode": { hasExamples: false },
-  "/cast-4byte": { hasExamples: false },
-  "/cast-4byte-decode": { hasExamples: false },
-  "/cast-4byte-event": { hasExamples: false },
-  "/cast-calldata": { hasExamples: false },
-  "/cast-calldata-decode": { hasExamples: false },
-  "/cast-pretty-calldata": { hasExamples: false },
-  "/cast-selectors": { hasExamples: false },
-  "/cast-upload-signature": { hasExamples: false },
-  "/cast-format-bytes32-string": { hasExamples: false },
-  "/cast-from-bin": { hasExamples: false },
-  "/cast-from-fixed-point": { hasExamples: false },
-  "/cast-from-utf8": { hasExamples: false },
-  "/cast-from-wei": { hasExamples: false },
-  "/cast-parse-bytes32-address": { hasExamples: false },
-  "/cast-parse-bytes32-string": { hasExamples: false },
-  "/cast-to-ascii": { hasExamples: false },
-  "/cast-to-base": { hasExamples: false },
-  "/cast-to-bytes32": { hasExamples: false },
-  "/cast-to-dec": { hasExamples: false },
-  "/cast-to-fixed-point": { hasExamples: false },
-  "/cast-to-hex": { hasExamples: false },
-  "/cast-to-hexdata": { hasExamples: false },
-  "/cast-to-int256": { hasExamples: false },
-  "/cast-to-rlp": { hasExamples: false },
-  "/cast-to-uint256": { hasExamples: false },
-  "/cast-to-uint": { hasExamples: false },
-  "/cast-to-wei": { hasExamples: false },
-  "/cast-shl": { hasExamples: false },
-  "/cast-shr": { hasExamples: false },
   "/cast-address-zero": { hasExamples: false },
   "/cast-sig": { hasExamples: false },
   "/cast-sig-event": { hasExamples: false },
@@ -183,111 +183,6 @@ export function Navigation() {
             <img src="/quickcast-logo.svg" alt="QuickCast" className="h-8" />
           </Link>
         </div>
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Chain Commands</h3>
-        <ul className="text-sm space-y-1">
-          <li>
-            <NavLink href="/cast-chain-id">cast chain-id</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-chain">cast chain</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-client">cast client</NavLink>
-          </li>
-        </ul>
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Transaction Commands</h3>
-        <ul className="text-sm space-y-1">
-          <li>
-            <NavLink href="/cast-publish">cast publish</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-receipt">cast receipt</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-send">cast send</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-call">cast call</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-rpc">cast rpc</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-tx">cast tx</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-run">cast run</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-estimate">cast estimate</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-access-list">cast access-list</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-logs">cast logs</NavLink>
-          </li>
-        </ul>
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Block Commands</h3>
-        <ul className="text-sm space-y-1">
-          <li>
-            <NavLink href="/cast-find-block">cast find-block</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-gas-price">cast gas-price</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-block-number">cast block-number</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-basefee">cast basefee</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-block">cast block</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-age">cast age</NavLink>
-          </li>
-        </ul>
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Account Commands</h3>
-        <ul className="text-sm space-y-1">
-          <li>
-            <NavLink href="/cast-balance">cast balance</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-storage">cast storage</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-proof">cast proof</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-nonce">cast nonce</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-code">cast code</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-codesize">cast codesize</NavLink>
-          </li>
-        </ul>
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">ENS Commands</h3>
-        <ul className="text-sm space-y-1">
-          <li>
-            <NavLink href="/cast-lookup-address">cast lookup-address</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-resolve-name">cast resolve-name</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-namehash">cast namehash</NavLink>
-          </li>
-        </ul>
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Etherscan Commands</h3>
-        <ul className="text-sm space-y-1">
-          <li>
-            <NavLink href="/cast-etherscan-source">cast etherscan-source</NavLink>
-          </li>
-        </ul>
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">ABI Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
@@ -427,6 +322,111 @@ export function Navigation() {
           </li>
           <li>
             <NavLink href="/cast-to-check-sum-address">cast to-check-sum-address</NavLink>
+          </li>
+        </ul>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Chain Commands</h3>
+        <ul className="text-sm space-y-1">
+          <li>
+            <NavLink href="/cast-chain-id">cast chain-id</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-chain">cast chain</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-client">cast client</NavLink>
+          </li>
+        </ul>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Transaction Commands</h3>
+        <ul className="text-sm space-y-1">
+          <li>
+            <NavLink href="/cast-publish">cast publish</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-receipt">cast receipt</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-send">cast send</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-call">cast call</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-rpc">cast rpc</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-tx">cast tx</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-run">cast run</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-estimate">cast estimate</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-access-list">cast access-list</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-logs">cast logs</NavLink>
+          </li>
+        </ul>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Block Commands</h3>
+        <ul className="text-sm space-y-1">
+          <li>
+            <NavLink href="/cast-find-block">cast find-block</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-gas-price">cast gas-price</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-block-number">cast block-number</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-basefee">cast basefee</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-block">cast block</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-age">cast age</NavLink>
+          </li>
+        </ul>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Account Commands</h3>
+        <ul className="text-sm space-y-1">
+          <li>
+            <NavLink href="/cast-balance">cast balance</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-storage">cast storage</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-proof">cast proof</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-nonce">cast nonce</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-code">cast code</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-codesize">cast codesize</NavLink>
+          </li>
+        </ul>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">ENS Commands</h3>
+        <ul className="text-sm space-y-1">
+          <li>
+            <NavLink href="/cast-lookup-address">cast lookup-address</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-resolve-name">cast resolve-name</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-namehash">cast namehash</NavLink>
+          </li>
+        </ul>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Etherscan Commands</h3>
+        <ul className="text-sm space-y-1">
+          <li>
+            <NavLink href="/cast-etherscan-source">cast etherscan-source</NavLink>
           </li>
         </ul>
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Wallet Commands</h3>

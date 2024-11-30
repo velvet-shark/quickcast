@@ -15,6 +15,11 @@ export function RunBytes32() {
       return "Error: Input must be a valid hex string";
     }
 
+    // Check if input is longer than 32 bytes (64 hex characters)
+    if (cleanInput.length > 64) {
+      return "Error: string >32 bytes";
+    }
+
     // Pad with zeros to 32 bytes (64 characters)
     const padded = padRight ? cleanInput.padEnd(64, "0") : cleanInput.padStart(64, "0");
     return "0x" + padded;
@@ -61,14 +66,16 @@ export function RunBytes32() {
         <div className="mt-4 space-y-6">
           <div>
             <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-              Right-padded (cast to-bytes32):
+              Right-padded (same as output of 'cast to-bytes32'):
             </div>
             <div className="font-mono text-sm bg-neutral-100 dark:bg-neutral-900 p-3 rounded-md overflow-x-auto">
               {outputs.right}
             </div>
           </div>
           <div>
-            <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">Left-padded:</div>
+            <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+              Left-padded (not provided by 'cast to-bytes32' but useful):
+            </div>
             <div className="font-mono text-sm bg-neutral-100 dark:bg-neutral-900 p-3 rounded-md overflow-x-auto">
               {outputs.left}
             </div>

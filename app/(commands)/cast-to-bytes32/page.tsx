@@ -2,7 +2,7 @@ import path from "path";
 import { getPageContent } from "@/app/lib/getContent";
 import { CommandPageTemplate, generateCommandMetadata } from "../components/CommandPageTemplate";
 import { Example } from "@/app/components/Example";
-import { RunBytes32 } from "./run-bytes32";
+import { RunBytes32 } from "../../components/commands/run-bytes32";
 
 export const generateMetadata = () => generateCommandMetadata(import.meta.url);
 

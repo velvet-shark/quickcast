@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CopyButton } from "../CopyButton";
 
 export function RunBytes32() {
   const [input, setInput] = useState("");
@@ -68,16 +69,30 @@ export function RunBytes32() {
             <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
               Right-padded (same as output of 'cast to-bytes32'):
             </div>
-            <div className="font-mono text-sm bg-neutral-100 dark:bg-neutral-900 p-3 rounded-md overflow-x-auto">
-              {outputs.right}
+            <div className="relative">
+              <div className="font-mono text-sm bg-neutral-100 dark:bg-neutral-900 p-3 pr-12 rounded-md overflow-x-auto">
+                {outputs.right}
+              </div>
+              {!outputs.right.startsWith("Error:") && (
+                <div className="absolute right-2 top-1/2 -translate-y-1/2">
+                  <CopyButton text={outputs.right} />
+                </div>
+              )}
             </div>
           </div>
           <div>
             <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
               Left-padded (not provided by 'cast to-bytes32' but useful):
             </div>
-            <div className="font-mono text-sm bg-neutral-100 dark:bg-neutral-900 p-3 rounded-md overflow-x-auto">
-              {outputs.left}
+            <div className="relative">
+              <div className="font-mono text-sm bg-neutral-100 dark:bg-neutral-900 p-3 pr-12 rounded-md overflow-x-auto">
+                {outputs.left}
+              </div>
+              {!outputs.left.startsWith("Error:") && (
+                <div className="absolute right-2 top-1/2 -translate-y-1/2">
+                  <CopyButton text={outputs.left} />
+                </div>
+              )}
             </div>
           </div>
         </div>

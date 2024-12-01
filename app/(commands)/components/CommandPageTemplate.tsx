@@ -20,8 +20,8 @@ export function CommandPageTemplate({ content, runCommand, examples }: CommandPa
           {/* Run command (Optional) */}
           {runCommand && (
             <div>
-              <h2 className="text-2xl font-bold mb-2">Try Online</h2>
               <section className="bg-white dark:bg-neutral-900 rounded-lg p-6 border dark:border-neutral-800">
+                <h2 className="text-2xl font-bold mb-2">Try Online</h2>
                 {runCommand}
               </section>
             </div>
@@ -30,8 +30,8 @@ export function CommandPageTemplate({ content, runCommand, examples }: CommandPa
           {/* Examples (Optional) */}
           {examples && (
             <div>
-              <h2 className="text-2xl font-bold mb-2">Examples</h2>
               <section className="bg-white dark:bg-neutral-900 rounded-lg p-6 border dark:border-neutral-800">
+                <h2 className="text-2xl font-bold mb-2">Examples</h2>
                 <div className="space-y-6">{examples}</div>
               </section>
             </div>

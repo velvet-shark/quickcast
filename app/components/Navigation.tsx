@@ -36,7 +36,7 @@ const commandFeatures: Record<string, { hasExamples?: boolean; hasOnlineExecutio
   "/cast-to-int256": { hasExamples: false },
   "/cast-to-rlp": { hasExamples: false },
   "/cast-to-uint256": { hasExamples: false },
-  "/cast-to-uint": { hasExamples: false },
+  "/cast-to-unit": { hasExamples: false },
   "/cast-to-wei": { hasExamples: false },
   "/cast-shl": { hasExamples: false },
   "/cast-shr": { hasExamples: false },
@@ -270,7 +270,7 @@ export function Navigation() {
             <NavLink href="/cast-to-uint256">cast to-uint256</NavLink>
           </li>
           <li>
-            <NavLink href="/cast-to-uint">cast to-uint</NavLink>
+            <NavLink href="/cast-to-unit">cast to-unit</NavLink>
           </li>
           <li>
             <NavLink href="/cast-to-wei">cast to-wei</NavLink>

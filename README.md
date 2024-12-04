@@ -51,7 +51,7 @@ npm start
 
 ```
 app/
-├── (commands)/ # Individual cast command pages
+├── (commands)/ # Individual cast command pages with examples and online execution options
 ├── components/ # Shared React components
 └── lib/ # Utility functions
 commands/ # Individual cast command pages (from Foundry's repo)

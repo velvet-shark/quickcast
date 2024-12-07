@@ -69,7 +69,7 @@ const commandFeatures: Record<string, { hasExamples?: boolean; hasOnlineExecutio
   "/cast-address-zero": { hasExamples: false },
   "/cast-sig": { hasExamples: false },
   "/cast-sig-event": { hasExamples: false },
-  "/cast-keccak": { hasExamples: false },
+  "/cast-keccak": { hasExamples: true, hasOnlineExecution: true },
   "/cast-compute-address": { hasExamples: false },
   "/cast-create2": { hasExamples: false },
   "/cast-interface": { hasExamples: false },

@@ -14,18 +14,11 @@ export default async function CommandPage() {
     <>
       <Example
         description="Convert wei to ether:"
-        command="cast to-unit 1000000000000000000 ether"
-        output="1.000000000000000000"
+        command="cast to-unit 1230000000000000000 ether"
+        output="1.230000000000000000"
       />
-      <Example description="Convert wei to gwei:" command="cast to-unit 1000000000 gwei" output="1.000000000" />
-      <Example
-        description="Convert multiple values with --json:"
-        command="cast to-unit --json 1000000000 1000000000000000000 gwei ether"
-        output={`{
-  "1000000000": "1.000000000",
-  "1000000000000000000": "1.000000000000000000"
-}`}
-      />
+      <Example description="Convert wei to gwei:" command="cast to-unit 2300000000 gwei" output="2.300000000" />
+      <Example description="Works with hex values too:" command="cast to-unit 0xde0b6b3a7640000 ether" output="1" />
     </>
   );
 

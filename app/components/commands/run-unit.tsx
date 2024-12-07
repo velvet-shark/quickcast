@@ -148,6 +148,11 @@ export function RunUnit() {
 
   return (
     <div className="space-y-6">
+      <div className="text-sm text-muted-foreground">
+        Converts between wei, gwei and ether, but also shows the value in USD, EUR and GBP.
+        <br />
+        Better display for large numbers so that you can always see how many of those damn zeros are there.
+      </div>
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <div className="w-16 text-sm font-medium">Wei</div>
@@ -165,7 +170,6 @@ export function RunUnit() {
             </div>
           </div>
         </div>
-
         <div className="flex items-center gap-2">
           <div className="w-16 text-sm font-medium">Gwei</div>
           <div className="flex-1">
@@ -182,7 +186,6 @@ export function RunUnit() {
             </div>
           </div>
         </div>
-
         <div className="flex items-center gap-2">
           <div className="w-16 text-sm font-medium">Ether</div>
           <div className="flex-1">
@@ -199,7 +202,6 @@ export function RunUnit() {
             </div>
           </div>
         </div>
-
         <div className="flex items-center gap-2">
           <div className="w-16 text-sm font-medium">Value</div>
           <div className="flex-1">

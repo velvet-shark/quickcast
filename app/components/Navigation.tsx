@@ -36,7 +36,7 @@ const commandFeatures: Record<string, { hasExamples?: boolean; hasOnlineExecutio
   "/cast-to-int256": { hasExamples: false },
   "/cast-to-rlp": { hasExamples: false },
   "/cast-to-uint256": { hasExamples: false },
-  "/cast-to-unit": { hasExamples: false },
+  "/cast-to-unit": { hasExamples: true, hasOnlineExecution: true },
   "/cast-to-wei": { hasExamples: false },
   "/cast-shl": { hasExamples: false },
   "/cast-shr": { hasExamples: false },

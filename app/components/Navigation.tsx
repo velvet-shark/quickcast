@@ -14,7 +14,7 @@ const commandFeatures: Record<string, { hasExamples?: boolean; hasOnlineExecutio
   "/cast-4byte": { hasExamples: false },
   "/cast-4byte-decode": { hasExamples: false },
   "/cast-4byte-event": { hasExamples: false },
-  "/cast-calldata": { hasExamples: false },
+  "/cast-calldata": { hasExamples: true, hasOnlineExecution: true },
   "/cast-calldata-decode": { hasExamples: false },
   "/cast-pretty-calldata": { hasExamples: false },
   "/cast-selectors": { hasExamples: false },
@@ -143,7 +143,7 @@ export function Navigation() {
                 />
               </svg>
               <div className="absolute right-0 top-0 -mt-8 px-2 py-1 bg-neutral-800 text-white text-xs rounded-md opacity-0 group-hover/tooltip:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                Run it online
+                Run the command online
               </div>
             </div>
           )}
@@ -178,11 +178,37 @@ export function Navigation() {
           isOpen ? "fixed inset-0 z-40" : "hidden"
         } sm:relative sm:block w-full sm:w-64 h-full overflow-y-auto bg-white dark:bg-[#1F1F1F] border-r dark:border-neutral-800 p-4`}
       >
-        <div className="mb-6">
+        <div className="mb-4">
           <Link href="/">
             <img src="/quickcast-logo.svg" alt="QuickCast" className="h-8" />
           </Link>
         </div>
+
+        <div className="mb-4 mt-2 text-sm text-neutral-500 space-y-1">
+          <div className="flex items-center gap-2">
+            <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              />
+            </svg>
+            <span>Extra examples</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+            <span>Run the command online</span>
+          </div>
+        </div>
+
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">ABI Commands</h3>
         <ul className="text-sm space-y-1">
           <li>

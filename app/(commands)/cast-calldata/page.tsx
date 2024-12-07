@@ -2,6 +2,7 @@ import path from "path";
 import { getPageContent } from "@/app/lib/getContent";
 import { CommandPageTemplate, generateCommandMetadata } from "../components/CommandPageTemplate";
 import { Example } from "@/app/components/Example";
+import { RunCalldata } from "@/app/components/commands/run-calldata";
 
 export const generateMetadata = () => generateCommandMetadata(import.meta.url);
 
@@ -9,21 +10,20 @@ export default async function CommandPage() {
   const dirName = path.basename(path.dirname(import.meta.url));
   const content = await getPageContent(`${dirName}.md`);
 
-  //   const examples = (
-  //     <>
-  //       <Example description="Description:" command="cast command arguments" output="output" />
+  const examples = (
+    <>
+      <Example
+        description="Get the calldata for a function call:"
+        command="cast calldata 'transfer(address,uint256)' 0xbd20e68967fc2a813356bff4754bba48692d8e0d 10000000000000000"
+        output="0xa9059cbb000000000000000000000000bd20e68967fc2a813356bff4754bba48692d8e0d000000000000000000000000000000000000000000000000002386f26fc10000"
+      />
+      <Example
+        description="Encode with different data types:"
+        command='cast calldata "setDetails(string,address)" "Hello World" 0xabcdefabcdefabcdefabcdefabcdefabcdefabcd'
+        output="0x1a367de70000000000000000000000000000000000000000000000000000000000000040000000000000000000000000abcdefabcdefabcdefabcdefabcdefabcdefabcd000000000000000000000000000000000000000000000000000000000000000b48656c6c6f20576f726c64000000000000000000000000000000000000000000"
+      />
+    </>
+  );
 
-  //       <Example
-  //         description="Convert multiple values with --json:"
-  //         command="cast to-dec --json 0xff 0xdeadbeef 0x1234"
-  //         output={`{
-  //   "0xff": "255",
-  //   "0xdeadbeef": "3735928559",
-  //   "0x1234": "4660"
-  // }`}
-  //       />
-  //     </>
-  //   );
-
-  return <CommandPageTemplate content={content} examples={typeof examples !== "undefined" ? examples : undefined} />;
+  return <CommandPageTemplate content={content} examples={examples} runCommand={<RunCalldata />} />;
 }

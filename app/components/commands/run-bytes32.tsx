@@ -82,7 +82,7 @@ export function RunBytes32() {
           </div>
           <div>
             <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
-              Left-padded (not provided by 'cast to-bytes32' but useful):
+              Left-padded (not provided by 'cast to-bytes32' but useful in many cases):
             </div>
             <div className="relative">
               <div className="font-mono text-sm bg-neutral-100 dark:bg-neutral-900 p-3 pr-12 rounded-md overflow-x-auto">

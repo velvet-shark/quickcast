@@ -8,7 +8,7 @@ export default async function Home() {
   return (
     <div className="p-4 sm:p-6 max-w-4xl mx-auto">
       <div className="mb-6 flex justify-center">
-        <Image src="/quickcast-logo.svg" alt="QuickCast Logo" width={300} height={80} priority />
+        <Image src="/quickcast-logo.png" alt="QuickCast Logo" width={300} height={45} priority />
       </div>
 
       <div className="space-y-8 mb-12">

@@ -10,7 +10,7 @@ const commandFeatures: Record<string, { hasExamples?: boolean; hasOnlineExecutio
   "/cast-chain-id": { hasExamples: true, hasOnlineExecution: false },
   "/cast-chain": { hasExamples: true },
   "/cast-client": { hasExamples: true, hasOnlineExecution: false },
-  "/cast-abi-decode": { hasExamples: true },
+  "/cast-abi-decode": { hasExamples: true, hasOnlineExecution: true },
   "/cast-abi-encode": { hasExamples: true, hasOnlineExecution: true },
   "/cast-4byte": { hasExamples: false },
   "/cast-4byte-decode": { hasExamples: false },

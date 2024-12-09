@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 // Command features configuration
 const commandFeatures: Record<string, { hasExamples?: boolean; hasOnlineExecution?: boolean }> = {
@@ -180,7 +181,7 @@ export function Navigation() {
       >
         <div className="mb-4">
           <Link href="/">
-            <img src="/quickcast-logo.svg" alt="QuickCast" className="h-8" />
+            <Image src="/quickcast-logo.png" alt="QuickCast" width={300} height={45} priority />
           </Link>
         </div>
 

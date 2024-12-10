@@ -158,7 +158,7 @@ export function Navigation() {
       {/* Mobile menu button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="sm:hidden fixed top-4 right-4 z-50 p-2 rounded-md bg-neutral-100 dark:bg-neutral-800"
+        className="sm:hidden fixed top-4 right-4 z-50 p-2 rounded-md bg-neutral-100"
       >
         <svg
           className="w-6 h-6"
@@ -177,7 +177,7 @@ export function Navigation() {
       <nav
         className={`${
           isOpen ? "fixed inset-0 z-40" : "hidden"
-        } sm:relative sm:block w-full sm:w-64 h-full overflow-y-auto bg-white dark:bg-[#1F1F1F] border-r dark:border-neutral-800 p-4`}
+        } sm:relative sm:block w-full sm:w-64 h-full overflow-y-auto bg-white border-r p-4`}
       >
         <div className="mb-4">
           <Link href="/">

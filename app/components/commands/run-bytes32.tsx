@@ -44,7 +44,7 @@ export function RunBytes32() {
     <div className="space-y-4">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="input" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+          <label htmlFor="input" className="block text-sm font-medium text-neutral-700">
             Enter a hex value (with or without 0x prefix):
           </label>
           <input
@@ -52,7 +52,7 @@ export function RunBytes32() {
             id="input"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-700 rounded-md bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white font-mono text-sm"
+            className="w-full px-3 py-2 border border-neutral-300 rounded-md bg-white text-neutral-900 font-mono text-sm"
             placeholder="e.g. 1234abc or 0x1234abc"
           />
         </div>
@@ -66,11 +66,11 @@ export function RunBytes32() {
       {outputs && (
         <div className="mt-4 space-y-6">
           <div>
-            <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+            <div className="text-sm font-medium text-neutral-700 mb-2">
               Right-padded (same as output of 'cast to-bytes32'):
             </div>
             <div className="relative">
-              <div className="font-mono text-sm bg-neutral-100 dark:bg-neutral-900 p-3 pr-12 rounded-md overflow-x-auto">
+              <div className="font-mono text-sm bg-neutral-100 p-3 pr-12 rounded-md overflow-x-auto">
                 {outputs.right}
               </div>
               {!outputs.right.startsWith("Error:") && (
@@ -81,11 +81,11 @@ export function RunBytes32() {
             </div>
           </div>
           <div>
-            <div className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+            <div className="text-sm font-medium text-neutral-700 mb-2">
               Left-padded (not provided by 'cast to-bytes32' but useful in many cases):
             </div>
             <div className="relative">
-              <div className="font-mono text-sm bg-neutral-100 dark:bg-neutral-900 p-3 pr-12 rounded-md overflow-x-auto">
+              <div className="font-mono text-sm bg-neutral-100 p-3 pr-12 rounded-md overflow-x-auto">
                 {outputs.left}
               </div>
               {!outputs.left.startsWith("Error:") && (

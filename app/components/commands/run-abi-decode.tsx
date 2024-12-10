@@ -127,7 +127,7 @@ export function RunAbiDecode() {
             <div className="absolute right-2 top-2 z-10">
               <CopyButton text={decoded} />
             </div>
-            <div className="pl-4 py-4 text-sm border-l-2 border-green-500 bg-neutral-50 dark:bg-neutral-800/50">
+            <div className="pl-4 py-4 text-sm border-l-2 border-green-500 bg-neutral-50">
               <div
                 className="font-mono whitespace-pre overflow-x-auto max-w-full pr-12"
                 style={{ WebkitOverflowScrolling: "touch" }}

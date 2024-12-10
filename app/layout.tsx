@@ -37,7 +37,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}>
-        <div className="min-h-full flex flex-col sm:flex-row dark:bg-[#1F1F1F]">
+        <div className="min-h-full flex flex-col sm:flex-row">
           <Navigation />
           <main className="flex-1 w-full overflow-x-hidden">{children}</main>
         </div>

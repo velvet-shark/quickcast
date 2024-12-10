@@ -13,8 +13,11 @@ export default async function Home() {
 
       <div className="space-y-8 mb-12">
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text">
-            <code className="font-mono font-normal bg-gray-100 border border-gray-300 p-1 rounded-md text-purple-600">
+          <h1 className="text-4xl font-semibold mb-4 bg-gradient-to-r from-blue-500 to-blue-700 text-transparent bg-clip-text">
+            <code
+              className="font-mono font-normal"
+              style={{ color: "#00bb00", textShadow: "0 0 2px #00bb00, 0 0 5px #00bb00" }}
+            >
               cast
             </code>{" "}
             commands at your fingertips
@@ -29,7 +32,7 @@ export default async function Home() {
         </div>
 
         <div className="grid sm:grid-cols-2 gap-6">
-          <div className="bg-white dark:bg-neutral-900 p-6 rounded-lg border border-neutral-200 dark:border-neutral-800">
+          <div className="bg-white p-6 rounded-lg border border-neutral-200">
             <div className="mb-3 text-blue-600">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -41,13 +44,13 @@ export default async function Home() {
               </svg>
             </div>
             <h3 className="font-bold text-lg mb-2">Learn from real-world usage</h3>
-            <p className="text-neutral-600 dark:text-neutral-300">
+            <p className="text-neutral-600">
               All the examples and options you ever wanted, or didn&apos;t even know existed. For every{" "}
               <code className="text-blue-600 font-mono">cast</code> command.
             </p>
           </div>
 
-          <div className="bg-white dark:bg-neutral-900 p-6 rounded-lg border border-neutral-200 dark:border-neutral-800">
+          <div className="bg-white p-6 rounded-lg border border-neutral-200">
             <div className="mb-3 text-blue-600">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -59,9 +62,9 @@ export default async function Home() {
               </svg>
             </div>
             <h3 className="font-bold text-lg mb-2">Execute without installation</h3>
-            <p className="text-neutral-600 dark:text-neutral-300">
-              Run (some) <code className="text-blue-600 dark:text-blue-400 font-mono">cast</code> commands in your
-              browser. No Foundry setup, no terminal needed. Just instant blockchain interactions and data conversions.
+            <p className="text-neutral-600">
+              Run (some) <code className="text-blue-600 font-mono">cast</code> commands in your browser. No Foundry
+              setup, no terminal needed. Just instant blockchain interactions and data conversions.
             </p>
           </div>
         </div>

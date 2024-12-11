@@ -12,7 +12,7 @@ export function Card({ children, title, className, ...rest }: CardProps) {
       <header className="flex items-end justify-between">
         <div aria-hidden="true" className="flex-shrink-0 border-l border-t border-neutral-900 py-2 px-4" />
         <h2 className="flex-shrink-0 py-0 px-4 text-xl font-bold text-[#00bb00]">{title}</h2>
-        <div aria-hidden="true" className="min-w-[10%] w-full border-r border-t border-neutral-900 py-2 px-8" />
+        <div aria-hidden="true" className="min-w-[5%] w-full border-r border-t border-neutral-900 py-2 px-4" />
       </header>
       <section className="border-x border-b border-neutral-900 px-8 pt-4 pb-8 overflow-x-auto overflow-y-hidden scrollbar-none">
         {children}

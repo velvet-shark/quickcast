@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Navigation } from "./components/Navigation";
+import { Footer } from "./components/Footer";
 import PlausibleProvider from "next-plausible";
 
 const geistSans = localFont({
@@ -17,7 +18,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "quickcast.dev",
-  description: "Foundry's cast cheat sheet and toolbox"
+  description: "Your guide to mastering Foundry's cast command-line tool"
 };
 
 export default function RootLayout({
@@ -37,9 +38,12 @@ export default function RootLayout({
         />
       </head>
       <body className={`${geistMono.variable} antialiased h-full`}>
-        <div className="min-h-full flex flex-col sm:flex-row">
-          <Navigation />
-          <main className="flex-1 w-full overflow-x-hidden">{children}</main>
+        <div className="min-h-full flex flex-col">
+          <div className="flex flex-col sm:flex-row flex-1">
+            <Navigation />
+            <main className="flex-1 w-full overflow-x-hidden">{children}</main>
+          </div>
+          <Footer />
         </div>
       </body>
     </html>

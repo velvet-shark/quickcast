@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { Markdown } from "@/app/components/Markdown";
 import { getCommandMetadata } from "@/app/lib/getCommandMetadata";
+import { Card } from "@/app/components/Card";
 import path from "path";
 
 interface CommandPageTemplateProps {
@@ -18,38 +19,21 @@ export function CommandPageTemplate({ content, runCommand, examples }: CommandPa
       {hasTopContent && (
         <div className="space-y-6">
           {/* Run command (Optional) */}
-          {runCommand && (
-            <div>
-              <section className="bg-white rounded-lg p-6 border">
-                <h2 className="text-2xl font-bold mb-2">Try Online</h2>
-                {runCommand}
-              </section>
-            </div>
-          )}
+          {runCommand && <Card title="TRY ONLINE">{runCommand}</Card>}
 
           {/* Examples (Optional) */}
           {examples && (
-            <div>
-              <section className="bg-white rounded-lg p-6 border">
-                <h2 className="text-2xl font-bold mb-2">Examples</h2>
-                <div className="space-y-6">{examples}</div>
-              </section>
-            </div>
+            <Card title="EXAMPLES">
+              <div className="space-y-6">{examples}</div>
+            </Card>
           )}
         </div>
       )}
 
       {/* Command Documentation */}
-      <div className={`-mx-6 sm:-mx-8 md:-mx-12 lg:-mx-24 ${!hasTopContent ? "-mt-4 sm:-mt-6" : ""}`}>
-        <div className="bg-yellow-50 border-y">
-          <div className="max-w-[1200px] mx-auto px-6 sm:px-8 md:px-12 lg:px-24 py-12">
-            <h2 className="text-2xl font-bold mb-6">Documentation</h2>
-            <div className="prose max-w-none">
-              <Markdown content={content ?? ""} className="bg-yellow-50" />
-            </div>
-          </div>
-        </div>
-      </div>
+      <Card title="DOCUMENTATION">
+        <Markdown content={content ?? ""} />
+      </Card>
     </>
   );
 }

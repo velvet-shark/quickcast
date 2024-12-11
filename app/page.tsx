@@ -1,6 +1,7 @@
 import { getPageContent } from "@/app/lib/getContent";
 import { Markdown } from "@/app/components/Markdown";
 import Image from "next/image";
+import { Card } from "./components/Card";
 
 export default async function Home() {
   const content = await getPageContent("cast.md");
@@ -32,7 +33,7 @@ export default async function Home() {
         </div>
 
         <div className="grid sm:grid-cols-2 gap-6">
-          <div className="bg-white p-6 rounded-lg border border-neutral-200">
+          <Card title="Lots of examples">
             <div className="mb-3 text-blue-600">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -48,9 +49,8 @@ export default async function Home() {
               All the examples and options you ever wanted, or didn&apos;t even know existed. For every{" "}
               <code className="text-blue-600 font-mono">cast</code> command.
             </p>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg border border-neutral-200">
+          </Card>
+          <Card title="Run commands online">
             <div className="mb-3 text-blue-600">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -64,22 +64,15 @@ export default async function Home() {
             <h3 className="font-bold text-lg mb-2">Execute without installation</h3>
             <p className="text-neutral-600">
               Run (some) <code className="text-blue-600 font-mono">cast</code> commands in your browser. No Foundry
-              setup, no terminal needed. Just instant blockchain interactions and data conversions.
+              setup, no terminal needed.
             </p>
-          </div>
+          </Card>
         </div>
       </div>
 
-      <div className={`-mx-6 sm:-mx-8 md:-mx-12 lg:-mx-24`}>
-        <section className="bg-yellow-50 border-y">
-          <div className="max-w-[1200px] mx-auto px-6 sm:px-8 md:px-12 lg:px-24 py-12">
-            <h2 className="text-2xl font-bold mb-6">Documentation</h2>
-            <div className="prose max-w-none">
-              <Markdown content={content ?? ""} className="bg-yellow-50" />
-            </div>
-          </div>
-        </section>
-      </div>
+      <Card title="DOCUMENTATION">
+        <Markdown content={content ?? ""} />
+      </Card>
     </div>
   );
 }

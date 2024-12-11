@@ -36,7 +36,7 @@ export default function RootLayout({
           customDomain="https://pls.velvetshark.com"
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}>
+      <body className={`${geistMono.variable} antialiased h-full`}>
         <div className="min-h-full flex flex-col sm:flex-row">
           <Navigation />
           <main className="flex-1 w-full overflow-x-hidden">{children}</main>

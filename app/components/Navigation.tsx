@@ -210,7 +210,7 @@ export function Navigation() {
           </div>
         </div>
 
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">ABI Commands</h3>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-[#e0e0e0]">ABI Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
             <NavLink href="/cast-abi-decode">cast abi-decode</NavLink>
@@ -243,7 +243,7 @@ export function Navigation() {
             <NavLink href="/cast-upload-signature">cast upload-signature</NavLink>
           </li>
         </ul>
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Conversion Commands</h3>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-[#e0e0e0]">Conversion Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
             <NavLink href="/cast-format-bytes32-string">cast format-bytes32-string</NavLink>
@@ -309,7 +309,7 @@ export function Navigation() {
             <NavLink href="/cast-shr">cast shr</NavLink>
           </li>
         </ul>
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Utility Commands</h3>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-[#e0e0e0]">Utility Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
             <NavLink href="/cast-address-zero">cast address-zero</NavLink>
@@ -351,7 +351,7 @@ export function Navigation() {
             <NavLink href="/cast-to-check-sum-address">cast to-check-sum-address</NavLink>
           </li>
         </ul>
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Chain Commands</h3>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-[#e0e0e0]">Chain Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
             <NavLink href="/cast-chain-id">cast chain-id</NavLink>
@@ -363,7 +363,7 @@ export function Navigation() {
             <NavLink href="/cast-client">cast client</NavLink>
           </li>
         </ul>
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Transaction Commands</h3>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-[#e0e0e0]">Transaction Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
             <NavLink href="/cast-publish">cast publish</NavLink>
@@ -396,7 +396,7 @@ export function Navigation() {
             <NavLink href="/cast-logs">cast logs</NavLink>
           </li>
         </ul>
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Block Commands</h3>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-[#e0e0e0]">Block Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
             <NavLink href="/cast-find-block">cast find-block</NavLink>
@@ -417,7 +417,7 @@ export function Navigation() {
             <NavLink href="/cast-age">cast age</NavLink>
           </li>
         </ul>
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Account Commands</h3>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-[#e0e0e0]">Account Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
             <NavLink href="/cast-balance">cast balance</NavLink>
@@ -438,7 +438,7 @@ export function Navigation() {
             <NavLink href="/cast-codesize">cast codesize</NavLink>
           </li>
         </ul>
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">ENS Commands</h3>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-[#e0e0e0]">ENS Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
             <NavLink href="/cast-lookup-address">cast lookup-address</NavLink>
@@ -450,13 +450,13 @@ export function Navigation() {
             <NavLink href="/cast-namehash">cast namehash</NavLink>
           </li>
         </ul>
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Etherscan Commands</h3>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-[#e0e0e0]">Etherscan Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
             <NavLink href="/cast-etherscan-source">cast etherscan-source</NavLink>
           </li>
         </ul>
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">Wallet Commands</h3>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-[#e0e0e0]">Wallet Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
             <NavLink href="/cast-wallet">cast wallet</NavLink>
@@ -477,7 +477,7 @@ export function Navigation() {
             <NavLink href="/cast-wallet-verify">cast wallet verify</NavLink>
           </li>
         </ul>
-        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-neutral-100 ">General Commands</h3>
+        <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-1 bg-[#e0e0e0]">General Commands</h3>
         <ul className="text-sm space-y-1">
           <li>
             <NavLink href="/cast-help">cast help</NavLink>

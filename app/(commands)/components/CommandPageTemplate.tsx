@@ -48,12 +48,24 @@ export async function generateCommandMetadata(importMetaUrl: string): Promise<Me
     openGraph: {
       title,
       description,
-      type: "article"
+      type: "article",
+      url: `https://quickcast.dev/${dirName}`,
+      siteName: "QuickCast",
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: `${title} - QuickCast Command Documentation`
+        }
+      ]
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title,
-      description
+      description,
+      images: ["/og-image.png"],
+      creator: "@velvet_shark"
     }
   };
 }

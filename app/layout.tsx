@@ -5,11 +5,6 @@ import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
 import PlausibleProvider from "next-plausible";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900"
-});
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -17,8 +12,34 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "quickcast.dev",
-  description: "Your guide to mastering Foundry's cast command-line tool"
+  title: "QuickCast | Foundry Cast Command Explorer",
+  description:
+    "Your guide to mastering Foundry's cast command-line tool. Interactive documentation, examples, and browser-based execution.",
+  metadataBase: new URL("https://quickcast.dev"),
+  openGraph: {
+    title: "QuickCast | Foundry Cast Command Explorer",
+    description:
+      "Your guide to mastering Foundry's cast command-line tool. Interactive documentation, examples, and browser-based execution.",
+    type: "website",
+    url: "https://quickcast.dev",
+    siteName: "QuickCast",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "QuickCast - Foundry Cast Command Explorer"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "QuickCast | Foundry Cast Command Explorer",
+    description:
+      "Your guide to mastering Foundry's cast command-line tool. Interactive documentation, examples, and browser-based execution.",
+    images: ["/og-image.png"],
+    creator: "@velvet_shark"
+  }
 };
 
 export default function RootLayout({
@@ -27,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="h-full" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.png" />
         <PlausibleProvider
@@ -37,7 +58,7 @@ export default function RootLayout({
           customDomain="https://pls.velvetshark.com"
         />
       </head>
-      <body className={`${geistMono.variable} antialiased h-full`}>
+      <body className={`${geistMono.variable} antialiased h-full`} suppressHydrationWarning>
         <div className="min-h-full flex flex-col">
           <div className="flex flex-col sm:flex-row flex-1">
             <Navigation />

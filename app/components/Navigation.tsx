@@ -24,7 +24,7 @@ const commandFeatures: Record<string, { hasExamples?: boolean; hasOnlineExecutio
   "/cast-from-bin": { hasExamples: false },
   "/cast-from-fixed-point": { hasExamples: false },
   "/cast-from-utf8": { hasExamples: false },
-  "/cast-from-wei": { hasExamples: false },
+  "/cast-from-wei": { hasExamples: true, hasOnlineExecution: true },
   "/cast-parse-bytes32-address": { hasExamples: false },
   "/cast-parse-bytes32-string": { hasExamples: false },
   "/cast-to-ascii": { hasExamples: false },

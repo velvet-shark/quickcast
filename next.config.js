@@ -7,6 +7,15 @@ const nextConfig = {
   typescript: {
     // Disable TypeScript checks during build
     ignoreBuildErrors: true
+  },
+  async redirects() {
+    return [
+      {
+        source: '/cast-calldata-decode',
+        destination: '/cast-decode-calldata',
+        permanent: true,
+      },
+    ];
   }
 };
 

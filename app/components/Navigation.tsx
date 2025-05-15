@@ -10,13 +10,13 @@ const commandFeatures: Record<string, { hasExamples?: boolean; hasOnlineExecutio
   "/cast-chain-id": { hasExamples: true, hasOnlineExecution: false },
   "/cast-chain": { hasExamples: true },
   "/cast-client": { hasExamples: true, hasOnlineExecution: false },
-  "/cast-abi-decode": { hasExamples: true, hasOnlineExecution: true },
+  "/cast-decode-abi": { hasExamples: true, hasOnlineExecution: true },
   "/cast-abi-encode": { hasExamples: true, hasOnlineExecution: true },
   "/cast-4byte": { hasExamples: false },
-  "/cast-4byte-decode": { hasExamples: false },
+  "/cast-4byte-calldata": { hasExamples: false },
   "/cast-4byte-event": { hasExamples: false },
   "/cast-calldata": { hasExamples: true, hasOnlineExecution: true },
-  "/cast-calldata-decode": { hasExamples: true, hasOnlineExecution: true },
+  "/cast-decode-calldata": { hasExamples: true, hasOnlineExecution: true },
   "/cast-pretty-calldata": { hasExamples: false },
   "/cast-selectors": { hasExamples: false },
   "/cast-upload-signature": { hasExamples: false },
@@ -213,7 +213,7 @@ export function Navigation() {
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-2 bg-[#e0e0e0]">ABI commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <NavLink href="/cast-abi-decode">cast abi-decode</NavLink>
+            <NavLink href="/cast-decode-abi">cast decode-abi</NavLink>
           </li>
           <li>
             <NavLink href="/cast-abi-encode">cast abi-encode</NavLink>
@@ -222,7 +222,7 @@ export function Navigation() {
             <NavLink href="/cast-4byte">cast 4byte</NavLink>
           </li>
           <li>
-            <NavLink href="/cast-4byte-decode">cast 4byte-decode</NavLink>
+            <NavLink href="/cast-4byte-calldata">cast 4byte-calldata</NavLink>
           </li>
           <li>
             <NavLink href="/cast-4byte-event">cast 4byte-event</NavLink>
@@ -231,7 +231,7 @@ export function Navigation() {
             <NavLink href="/cast-calldata">cast calldata</NavLink>
           </li>
           <li>
-            <NavLink href="/cast-calldata-decode">cast calldata-decode</NavLink>
+            <NavLink href="/cast-decode-calldata">cast decode-calldata</NavLink>
           </li>
           <li>
             <NavLink href="/cast-pretty-calldata">cast pretty-calldata</NavLink>

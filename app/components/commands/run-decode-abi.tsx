@@ -85,8 +85,8 @@ export function RunAbiDecode() {
   return (
     <div className="space-y-6">
       <div className="text-sm text-muted-foreground">
-        Works for output data, same as running `cast calldata-decode`. abi-decode can also decode input data with the
-        `--input` flag, but it is the same as running `cast calldata-decode`, so you can just use that instead.
+        Works for output data, same as running `cast decode-calldata`. decode-abi can also decode input data with the
+        `--input` flag, but it is the same as running `cast decode-calldata`, so you can just use that instead.
       </div>
       <div className="flex items-center gap-2">
         <div className="w-24 text-sm font-medium">Signature</div>

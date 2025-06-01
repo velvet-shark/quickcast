@@ -24,9 +24,9 @@ async function resolveInclude(
   try {
     content = await fs.promises.readFile(fullPath, "utf8");
   } catch {
-    // If not found, try from commands/src/reference/common
+    // If not found, try from commands/vocs/docs/pages/cast/reference
     try {
-      fullPath = path.join(process.cwd(), "commands", "src", "reference", "common", includePath);
+      fullPath = path.join(process.cwd(), "commands", "vocs", "docs", "pages", "cast", "reference", includePath);
       content = await fs.promises.readFile(fullPath, "utf8");
     } catch (innerError) {
       console.error(`Error reading include file ${includePath}:`, innerError);
@@ -52,7 +52,7 @@ async function resolveInclude(
 }
 
 export async function getPageContent(pagePath: string) {
-  const fullPath = path.join(process.cwd(), "commands", "src", "reference", "cast", pagePath);
+  const fullPath = path.join(process.cwd(), "commands", "vocs", "docs", "pages", "cast", "reference", pagePath + ".mdx");
 
   try {
     let content = await fs.promises.readFile(fullPath, "utf8");

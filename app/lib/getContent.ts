@@ -59,7 +59,18 @@ async function resolveInclude(
 }
 
 export async function getPageContent(pagePath: string) {
-  // Normalize path and ensure it has the correct extension
+  // Special case for the overview page
+  if (pagePath === 'cast.md') {
+    const overviewPath = path.join(process.cwd(), "commands", "vocs", "docs", "pages", "cast", "reference", "overview.mdx");
+    try {
+      return await fs.promises.readFile(overviewPath, "utf8");
+    } catch (error) {
+      console.error("Error reading overview file:", error);
+      return null;
+    }
+  }
+
+  // Normalize path and ensure it has the correct extension for other pages
   const normalizePath = (p: string) => {
     // Remove any existing .mdx or .md extension
     const normalized = p.replace(/\.(mdx?)$/, '');

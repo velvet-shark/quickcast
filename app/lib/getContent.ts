@@ -24,9 +24,16 @@ async function resolveInclude(
   try {
     content = await fs.promises.readFile(fullPath, "utf8");
   } catch {
-    // If not found, try from commands/vocs/docs/pages/cast/reference
+    // If not found, try from commands/vocs/docs/pages/cast/reference with proper extension handling
     try {
-      fullPath = path.join(process.cwd(), "commands", "vocs", "docs", "pages", "cast", "reference", includePath);
+      const normalizeIncludePath = (p: string) => {
+        // Handle relative paths in includes
+        const relativePath = p.replace(/^\.\//, '');
+        // Remove any existing .mdx or .md extension and add .mdx
+        return relativePath.replace(/\.(mdx?)$/, '') + '.mdx';
+      };
+      
+      fullPath = path.join(process.cwd(), "commands", "vocs", "docs", "pages", "cast", "reference", normalizeIncludePath(includePath));
       content = await fs.promises.readFile(fullPath, "utf8");
     } catch (innerError) {
       console.error(`Error reading include file ${includePath}:`, innerError);
@@ -52,7 +59,15 @@ async function resolveInclude(
 }
 
 export async function getPageContent(pagePath: string) {
-  const fullPath = path.join(process.cwd(), "commands", "vocs", "docs", "pages", "cast", "reference", pagePath + ".mdx");
+  // Normalize path and ensure it has the correct extension
+  const normalizePath = (p: string) => {
+    // Remove any existing .mdx or .md extension
+    const normalized = p.replace(/\.(mdx?)$/, '');
+    // Add .mdx extension
+    return `${normalized}.mdx`;
+  };
+  
+  const fullPath = path.join(process.cwd(), "commands", "vocs", "docs", "pages", "cast", "reference", normalizePath(pagePath));
 
   try {
     let content = await fs.promises.readFile(fullPath, "utf8");

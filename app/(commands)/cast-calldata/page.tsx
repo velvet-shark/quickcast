@@ -1,5 +1,6 @@
 import path from "path";
 import { getPageContent } from "@/app/lib/getContent";
+import { getMdxContent } from "@/app/lib/getMdxContent";
 import { CommandPageTemplate, generateCommandMetadata } from "../components/CommandPageTemplate";
 import { Example } from "@/app/components/Example";
 import { RunCalldata } from "@/app/components/commands/run-calldata";
@@ -8,7 +9,9 @@ export const generateMetadata = () => generateCommandMetadata(import.meta.url);
 
 export default async function CommandPage() {
   const dirName = path.basename(path.dirname(import.meta.url));
-  const content = await getPageContent(`${dirName}.md`);
+  // Try to get MDX content first, fall back to regular content if needed
+  const mdxContent = await getMdxContent(`${dirName}.md`);
+  const content = mdxContent ? null : await getPageContent(`${dirName}.md`);
 
   const examples = (
     <>
@@ -25,5 +28,5 @@ export default async function CommandPage() {
     </>
   );
 
-  return <CommandPageTemplate content={content} examples={examples} runCommand={<RunCalldata />} />;
+  return <CommandPageTemplate content={content} mdxContent={mdxContent} examples={examples} runCommand={<RunCalldata />} />;
 }

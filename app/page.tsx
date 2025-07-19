@@ -1,10 +1,14 @@
 import { getPageContent } from "@/app/lib/getContent";
+import { getMdxContent } from "@/app/lib/getMdxContent";
 import { Markdown } from "@/app/components/Markdown";
+import { MdxRenderer } from "@/app/components/MdxRenderer";
 import Image from "next/image";
 import { Card } from "./components/Card";
 
 export default async function Home() {
-  const content = await getPageContent("cast.md");
+  // Try to get MDX content first, fall back to regular content if needed
+  const mdxContent = await getMdxContent("cast.md");
+  const content = mdxContent ? null : await getPageContent("cast.md");
 
   return (
     <div className="p-4 sm:p-6 max-w-4xl mx-auto">
@@ -75,7 +79,11 @@ export default async function Home() {
       </div>
 
       <Card title="DOCUMENTATION">
-        <Markdown content={content ?? ""} />
+        {mdxContent ? (
+          <MdxRenderer mdxContent={mdxContent} />
+        ) : (
+          <Markdown content={content ?? ""} />
+        )}
       </Card>
     </div>
   );

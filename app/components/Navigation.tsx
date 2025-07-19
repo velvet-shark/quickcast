@@ -213,12 +213,6 @@ export function Navigation() {
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-2 bg-[#e0e0e0]">ABI commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <NavLink href="/cast-decode-abi">cast decode-abi</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-abi-encode">cast abi-encode</NavLink>
-          </li>
-          <li>
             <NavLink href="/cast-4byte">cast 4byte</NavLink>
           </li>
           <li>
@@ -228,7 +222,13 @@ export function Navigation() {
             <NavLink href="/cast-4byte-event">cast 4byte-event</NavLink>
           </li>
           <li>
+            <NavLink href="/cast-abi-encode">cast abi-encode</NavLink>
+          </li>
+          <li>
             <NavLink href="/cast-calldata">cast calldata</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-decode-abi">cast decode-abi</NavLink>
           </li>
           <li>
             <NavLink href="/cast-decode-calldata">cast decode-calldata</NavLink>
@@ -253,6 +253,9 @@ export function Navigation() {
           </li>
           <li>
             <NavLink href="/cast-from-fixed-point">cast from-fixed-point</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-from-rlp">cast from-rlp</NavLink>
           </li>
           <li>
             <NavLink href="/cast-from-utf8">cast from-utf8</NavLink>
@@ -366,46 +369,43 @@ export function Navigation() {
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-2 bg-[#e0e0e0]">transaction commands</h3>
         <ul className="text-sm space-y-1">
           <li>
+            <NavLink href="/cast-access-list">cast access-list</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-call">cast call</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-estimate">cast estimate</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-logs">cast logs</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-mktx">cast mktx</NavLink>
+          </li>
+          <li>
             <NavLink href="/cast-publish">cast publish</NavLink>
           </li>
           <li>
             <NavLink href="/cast-receipt">cast receipt</NavLink>
           </li>
           <li>
-            <NavLink href="/cast-send">cast send</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-call">cast call</NavLink>
-          </li>
-          <li>
             <NavLink href="/cast-rpc">cast rpc</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-tx">cast tx</NavLink>
           </li>
           <li>
             <NavLink href="/cast-run">cast run</NavLink>
           </li>
           <li>
-            <NavLink href="/cast-estimate">cast estimate</NavLink>
+            <NavLink href="/cast-send">cast send</NavLink>
           </li>
           <li>
-            <NavLink href="/cast-access-list">cast access-list</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-logs">cast logs</NavLink>
+            <NavLink href="/cast-tx">cast tx</NavLink>
           </li>
         </ul>
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-2 bg-[#e0e0e0]">block commands</h3>
         <ul className="text-sm space-y-1">
           <li>
-            <NavLink href="/cast-find-block">cast find-block</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-gas-price">cast gas-price</NavLink>
-          </li>
-          <li>
-            <NavLink href="/cast-block-number">cast block-number</NavLink>
+            <NavLink href="/cast-age">cast age</NavLink>
           </li>
           <li>
             <NavLink href="/cast-basefee">cast basefee</NavLink>
@@ -414,7 +414,13 @@ export function Navigation() {
             <NavLink href="/cast-block">cast block</NavLink>
           </li>
           <li>
-            <NavLink href="/cast-age">cast age</NavLink>
+            <NavLink href="/cast-block-number">cast block-number</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-find-block">cast find-block</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-gas-price">cast gas-price</NavLink>
           </li>
         </ul>
         <h3 className="text-m font-semibold m-0 my-2 -mx-4 px-4 py-2 bg-[#e0e0e0]">account commands</h3>
@@ -462,13 +468,25 @@ export function Navigation() {
             <NavLink href="/cast-wallet">cast wallet</NavLink>
           </li>
           <li>
-            <NavLink href="/cast-wallet-new">cast wallet new</NavLink>
-          </li>
-          <li>
             <NavLink href="/cast-wallet-address">cast wallet address</NavLink>
           </li>
           <li>
+            <NavLink href="/cast-wallet-import">cast wallet import</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-wallet-list">cast wallet list</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-wallet-new">cast wallet new</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-wallet-new-mnemonic">cast wallet new-mnemonic</NavLink>
+          </li>
+          <li>
             <NavLink href="/cast-wallet-sign">cast wallet sign</NavLink>
+          </li>
+          <li>
+            <NavLink href="/cast-wallet-sign-auth">cast wallet sign-auth</NavLink>
           </li>
           <li>
             <NavLink href="/cast-wallet-vanity">cast wallet vanity</NavLink>

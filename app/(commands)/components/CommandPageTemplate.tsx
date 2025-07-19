@@ -1,16 +1,19 @@
 import { Metadata } from "next";
 import { Markdown } from "@/app/components/Markdown";
+import { MdxRenderer } from "@/app/components/MdxRenderer";
 import { getCommandMetadata } from "@/app/lib/getCommandMetadata";
 import { Card } from "@/app/components/Card";
+import { MdxContent } from "@/app/lib/getMdxContent";
 import path from "path";
 
 interface CommandPageTemplateProps {
   content: string | null;
+  mdxContent?: MdxContent | null;
   runCommand?: React.ReactNode;
   examples?: React.ReactNode;
 }
 
-export function CommandPageTemplate({ content, runCommand, examples }: CommandPageTemplateProps) {
+export function CommandPageTemplate({ content, mdxContent, runCommand, examples }: CommandPageTemplateProps) {
   const hasTopContent = runCommand || examples;
 
   return (
@@ -32,7 +35,11 @@ export function CommandPageTemplate({ content, runCommand, examples }: CommandPa
 
       {/* Command Documentation */}
       <Card title="DOCUMENTATION">
-        <Markdown content={content ?? ""} />
+        {mdxContent ? (
+          <MdxRenderer mdxContent={mdxContent} />
+        ) : (
+          <Markdown content={content ?? ""} />
+        )}
       </Card>
     </>
   );

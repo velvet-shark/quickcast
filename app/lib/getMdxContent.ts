@@ -167,6 +167,12 @@ export async function getMdxContent(pagePath: string): Promise<MdxContent | null
       return `tx-pool/${subCommand}.mdx`;
     }
     
+    // Handle --create commands (cast-call---create -> call/--create)
+    if (withoutPrefix.includes('---create')) {
+      const baseCommand = withoutPrefix.replace('---create', '');
+      return `${baseCommand}/--create.mdx`;
+    }
+    
     // Add .mdx extension
     return `${withoutPrefix}.mdx`;
   };

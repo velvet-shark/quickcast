@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sync-commands": "npx tsx scripts/sync-commands.ts",
+    "predev": "npm run sync-commands",
+    "prebuild": "npm run sync-commands"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",

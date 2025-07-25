@@ -1,0 +1,514 @@
+{
+  "categories": {
+    "ABI Commands": [
+      {
+        "text": "cast 4byte",
+        "href": "/cast-4byte"
+      },
+      {
+        "text": "cast 4byte-calldata",
+        "href": "/cast-4byte-calldata"
+      },
+      {
+        "text": "cast 4byte-event",
+        "href": "/cast-4byte-event"
+      },
+      {
+        "text": "cast abi-encode",
+        "href": "/cast-abi-encode"
+      },
+      {
+        "text": "cast calldata",
+        "href": "/cast-calldata"
+      },
+      {
+        "text": "cast decode-abi",
+        "href": "/cast-decode-abi"
+      },
+      {
+        "text": "cast decode-calldata",
+        "href": "/cast-decode-calldata"
+      },
+      {
+        "text": "cast pretty-calldata",
+        "href": "/cast-pretty-calldata"
+      },
+      {
+        "text": "cast selectors",
+        "href": "/cast-selectors"
+      },
+      {
+        "text": "cast upload-signature",
+        "href": "/cast-upload-signature"
+      }
+    ],
+    "Account Commands": [
+      {
+        "text": "cast balance",
+        "href": "/cast-balance"
+      },
+      {
+        "text": "cast code",
+        "href": "/cast-code"
+      },
+      {
+        "text": "cast codesize",
+        "href": "/cast-codesize"
+      },
+      {
+        "text": "cast nonce",
+        "href": "/cast-nonce"
+      },
+      {
+        "text": "cast proof",
+        "href": "/cast-proof"
+      },
+      {
+        "text": "cast storage",
+        "href": "/cast-storage"
+      }
+    ],
+    "Block Commands": [
+      {
+        "text": "cast age",
+        "href": "/cast-age"
+      },
+      {
+        "text": "cast block",
+        "href": "/cast-block"
+      },
+      {
+        "text": "cast block-number",
+        "href": "/cast-block-number"
+      },
+      {
+        "text": "cast find-block",
+        "href": "/cast-find-block"
+      },
+      {
+        "text": "cast gas-price",
+        "href": "/cast-gas-price"
+      }
+    ],
+    "Chain Commands": [
+      {
+        "text": "cast chain",
+        "href": "/cast-chain"
+      },
+      {
+        "text": "cast chain-id",
+        "href": "/cast-chain-id"
+      },
+      {
+        "text": "cast client",
+        "href": "/cast-client"
+      }
+    ],
+    "Conversion Commands": [
+      {
+        "text": "cast format-bytes32-string",
+        "href": "/cast-format-bytes32-string"
+      },
+      {
+        "text": "cast from-bin",
+        "href": "/cast-from-bin"
+      },
+      {
+        "text": "cast from-fixed-point",
+        "href": "/cast-from-fixed-point"
+      },
+      {
+        "text": "cast from-rlp",
+        "href": "/cast-from-rlp"
+      },
+      {
+        "text": "cast from-utf8",
+        "href": "/cast-from-utf8"
+      },
+      {
+        "text": "cast from-wei",
+        "href": "/cast-from-wei"
+      },
+      {
+        "text": "cast parse-bytes32-address",
+        "href": "/cast-parse-bytes32-address"
+      },
+      {
+        "text": "cast parse-bytes32-string",
+        "href": "/cast-parse-bytes32-string"
+      },
+      {
+        "text": "cast shl",
+        "href": "/cast-shl"
+      },
+      {
+        "text": "cast shr",
+        "href": "/cast-shr"
+      },
+      {
+        "text": "cast to-ascii",
+        "href": "/cast-to-ascii"
+      },
+      {
+        "text": "cast to-base",
+        "href": "/cast-to-base"
+      },
+      {
+        "text": "cast to-bytes32",
+        "href": "/cast-to-bytes32"
+      },
+      {
+        "text": "cast to-dec",
+        "href": "/cast-to-dec"
+      },
+      {
+        "text": "cast to-fixed-point",
+        "href": "/cast-to-fixed-point"
+      },
+      {
+        "text": "cast to-hex",
+        "href": "/cast-to-hex"
+      },
+      {
+        "text": "cast to-hexdata",
+        "href": "/cast-to-hexdata"
+      },
+      {
+        "text": "cast to-int256",
+        "href": "/cast-to-int256"
+      },
+      {
+        "text": "cast to-rlp",
+        "href": "/cast-to-rlp"
+      },
+      {
+        "text": "cast to-uint256",
+        "href": "/cast-to-uint256"
+      },
+      {
+        "text": "cast to-unit",
+        "href": "/cast-to-unit"
+      },
+      {
+        "text": "cast to-wei",
+        "href": "/cast-to-wei"
+      }
+    ],
+    "ENS Commands": [
+      {
+        "text": "cast lookup-address",
+        "href": "/cast-lookup-address"
+      },
+      {
+        "text": "cast namehash",
+        "href": "/cast-namehash"
+      },
+      {
+        "text": "cast resolve-name",
+        "href": "/cast-resolve-name"
+      }
+    ],
+    "Etherscan Commands": [
+      {
+        "text": "cast source",
+        "href": "/cast-source"
+      }
+    ],
+    "General Commands": [
+      {
+        "text": "cast completions",
+        "href": "/cast-completions"
+      }
+    ],
+    "Transaction Commands": [
+      {
+        "text": "cast access-list",
+        "href": "/cast-access-list"
+      },
+      {
+        "text": "cast call",
+        "href": "/cast-call"
+      },
+      {
+        "text": "cast estimate",
+        "href": "/cast-estimate"
+      },
+      {
+        "text": "cast logs",
+        "href": "/cast-logs"
+      },
+      {
+        "text": "cast mktx",
+        "href": "/cast-mktx"
+      },
+      {
+        "text": "cast publish",
+        "href": "/cast-publish"
+      },
+      {
+        "text": "cast receipt",
+        "href": "/cast-receipt"
+      },
+      {
+        "text": "cast rpc",
+        "href": "/cast-rpc"
+      },
+      {
+        "text": "cast run",
+        "href": "/cast-run"
+      },
+      {
+        "text": "cast send",
+        "href": "/cast-send"
+      },
+      {
+        "text": "cast tx",
+        "href": "/cast-tx"
+      }
+    ],
+    "Utility Commands": [
+      {
+        "text": "cast address-zero",
+        "href": "/cast-address-zero"
+      },
+      {
+        "text": "cast admin",
+        "href": "/cast-admin"
+      },
+      {
+        "text": "cast artifact",
+        "href": "/cast-artifact"
+      },
+      {
+        "text": "cast base-fee",
+        "href": "/cast-base-fee"
+      },
+      {
+        "text": "cast bind",
+        "href": "/cast-bind"
+      },
+      {
+        "text": "cast call --create",
+        "href": "/cast-call---create"
+      },
+      {
+        "text": "cast codehash",
+        "href": "/cast-codehash"
+      },
+      {
+        "text": "cast compute-address",
+        "href": "/cast-compute-address"
+      },
+      {
+        "text": "cast concat-hex",
+        "href": "/cast-concat-hex"
+      },
+      {
+        "text": "cast constructor-args",
+        "href": "/cast-constructor-args"
+      },
+      {
+        "text": "cast create2",
+        "href": "/cast-create2"
+      },
+      {
+        "text": "cast creation-code",
+        "href": "/cast-creation-code"
+      },
+      {
+        "text": "cast da-estimate",
+        "href": "/cast-da-estimate"
+      },
+      {
+        "text": "cast decode-error",
+        "href": "/cast-decode-error"
+      },
+      {
+        "text": "cast decode-event",
+        "href": "/cast-decode-event"
+      },
+      {
+        "text": "cast decode-string",
+        "href": "/cast-decode-string"
+      },
+      {
+        "text": "cast decode-transaction",
+        "href": "/cast-decode-transaction"
+      },
+      {
+        "text": "cast disassemble",
+        "href": "/cast-disassemble"
+      },
+      {
+        "text": "cast estimate --create",
+        "href": "/cast-estimate---create"
+      },
+      {
+        "text": "cast format-units",
+        "href": "/cast-format-units"
+      },
+      {
+        "text": "cast generate-fig-spec",
+        "href": "/cast-generate-fig-spec"
+      },
+      {
+        "text": "cast hash-message",
+        "href": "/cast-hash-message"
+      },
+      {
+        "text": "cast hash-zero",
+        "href": "/cast-hash-zero"
+      },
+      {
+        "text": "cast implementation",
+        "href": "/cast-implementation"
+      },
+      {
+        "text": "cast index",
+        "href": "/cast-index"
+      },
+      {
+        "text": "cast index-erc7201",
+        "href": "/cast-index-erc7201"
+      },
+      {
+        "text": "cast interface",
+        "href": "/cast-interface"
+      },
+      {
+        "text": "cast keccak",
+        "href": "/cast-keccak"
+      },
+      {
+        "text": "cast max-int",
+        "href": "/cast-max-int"
+      },
+      {
+        "text": "cast max-uint",
+        "href": "/cast-max-uint"
+      },
+      {
+        "text": "cast min-int",
+        "href": "/cast-min-int"
+      },
+      {
+        "text": "cast mktx --create",
+        "href": "/cast-mktx---create"
+      },
+      {
+        "text": "cast parse-units",
+        "href": "/cast-parse-units"
+      },
+      {
+        "text": "cast recover-authority",
+        "href": "/cast-recover-authority"
+      },
+      {
+        "text": "cast send --create",
+        "href": "/cast-send---create"
+      },
+      {
+        "text": "cast sig",
+        "href": "/cast-sig"
+      },
+      {
+        "text": "cast sig-event",
+        "href": "/cast-sig-event"
+      },
+      {
+        "text": "cast storage-root",
+        "href": "/cast-storage-root"
+      },
+      {
+        "text": "cast to-check-sum-address",
+        "href": "/cast-to-check-sum-address"
+      },
+      {
+        "text": "cast to-utf8",
+        "href": "/cast-to-utf8"
+      },
+      {
+        "text": "cast tx-pool",
+        "href": "/cast-tx-pool"
+      },
+      {
+        "text": "cast tx-pool content",
+        "href": "/cast-tx-pool-content"
+      },
+      {
+        "text": "cast tx-pool content-from",
+        "href": "/cast-tx-pool-content-from"
+      },
+      {
+        "text": "cast tx-pool inspect",
+        "href": "/cast-tx-pool-inspect"
+      },
+      {
+        "text": "cast tx-pool status",
+        "href": "/cast-tx-pool-status"
+      },
+      {
+        "text": "cast wallet address",
+        "href": "/cast-wallet-address"
+      },
+      {
+        "text": "cast wallet change-password",
+        "href": "/cast-wallet-change-password"
+      },
+      {
+        "text": "cast wallet decrypt-keystore",
+        "href": "/cast-wallet-decrypt-keystore"
+      },
+      {
+        "text": "cast wallet import",
+        "href": "/cast-wallet-import"
+      },
+      {
+        "text": "cast wallet list",
+        "href": "/cast-wallet-list"
+      },
+      {
+        "text": "cast wallet new",
+        "href": "/cast-wallet-new"
+      },
+      {
+        "text": "cast wallet new-mnemonic",
+        "href": "/cast-wallet-new-mnemonic"
+      },
+      {
+        "text": "cast wallet private-key",
+        "href": "/cast-wallet-private-key"
+      },
+      {
+        "text": "cast wallet public-key",
+        "href": "/cast-wallet-public-key"
+      },
+      {
+        "text": "cast wallet remove",
+        "href": "/cast-wallet-remove"
+      },
+      {
+        "text": "cast wallet sign",
+        "href": "/cast-wallet-sign"
+      },
+      {
+        "text": "cast wallet sign-auth",
+        "href": "/cast-wallet-sign-auth"
+      },
+      {
+        "text": "cast wallet vanity",
+        "href": "/cast-wallet-vanity"
+      },
+      {
+        "text": "cast wallet verify",
+        "href": "/cast-wallet-verify"
+      }
+    ],
+    "Wallet Commands": [
+      {
+        "text": "cast wallet",
+        "href": "/cast-wallet"
+      }
+    ]
+  }
+}

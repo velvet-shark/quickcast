@@ -61,7 +61,7 @@ async function resolveInclude(
 export async function getPageContent(pagePath: string) {
   // Special case for the overview page
   if (pagePath === 'cast.md') {
-    const overviewPath = path.join(process.cwd(), "commands", "vocs", "docs", "pages", "cast", "reference", "overview.mdx");
+    const overviewPath = path.join(process.cwd(), "commands", "vocs", "docs", "pages", "cast", "reference", "cast.mdx");
     try {
       return await fs.promises.readFile(overviewPath, "utf8");
     } catch (error) {
@@ -74,8 +74,23 @@ export async function getPageContent(pagePath: string) {
   const normalizePath = (p: string) => {
     // Remove any existing .mdx or .md extension
     const normalized = p.replace(/\.(mdx?)$/, '');
+    // Remove cast- prefix if present
+    const withoutPrefix = normalized.replace(/^cast-/, '');
+    
+    // Handle wallet subcommands (cast-wallet-address -> wallet/address)
+    if (withoutPrefix.startsWith('wallet-')) {
+      const subCommand = withoutPrefix.replace('wallet-', '');
+      return `wallet/${subCommand}.mdx`;
+    }
+    
+    // Handle tx-pool subcommands (cast-tx-pool-status -> tx-pool/status)
+    if (withoutPrefix.startsWith('tx-pool-')) {
+      const subCommand = withoutPrefix.replace('tx-pool-', '');
+      return `tx-pool/${subCommand}.mdx`;
+    }
+    
     // Add .mdx extension
-    return `${normalized}.mdx`;
+    return `${withoutPrefix}.mdx`;
   };
   
   const fullPath = path.join(process.cwd(), "commands", "vocs", "docs", "pages", "cast", "reference", normalizePath(pagePath));

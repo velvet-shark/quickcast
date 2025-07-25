@@ -145,15 +145,30 @@ function stripMdExtensions(text: string): string {
 export async function getMdxContent(pagePath: string): Promise<MdxContent | null> {
   // Special case for the overview page
   if (pagePath === 'cast.md' || pagePath === 'cast') {
-    pagePath = 'overview.mdx';
+    pagePath = 'cast.mdx';
   }
   
   // Normalize path and ensure it has the correct extension
   const normalizePath = (p: string) => {
     // Remove any existing .mdx or .md extension
     const normalized = p.replace(/\.(mdx?)$/, '');
+    // Remove cast- prefix if present
+    const withoutPrefix = normalized.replace(/^cast-/, '');
+    
+    // Handle wallet subcommands (cast-wallet-address -> wallet/address)
+    if (withoutPrefix.startsWith('wallet-')) {
+      const subCommand = withoutPrefix.replace('wallet-', '');
+      return `wallet/${subCommand}.mdx`;
+    }
+    
+    // Handle tx-pool subcommands (cast-tx-pool-status -> tx-pool/status)
+    if (withoutPrefix.startsWith('tx-pool-')) {
+      const subCommand = withoutPrefix.replace('tx-pool-', '');
+      return `tx-pool/${subCommand}.mdx`;
+    }
+    
     // Add .mdx extension
-    return `${normalized}.mdx`;
+    return `${withoutPrefix}.mdx`;
   };
   
   const fullPath = path.join(

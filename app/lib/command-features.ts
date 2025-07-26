@@ -39,12 +39,12 @@ export const commandFeatures: Record<string, { hasExamples?: boolean; hasOnlineE
   "/cast-to-wei": { hasExamples: false },
   "/cast-shl": { hasExamples: false },
   "/cast-shr": { hasExamples: false },
-  "/cast-address-zero": { hasExamples: false },
+  "/cast-address-zero": { hasExamples: true },
   "/cast-sig": { hasExamples: false },
   "/cast-sig-event": { hasExamples: false },
   "/cast-keccak": { hasExamples: true, hasOnlineExecution: true },
   "/cast-hash-message": { hasExamples: false },
-  "/cast-hash-zero": { hasExamples: false },
+  "/cast-hash-zero": { hasExamples: true },
   "/cast-compute-address": { hasExamples: false },
   "/cast-create2": { hasExamples: false },
   "/cast-interface": { hasExamples: false },
@@ -118,5 +118,5 @@ export const commandFeatures: Record<string, { hasExamples?: boolean; hasOnlineE
   "/cast-wallet-public-key": { hasExamples: false },
   "/cast-wallet-decrypt-keystore": { hasExamples: false },
   "/cast-wallet-remove": { hasExamples: false },
-  "/cast-wallet-change-password": { hasExamples: false },
+  "/cast-wallet-change-password": { hasExamples: false }
 };

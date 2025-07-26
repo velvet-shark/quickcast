@@ -12,21 +12,21 @@ export default async function CommandPage() {
   const mdxContent = await getMdxContent(`${dirName}.md`);
   const content = mdxContent ? null : await getPageContent(`${dirName}.md`);
 
-  //   const examples = (
-  //     <>
-  //       <Example description="Description:" command="cast command arguments" output="output" />
+  const examples = (
+    <>
+      <Example
+        description="Prints the zero address:"
+        command="cast address-zero"
+        output={`0x0000000000000000000000000000000000000000`}
+      />
+    </>
+  );
 
-  //       <Example
-  //         description="Convert multiple values with --json:"
-  //         command="cast to-dec --json 0xff 0xdeadbeef 0x1234"
-  //         output={`{
-  //   "0xff": "255",
-  //   "0xdeadbeef": "3735928559",
-  //   "0x1234": "4660"
-  // }`}
-  //       />
-  //     </>
-  //   );
-
-  return <CommandPageTemplate content={content} mdxContent={mdxContent}  />;
+  return (
+    <CommandPageTemplate
+      content={content}
+      mdxContent={mdxContent}
+      examples={typeof examples !== "undefined" ? examples : undefined}
+    />
+  );
 }

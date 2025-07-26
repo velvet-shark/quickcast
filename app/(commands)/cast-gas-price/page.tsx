@@ -12,21 +12,21 @@ export default async function CommandPage() {
   const mdxContent = await getMdxContent(`${dirName}.md`);
   const content = mdxContent ? null : await getPageContent(`${dirName}.md`);
 
-  //   const examples = (
-  //     <>
-  //       <Example description="Description:" command="cast command arguments" output="output" />
+  const examples = (
+    <>
+      <Example
+        description="Get the current gas price. Use --rpc-url or -r flag to specify the RPC endpoint."
+        command="cast gas-price -r https://eth.llamarpc.com"
+        output="234724540"
+      />
+    </>
+  );
 
-  //       <Example
-  //         description="Convert multiple values with --json:"
-  //         command="cast to-dec --json 0xff 0xdeadbeef 0x1234"
-  //         output={`{
-  //   "0xff": "255",
-  //   "0xdeadbeef": "3735928559",
-  //   "0x1234": "4660"
-  // }`}
-  //       />
-  //     </>
-  //   );
-
-  return <CommandPageTemplate content={content} mdxContent={mdxContent}  />;
+  return (
+    <CommandPageTemplate
+      content={content}
+      mdxContent={mdxContent}
+      examples={typeof examples !== "undefined" ? examples : undefined}
+    />
+  );
 }

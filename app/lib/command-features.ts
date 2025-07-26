@@ -82,7 +82,7 @@ export const commandFeatures: Record<string, { hasExamples?: boolean; hasOnlineE
   "/cast-block": { hasExamples: false },
   "/cast-block-number": { hasExamples: false },
   "/cast-find-block": { hasExamples: false },
-  "/cast-gas-price": { hasExamples: false },
+  "/cast-gas-price": { hasExamples: true },
   "/cast-balance": { hasExamples: false },
   "/cast-nonce": { hasExamples: false },
   "/cast-code": { hasExamples: false },

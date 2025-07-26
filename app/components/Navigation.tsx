@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import navigationData from "@/app/lib/navigation-data.json";
 import { commandFeatures } from "@/app/lib/command-features";
+import { Search } from "./Search";
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -100,6 +101,10 @@ export function Navigation() {
           <Link href="/">
             <Image src="/quickcast-logo.png" alt="QuickCast" width={300} height={45} priority />
           </Link>
+        </div>
+
+        <div className="mb-4">
+          <Search />
         </div>
 
         <div className="mb-4 mt-2 text-sm text-neutral-500 space-y-1">

@@ -112,10 +112,10 @@ export function Search() {
     if (selectedItemRef.current && dropdownRef.current) {
       const dropdown = dropdownRef.current;
       const item = selectedItemRef.current;
-      
+
       const dropdownRect = dropdown.getBoundingClientRect();
       const itemRect = item.getBoundingClientRect();
-      
+
       // Check if item is below visible area
       if (itemRect.bottom > dropdownRect.bottom) {
         item.scrollIntoView({ block: "end", behavior: "smooth" });
@@ -153,7 +153,7 @@ export function Search() {
 
   return (
     <div className="relative w-full">
-      <div className="relative">
+      <div className="relative border border-green-600 rounded-md">
         <Input
           ref={inputRef}
           type="text"

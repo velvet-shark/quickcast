@@ -4,6 +4,7 @@ import { Markdown } from "@/app/components/Markdown";
 import { MdxRenderer } from "@/app/components/MdxRenderer";
 import Image from "next/image";
 import { Card } from "./components/Card";
+import { Search } from "./components/Search";
 
 export default async function Home() {
   // Try to get MDX content first, fall back to regular content if needed
@@ -34,6 +35,10 @@ export default async function Home() {
             </a>{" "}
             <code className="text-blue-600 font-mono">cast</code> command-line tool
           </p>
+        </div>
+
+        <div className="mt-8 max-w-4xl mx-auto">
+          <Search />
         </div>
 
         <div className="grid sm:grid-cols-2 gap-6">
@@ -79,11 +84,7 @@ export default async function Home() {
       </div>
 
       <Card title="DOCUMENTATION">
-        {mdxContent ? (
-          <MdxRenderer mdxContent={mdxContent} />
-        ) : (
-          <Markdown content={content ?? ""} />
-        )}
+        {mdxContent ? <MdxRenderer mdxContent={mdxContent} /> : <Markdown content={content ?? ""} />}
       </Card>
     </div>
   );

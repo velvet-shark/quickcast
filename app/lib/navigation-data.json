@@ -396,6 +396,10 @@
         "href": "/cast-mktx---create"
       },
       {
+        "text": "cast pad",
+        "href": "/cast-pad"
+      },
+      {
         "text": "cast parse-units",
         "href": "/cast-parse-units"
       },

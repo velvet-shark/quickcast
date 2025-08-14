@@ -6,6 +6,9 @@ on:
     - cron: '0 6 * * *'
   workflow_dispatch: # Allow manual trigger
 
+permissions:
+  contents: write
+
 jobs:
   update-submodule:
     runs-on: ubuntu-latest
@@ -15,6 +18,7 @@ jobs:
         with:
           submodules: true
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: Update submodule
         run: |

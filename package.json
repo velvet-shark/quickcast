@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "sync-commands": "npx tsx scripts/sync-commands.ts",
+    "update-submodule": "./scripts/update-submodule.sh",
     "predev": "npm run sync-commands",
     "prebuild": "npm run sync-commands"
   },

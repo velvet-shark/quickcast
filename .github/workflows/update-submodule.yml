@@ -20,7 +20,7 @@ jobs:
         run: |
           cd commands
           git fetch origin
-          git reset --hard origin/main
+          git reset --hard origin/master
 
       - name: Check for changes
         id: changes

@@ -15,7 +15,7 @@ git fetch origin
 
 # Check if there are updates
 CURRENT_HASH=$(git rev-parse HEAD)
-LATEST_HASH=$(git rev-parse origin/main)
+LATEST_HASH=$(git rev-parse origin/master)
 
 if [ "$CURRENT_HASH" = "$LATEST_HASH" ]; then
     echo "Commands submodule is already up to date."
@@ -23,7 +23,7 @@ if [ "$CURRENT_HASH" = "$LATEST_HASH" ]; then
 fi
 
 # Update to latest
-git reset --hard origin/main
+git reset --hard origin/master
 
 # Go back to project root
 cd ..

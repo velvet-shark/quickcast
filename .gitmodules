@@ -1,3 +1,0 @@
-[submodule "commands"]
-	path = commands
-	url = https://github.com/foundry-rs/book.git

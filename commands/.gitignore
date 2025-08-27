@@ -1,0 +1,13 @@
+/book
+/.idea
+/.vscode
+
+/cache/
+/vocs/snippets/projects/**/cache/
+/out/
+/vocs/snippets/projects/**/out/
+
+/vocs/node_modules
+/vocs/docs/dist
+_
+links-report.json

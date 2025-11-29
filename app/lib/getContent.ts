@@ -58,9 +58,51 @@ async function resolveInclude(
   return content;
 }
 
+// Build a prioritized list of possible relative paths for a command page.
+// This makes nested command folders (e.g. erc20-token/allowance) resolve correctly.
+function buildCandidatePaths(pagePath: string): string[] {
+  const candidates = new Set<string>();
+  const normalized = pagePath.replace(/\.(mdx?)$/, "");
+  const withoutPrefix = normalized.replace(/^cast-/, "");
+  const parts = withoutPrefix.split("-");
+
+  // Existing specific mappings
+  if (withoutPrefix.startsWith("wallet-")) {
+    const subCommand = withoutPrefix.replace("wallet-", "");
+    candidates.add(`wallet/${subCommand}.mdx`);
+  }
+
+  if (withoutPrefix.startsWith("tx-pool-")) {
+    const subCommand = withoutPrefix.replace("tx-pool-", "");
+    candidates.add(`tx-pool/${subCommand}.mdx`);
+  }
+
+  if (withoutPrefix.includes("---create")) {
+    const baseCommand = withoutPrefix.replace("---create", "");
+    candidates.add(`${baseCommand}/--create.mdx`);
+  }
+
+  // Default flat file
+  candidates.add(`${withoutPrefix}.mdx`);
+
+  // Generic nested mappings:
+  // Try progressively grouping leading segments into a directory and the rest as filename.
+  if (parts.length >= 2) {
+    candidates.add(`${parts[0]}/${parts.slice(1).join("-")}.mdx`);
+  }
+  if (parts.length >= 3) {
+    candidates.add(`${parts.slice(0, 2).join("-")}/${parts.slice(2).join("-")}.mdx`);
+  }
+  if (parts.length >= 4) {
+    candidates.add(`${parts.slice(0, 3).join("-")}/${parts.slice(3).join("-")}.mdx`);
+  }
+
+  return Array.from(candidates);
+}
+
 export async function getPageContent(pagePath: string) {
   // Special case for the overview page
-  if (pagePath === 'cast.md') {
+  if (pagePath === "cast.md") {
     const overviewPath = path.join(process.cwd(), "commands", "vocs", "docs", "pages", "cast", "reference", "cast.mdx");
     try {
       return await fs.promises.readFile(overviewPath, "utf8");
@@ -70,55 +112,32 @@ export async function getPageContent(pagePath: string) {
     }
   }
 
-  // Normalize path and ensure it has the correct extension for other pages
-  const normalizePath = (p: string) => {
-    // Remove any existing .mdx or .md extension
-    const normalized = p.replace(/\.(mdx?)$/, '');
-    // Remove cast- prefix if present
-    const withoutPrefix = normalized.replace(/^cast-/, '');
-    
-    // Handle wallet subcommands (cast-wallet-address -> wallet/address)
-    if (withoutPrefix.startsWith('wallet-')) {
-      const subCommand = withoutPrefix.replace('wallet-', '');
-      return `wallet/${subCommand}.mdx`;
-    }
-    
-    // Handle tx-pool subcommands (cast-tx-pool-status -> tx-pool/status)
-    if (withoutPrefix.startsWith('tx-pool-')) {
-      const subCommand = withoutPrefix.replace('tx-pool-', '');
-      return `tx-pool/${subCommand}.mdx`;
-    }
-    
-    // Handle --create commands (cast-call---create -> call/--create)
-    if (withoutPrefix.includes('---create')) {
-      const baseCommand = withoutPrefix.replace('---create', '');
-      return `${baseCommand}/--create.mdx`;
-    }
-    
-    // Add .mdx extension
-    return `${withoutPrefix}.mdx`;
-  };
-  
-  const fullPath = path.join(process.cwd(), "commands", "vocs", "docs", "pages", "cast", "reference", normalizePath(pagePath));
+  const referenceRoot = path.join(process.cwd(), "commands", "vocs", "docs", "pages", "cast", "reference");
+  const candidatePaths = buildCandidatePaths(pagePath);
 
-  try {
-    let content = await fs.promises.readFile(fullPath, "utf8");
+  for (const candidate of candidatePaths) {
+    const fullPath = path.join(referenceRoot, candidate);
+    try {
+      let content = await fs.promises.readFile(fullPath, "utf8");
 
-    // Handle includes
-    const includeRegex = /{{#include ([^}]+)}}/g;
-    const matches = content.matchAll(includeRegex);
+      // Handle includes
+      const includeRegex = /{{#include ([^}]+)}}/g;
+      const matches = content.matchAll(includeRegex);
 
-    for (const match of matches) {
-      const includePath = match[1].trim();
-      const includeContent = await resolveInclude(fullPath, includePath);
-      if (includeContent) {
-        content = content.replace(match[0], includeContent);
+      for (const match of matches) {
+        const includePath = match[1].trim();
+        const includeContent = await resolveInclude(fullPath, includePath);
+        if (includeContent) {
+          content = content.replace(match[0], includeContent);
+        }
       }
-    }
 
-    return stripMdExtensions(content);
-  } catch (error) {
-    console.error("Error reading file:", error);
-    return null;
+      return stripMdExtensions(content);
+    } catch (error) {
+      // Try next candidate
+    }
   }
+
+  console.error("Error reading file: no matching path for", pagePath);
+  return null;
 }

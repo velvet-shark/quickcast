@@ -142,75 +142,93 @@ function stripMdExtensions(text: string): string {
 }
 
 // Main function to get MDX content with imports
+// Build candidate relative paths for a command MDX file, supporting nested folders.
+function buildMdxCandidatePaths(pagePath: string): string[] {
+  const candidates = new Set<string>();
+  const normalized = pagePath.replace(/\.(mdx?)$/, "");
+  const withoutPrefix = normalized.replace(/^cast-/, "");
+  const parts = withoutPrefix.split("-");
+
+  // Existing specific mappings
+  if (withoutPrefix.startsWith("wallet-")) {
+    const subCommand = withoutPrefix.replace("wallet-", "");
+    candidates.add(`wallet/${subCommand}.mdx`);
+  }
+
+  if (withoutPrefix.startsWith("tx-pool-")) {
+    const subCommand = withoutPrefix.replace("tx-pool-", "");
+    candidates.add(`tx-pool/${subCommand}.mdx`);
+  }
+
+  if (withoutPrefix.includes("---create")) {
+    const baseCommand = withoutPrefix.replace("---create", "");
+    candidates.add(`${baseCommand}/--create.mdx`);
+  }
+
+  // Default flat file
+  candidates.add(`${withoutPrefix}.mdx`);
+
+  // Generic nested mappings
+  if (parts.length >= 2) {
+    candidates.add(`${parts[0]}/${parts.slice(1).join("-")}.mdx`);
+  }
+  if (parts.length >= 3) {
+    candidates.add(`${parts.slice(0, 2).join("-")}/${parts.slice(2).join("-")}.mdx`);
+  }
+  if (parts.length >= 4) {
+    candidates.add(`${parts.slice(0, 3).join("-")}/${parts.slice(3).join("-")}.mdx`);
+  }
+
+  return Array.from(candidates);
+}
+
 export async function getMdxContent(pagePath: string): Promise<MdxContent | null> {
   // Special case for the overview page
-  if (pagePath === 'cast.md' || pagePath === 'cast') {
-    pagePath = 'cast.mdx';
+  if (pagePath === "cast.md" || pagePath === "cast") {
+    pagePath = "cast.mdx";
   }
-  
-  // Normalize path and ensure it has the correct extension
-  const normalizePath = (p: string) => {
-    // Remove any existing .mdx or .md extension
-    const normalized = p.replace(/\.(mdx?)$/, '');
-    // Remove cast- prefix if present
-    const withoutPrefix = normalized.replace(/^cast-/, '');
-    
-    // Handle wallet subcommands (cast-wallet-address -> wallet/address)
-    if (withoutPrefix.startsWith('wallet-')) {
-      const subCommand = withoutPrefix.replace('wallet-', '');
-      return `wallet/${subCommand}.mdx`;
-    }
-    
-    // Handle tx-pool subcommands (cast-tx-pool-status -> tx-pool/status)
-    if (withoutPrefix.startsWith('tx-pool-')) {
-      const subCommand = withoutPrefix.replace('tx-pool-', '');
-      return `tx-pool/${subCommand}.mdx`;
-    }
-    
-    // Handle --create commands (cast-call---create -> call/--create)
-    if (withoutPrefix.includes('---create')) {
-      const baseCommand = withoutPrefix.replace('---create', '');
-      return `${baseCommand}/--create.mdx`;
-    }
-    
-    // Add .mdx extension
-    return `${withoutPrefix}.mdx`;
-  };
-  
-  const fullPath = path.join(
-    process.cwd(), 
-    "commands", 
-    "vocs", 
-    "docs", 
-    "pages", 
-    "cast", 
-    "reference", 
-    normalizePath(pagePath)
+
+  const referenceRoot = path.join(
+    process.cwd(),
+    "commands",
+    "vocs",
+    "docs",
+    "pages",
+    "cast",
+    "reference"
   );
-  
-  try {
-    // Read the main file
-    let content = await fs.promises.readFile(fullPath, "utf8");
-    
-    // Parse MDX imports
-    const { imports, contentWithoutImports } = parseMdxImports(content, fullPath);
-    
-    // Load imported components
-    const components = await loadImportedComponents(imports);
-    
-    // Process any remaining includes in the main content
-    let processedContent = await processIncludes(contentWithoutImports, fullPath);
-    
-    // Strip .md extensions (backward compatibility)
-    processedContent = stripMdExtensions(processedContent);
-    
-    return {
-      content: processedContent,
-      imports,
-      components
-    };
-  } catch (error) {
-    console.error("Error reading MDX file:", error);
-    return null;
+
+  const candidatePaths = buildMdxCandidatePaths(pagePath);
+
+  for (const candidate of candidatePaths) {
+    const fullPath = path.join(referenceRoot, candidate);
+
+    try {
+      // Read the main file
+      let content = await fs.promises.readFile(fullPath, "utf8");
+
+      // Parse MDX imports
+      const { imports, contentWithoutImports } = parseMdxImports(content, fullPath);
+
+      // Load imported components
+      const components = await loadImportedComponents(imports);
+
+      // Process any remaining includes in the main content
+      let processedContent = await processIncludes(contentWithoutImports, fullPath);
+
+      // Strip .md extensions (backward compatibility)
+      processedContent = stripMdExtensions(processedContent);
+
+      return {
+        content: processedContent,
+        imports,
+        components
+      };
+    } catch (error) {
+      // Try next candidate
+    }
   }
+
+  console.error("Error reading MDX file: no matching path for", pagePath);
+  return null;
 }

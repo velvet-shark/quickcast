@@ -20,6 +20,34 @@ export function Search() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const selectedItemRef = useRef<HTMLButtonElement>(null);
 
+  const normalize = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+
+  const scoreCommand = (command: Command, rawQuery: string) => {
+    const normalizedQuery = normalize(rawQuery);
+    if (!normalizedQuery) return 0;
+
+    const text = normalize(command.text);
+    const href = normalize(command.href);
+
+    if (text === normalizedQuery) return 100;
+    if (href === normalizedQuery) return 95;
+    if (text.startsWith(normalizedQuery)) return 90;
+    if (href.startsWith(normalizedQuery)) return 85;
+
+    const textWords = new Set(text.split(" ").filter(Boolean));
+    if (textWords.has(normalizedQuery)) return 80;
+
+    const inTextIndex = text.indexOf(normalizedQuery);
+    if (inTextIndex !== -1) return 70 - inTextIndex * 0.01;
+
+    const inHrefIndex = href.indexOf(normalizedQuery);
+    if (inHrefIndex !== -1) return 60 - inHrefIndex * 0.01;
+
+    // Light similarity signal to keep partial matches, biased toward shorter labels
+    const similarity = normalizedQuery.length / Math.max(text.length, normalizedQuery.length);
+    return similarity * 50;
+  };
+
   // Flatten navigation data into searchable array
   const allCommands = useMemo(() => {
     const commands: Command[] = [];
@@ -45,10 +73,11 @@ export function Search() {
   const filteredCommands = useMemo(() => {
     if (!query.trim()) return [];
 
-    const lowerQuery = query.toLowerCase();
-    return allCommands.filter(
-      (command) => command.text.toLowerCase().includes(lowerQuery) || command.href.toLowerCase().includes(lowerQuery)
-    );
+    return allCommands
+      .map((command) => ({ ...command, score: scoreCommand(command, query) }))
+      .filter((command) => command.score > 0)
+      .sort((a, b) => b.score - a.score || a.text.localeCompare(b.text))
+      .map(({ score: _score, ...command }) => command);
   }, [query, allCommands]);
 
   // Handle keyboard navigation
@@ -139,7 +168,11 @@ export function Search() {
   };
 
   const highlightMatch = (text: string, query: string) => {
-    const parts = text.split(new RegExp(`(${query})`, "gi"));
+    if (!query) return text;
+
+    const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const safeQuery = escapeRegExp(query);
+    const parts = text.split(new RegExp(`(${safeQuery})`, "gi"));
     return parts.map((part, index) =>
       part.toLowerCase() === query.toLowerCase() ? (
         <span key={index} className="font-semibold text-neutral-900">

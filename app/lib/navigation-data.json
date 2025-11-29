@@ -56,6 +56,10 @@
         "href": "/cast-codesize"
       },
       {
+        "text": "cast erc20-token balance",
+        "href": "/cast-erc20-token-balance"
+      },
+      {
         "text": "cast nonce",
         "href": "/cast-nonce"
       },
@@ -268,6 +272,10 @@
     ],
     "Utility Commands": [
       {
+        "text": "cast abi-encode-event",
+        "href": "/cast-abi-encode-event"
+      },
+      {
         "text": "cast address-zero",
         "href": "/cast-address-zero"
       },
@@ -278,6 +286,10 @@
       {
         "text": "cast artifact",
         "href": "/cast-artifact"
+      },
+      {
+        "text": "cast b2e-payload",
+        "href": "/cast-b2e-payload"
       },
       {
         "text": "cast base-fee",
@@ -340,16 +352,52 @@
         "href": "/cast-disassemble"
       },
       {
+        "text": "cast erc20-token",
+        "href": "/cast-erc20-token"
+      },
+      {
+        "text": "cast erc20-token allowance",
+        "href": "/cast-erc20-token-allowance"
+      },
+      {
+        "text": "cast erc20-token approve",
+        "href": "/cast-erc20-token-approve"
+      },
+      {
+        "text": "cast erc20-token burn",
+        "href": "/cast-erc20-token-burn"
+      },
+      {
+        "text": "cast erc20-token decimals",
+        "href": "/cast-erc20-token-decimals"
+      },
+      {
+        "text": "cast erc20-token mint",
+        "href": "/cast-erc20-token-mint"
+      },
+      {
+        "text": "cast erc20-token name",
+        "href": "/cast-erc20-token-name"
+      },
+      {
+        "text": "cast erc20-token symbol",
+        "href": "/cast-erc20-token-symbol"
+      },
+      {
+        "text": "cast erc20-token total-supply",
+        "href": "/cast-erc20-token-total-supply"
+      },
+      {
+        "text": "cast erc20-token transfer",
+        "href": "/cast-erc20-token-transfer"
+      },
+      {
         "text": "cast estimate --create",
         "href": "/cast-estimate---create"
       },
       {
         "text": "cast format-units",
         "href": "/cast-format-units"
-      },
-      {
-        "text": "cast generate-fig-spec",
-        "href": "/cast-generate-fig-spec"
       },
       {
         "text": "cast hash-message",

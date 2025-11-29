@@ -7,7 +7,8 @@ import { AbiCoder } from "ethers";
 
 type DecodedValue = string | bigint | DecodedValue[];
 
-export function RunAbiDecode() {
+// Exported as RunDecodeAbi to match imports used across the app.
+export function RunDecodeAbi() {
   const [signature, setSignature] = useState("");
   const [data, setData] = useState("");
   const [decoded, setDecoded] = useState("");
@@ -141,3 +142,6 @@ export function RunAbiDecode() {
     </div>
   );
 }
+
+// Backward compatibility for earlier import naming
+export const RunAbiDecode = RunDecodeAbi;

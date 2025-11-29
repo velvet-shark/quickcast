@@ -7,7 +7,8 @@ import { Interface } from "ethers";
 
 type DecodedValue = string | bigint | DecodedValue[];
 
-export function RunCalldataDecode() {
+// Exported as RunDecodeCalldata to match imports used across the app.
+export function RunDecodeCalldata() {
   const [signature, setSignature] = useState("");
   const [data, setData] = useState("");
   const [decoded, setDecoded] = useState("");
@@ -134,3 +135,6 @@ export function RunCalldataDecode() {
     </div>
   );
 }
+
+// Backward compatibility for earlier import naming
+export const RunCalldataDecode = RunDecodeCalldata;

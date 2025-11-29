@@ -1,7 +1,8 @@
 import path from "path";
 import { getPageContent } from "@/app/lib/getContent";
 import { getMdxContent } from "@/app/lib/getMdxContent";
-import { CommandPageTemplate, generateCommandMetadata } from "../components/CommandPageTemplate";
+import { generateCommandMetadata } from "../components/CommandPageTemplate";
+import { CommandPageTemplateWithCustomizations } from "../components/CommandPageTemplateWithCustomizations";
 
 export const generateMetadata = () => generateCommandMetadata(import.meta.url);
 
@@ -11,5 +12,11 @@ export default async function CommandPage() {
   const mdxContent = await getMdxContent(`${dirName}.md`);
   const content = mdxContent ? null : await getPageContent(`${dirName}.md`);
 
-  return <CommandPageTemplate content={content} mdxContent={mdxContent} />;
+  return (
+    <CommandPageTemplateWithCustomizations
+      commandPath={dirName}
+      content={content}
+      mdxContent={mdxContent}
+    />
+  );
 }

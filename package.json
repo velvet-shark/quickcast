@@ -49,6 +49,9 @@
     "character-entities": "^2.0.2",
     "decode-named-character-reference": {
       "character-entities": "^2.0.2"
+    },
+    "sucrase": {
+      "glob": "10.5.0"
     }
   }
 }

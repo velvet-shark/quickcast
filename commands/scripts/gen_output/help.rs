@@ -222,7 +222,7 @@ fn help_markdown(cmd: &Cmd, stdout: &str) -> String {
     let (description, s) = parse_description(stdout);
     let processed_description = preprocess_help(description);
     let help = preprocess_help(s.trim());
-    format!("{processed_description}\n\n```bash\n$ {cmd} --help\n```\n\n```txt\n{help}\n```")
+    format!("{processed_description}\n\n:::terminal\n\n```bash\n$ {cmd} --help\n```\n\n```txt\n{help}\n```\n\n:::")
 }
 
 /// Splits the help output into a description and the rest.
@@ -424,7 +424,7 @@ fn generate_sidebar(output: &[(Cmd, String)], _out_dir: &Path, sidebar_file: &Pa
     content.push_str("    items: [\n");
     
     // Add root command
-    content.push_str(&format!("        {{ text: \"{}\", link: \"/{}/reference/{}\" }},\n", tool_name, tool_name, tool_name));
+    content.push_str(&format!("        {{ text: \"{}\", link: \"/reference/{}/{}\" }},\n", tool_name, tool_name, tool_name));
     
     // Add categories
     for (category, cmds) in categories {
@@ -443,7 +443,7 @@ fn generate_sidebar(output: &[(Cmd, String)], _out_dir: &Path, sidebar_file: &Pa
         
         for cmd in sorted_cmds {
             let cmd_path = cmd.md_path();
-            content.push_str(&format!("                {{ text: \"{}\", link: \"/{}/reference/{}\" }},\n", 
+            content.push_str(&format!("                {{ text: \"{}\", link: \"/reference/{}/{}\" }},\n", 
                 cmd.display_name(), tool_name, cmd_path));
         }
         

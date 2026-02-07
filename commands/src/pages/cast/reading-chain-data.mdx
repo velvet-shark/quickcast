@@ -1,0 +1,155 @@
+---
+description: Query blockchain data with Cast — blocks, transactions, logs, and account state.
+---
+
+## Reading chain data
+
+Cast queries any Ethereum-compatible chain via JSON-RPC. Set your RPC endpoint with `--rpc-url` or the `ETH_RPC_URL` environment variable.
+
+```bash
+$ export ETH_RPC_URL=https://ethereum.reth.rs/rpc
+```
+
+### Blocks
+
+:::code-group
+
+```bash [Block number]
+$ cast block-number
+```
+
+```bash [Block details]
+$ cast block latest
+```
+
+```bash [Specific block]
+$ cast block 18000000
+```
+
+```bash [Block field]
+$ cast block latest --field timestamp
+```
+
+```bash [Base fee]
+$ cast base-fee
+```
+
+:::
+
+### Transactions
+
+:::code-group
+
+```bash [Transaction details]
+$ cast tx $TX_HASH
+```
+
+```bash [Receipt]
+$ cast receipt $TX_HASH
+```
+
+```bash [Status]
+$ cast receipt $TX_HASH --field status
+```
+
+```bash [Gas used]
+$ cast receipt $TX_HASH --field gasUsed
+```
+
+:::
+
+### Account state
+
+:::code-group
+
+```bash [ETH balance]
+$ cast balance $ADDRESS
+```
+
+```bash [Balance in ether]
+$ cast balance $ADDRESS --ether
+```
+
+```bash [Nonce]
+$ cast nonce $ADDRESS
+```
+
+```bash [Bytecode]
+$ cast code $ADDRESS
+```
+
+```bash [Storage slot]
+$ cast storage $ADDRESS 0
+```
+
+:::
+
+### Contract calls
+
+Call view functions without sending a transaction:
+
+:::code-group
+
+```bash [Call function]
+$ cast call $CONTRACT "balanceOf(address)(uint256)" $ADDRESS
+```
+
+```bash [Named output]
+$ cast call $CONTRACT "name()(string)"
+```
+
+```bash [At block]
+$ cast call $CONTRACT "totalSupply()(uint256)" --block 18000000
+```
+
+:::
+
+### Logs and events
+
+:::code-group
+
+```bash [By event signature]
+$ cast logs "Transfer(address indexed,address indexed,uint256)" --from-block 18000000
+```
+
+```bash [By address]
+$ cast logs --address $CONTRACT --from-block 18000000 --to-block latest
+```
+
+```bash [Decode topics]
+$ cast logs "Transfer(address,address,uint256)" --address $TOKEN
+```
+
+:::
+
+### Chain info
+
+:::code-group
+
+```bash [Chain ID]
+$ cast chain-id
+```
+
+```bash [Gas price]
+$ cast gas-price
+```
+
+```bash [Estimate gas]
+$ cast estimate $CONTRACT "transfer(address,uint256)" $TO $AMOUNT
+```
+
+:::
+
+### ENS resolution
+
+:::code-group
+
+```bash [Name to address]
+$ cast resolve-name vitalik.eth
+```
+
+```bash [Address to name]
+$ cast lookup-address 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
+```
+
+:::

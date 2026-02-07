@@ -1,0 +1,136 @@
+---
+description: Lint Solidity code with Forge.
+---
+
+## Linting
+
+Forge includes a built-in linter to catch common issues and enforce best practices.
+
+### Run the linter
+
+```bash
+$ forge lint
+```
+
+The linter checks for:
+- Incorrect shift operations
+- Unchecked external calls
+- Divide-before-multiply bugs
+- Unsafe typecasts
+- Naming convention violations
+- Unused imports
+- Gas optimizations
+
+### Configuration
+
+Configure linter rules in `foundry.toml`:
+
+```toml [foundry.toml]
+[lint]
+severity = ["high", "med", "low"]
+exclude_lints = ["mixed-case-function", "custom-errors"]
+```
+
+#### Severity levels
+
+Control which lints run by severity:
+
+```toml [foundry.toml]
+[lint]
+severity = ["high", "med"]  # Only high and medium severity
+```
+
+Valid severity levels: `high`, `med`, `low`, `info`, `gas`, `code-size`
+
+#### Exclude specific lints
+
+Disable specific lint rules globally:
+
+```toml [foundry.toml]
+[lint]
+exclude_lints = ["mixed-case-variable", "asm-keccak256"]
+```
+
+### Ignoring files
+
+Exclude files from linting:
+
+```toml [foundry.toml]
+[lint]
+ignore = ["src/legacy/**", "test/**"]
+```
+
+### Inline suppression
+
+Disable lints for specific lines or blocks using comment directives.
+
+#### Disable on current line
+
+```solidity
+uint256 Mixed_Case = 1; // forge-lint: disable-line(mixed-case-variable)
+```
+
+#### Disable on next line
+
+```solidity
+// forge-lint: disable-next-line(custom-errors)
+revert("Use custom errors instead");
+```
+
+#### Disable for next item
+
+Disable lints for an entire function, struct, or contract:
+
+```solidity
+// forge-lint: disable-next-item(mixed-case-function)
+function non_standard_name() public {
+    // entire function is excluded from the lint
+}
+```
+
+#### Disable a block
+
+```solidity
+// forge-lint: disable-start(asm-keccak256)
+bytes32 hash1 = keccak256(abi.encodePacked(a, b));
+bytes32 hash2 = keccak256(abi.encodePacked(c, d));
+// forge-lint: disable-end(asm-keccak256)
+```
+
+#### Disable multiple lints
+
+```solidity
+// forge-lint: disable-next-line(custom-errors, mixed-case-variable)
+```
+
+#### Disable all lints
+
+```solidity
+// forge-lint: disable-next-line
+```
+
+Or explicitly:
+
+```solidity
+// forge-lint: disable-next-line(all)
+```
+
+### Disable linting on build
+
+By default, `forge build` runs the linter. To disable:
+
+```toml [foundry.toml]
+[lint]
+lint_on_build = false
+```
+
+### CI integration
+
+Add linting to your CI pipeline:
+
+```yaml
+- name: Run linter
+  run: forge lint
+```
+
+See the [linter reference](/config/reference/linter) for all configuration options.

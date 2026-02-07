@@ -125,9 +125,11 @@ contract Example {}
 ```
 ````
 
+For terminal commands, prefix each command with `$ `:
+
 ````md
 ```bash
-forge build
+$ forge build
 ```
 ````
 
@@ -154,13 +156,13 @@ Each output file has three anchors:
 // [!include ~/snippets/output/abc/xyz:output]
 ```
 
-Learn more in the [output folder](./vocs/docs/snippets/output).
+Learn more in the [output folder](./src/snippets/output).
 
 ---
 
 #### Source Code Snippets
 
-Do **not** inline Solidity code. Instead, include source files from the [projects folder](./vocs/docs/snippets/projects):
+Do **not** inline Solidity code. Instead, include source files from the [projects folder](./src/snippets/projects):
 
 ```md
 // [!include ~/snippets/projects/hello_foundry/src/Counter.sol]
@@ -169,3 +171,158 @@ Do **not** inline Solidity code. Instead, include source files from the [project
 This allows examples to be updated in one place and stay consistent across pages.
 
 Learn more about including snippets in the [Vocs documentation](https://vocs.dev/docs/guides/code-snippets#physical-file-snippets).
+
+---
+
+#### Vocs Markdown Features
+
+The documentation uses [Vocs](https://vocs.dev), which provides several useful markdown extensions.
+
+##### Code Block Titles
+
+Use titles instead of comments for single-action commands:
+
+````md
+```bash [Check an address balance]
+$ cast balance vitalik.eth --ether
+```
+````
+
+##### Inline Terminal Output
+
+Use `// @log:` to show command output inline:
+
+````md
+```bash
+$ forge test -vv
+// @log: Ran 2 tests for test/Counter.t.sol:CounterTest
+// @log: [PASS] test_Increment() (gas: 31293)
+// @log: Suite result: ok. 2 passed; 0 failed; 0 skipped
+```
+````
+
+##### Steps
+
+Use `::::steps` for sequential instructions:
+
+````md
+::::steps
+
+### Install foundryup
+
+```bash
+$ curl -L https://foundry.paradigm.xyz | bash
+```
+
+### Install Foundry
+
+```bash
+$ foundryup
+```
+
+::::
+````
+
+##### Callouts
+
+Use callouts for warnings, tips, and notes:
+
+````md
+:::tip
+Run any command with `--help` for detailed usage.
+:::
+
+:::warning
+This will overwrite existing files.
+:::
+
+:::note
+This feature requires Foundry v1.0 or later.
+:::
+````
+
+##### Cards
+
+Use `Cards` and `Card` components for navigation grids:
+
+````mdx
+import { Cards, Card } from 'vocs'
+
+<Cards>
+  <Card
+    title="Forge"
+    description="Build and test smart contracts."
+    to="/forge/overview"
+    icon="lucide:hammer"
+  />
+</Cards>
+````
+
+##### Code Groups
+
+Use `:::code-group` for tabbed code examples. Code groups are ideal for:
+
+- **Related commands** – Multiple ways to do the same thing (e.g., install options)
+- **Good vs. bad examples** – Show preferred and discouraged patterns
+- **Multi-file examples** – Related files that work together (e.g., test + harness)
+
+````md
+:::code-group
+
+```bash [npm]
+$ npm install
+```
+
+```bash [pnpm]
+$ pnpm install
+```
+
+```bash [bun]
+$ bun install
+```
+
+:::
+````
+
+For good/bad examples, use clear tab names:
+
+````md
+:::code-group
+
+```solidity [Good]
+import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+```
+
+```solidity [Avoid]
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+```
+
+:::
+````
+
+For multi-file examples, use file paths as tab names:
+
+````md
+:::code-group
+
+```solidity [test/harnesses/TokenHarness.sol]
+contract TokenHarness is Token {
+    function exposed_mint(address to, uint256 amount) external {
+        _mint(to, amount);
+    }
+}
+```
+
+```solidity [test/Token.t.sol]
+contract TokenInternalTest is Test {
+    function test_MintIncreasesSupply() public {
+        token.exposed_mint(alice, 1000);
+        assertEq(token.totalSupply(), 1000);
+    }
+}
+```
+
+:::
+````
+
+Learn more in the [Vocs Markdown Reference](https://vocs.dev/docs/markdown).

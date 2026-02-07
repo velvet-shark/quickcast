@@ -480,6 +480,10 @@
         "href": "/cast-to-utf8"
       },
       {
+        "text": "cast trace",
+        "href": "/cast-trace"
+      },
+      {
         "text": "cast tx-pool",
         "href": "/cast-tx-pool"
       },
@@ -510,6 +514,10 @@
       {
         "text": "cast wallet decrypt-keystore",
         "href": "/cast-wallet-decrypt-keystore"
+      },
+      {
+        "text": "cast wallet derive",
+        "href": "/cast-wallet-derive"
       },
       {
         "text": "cast wallet import",

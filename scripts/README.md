@@ -5,7 +5,7 @@ This directory contains the automatic command synchronization system for QuickCa
 ## Overview
 
 The `sync-commands.ts` script automatically:
-1. Reads command definitions from `/commands/vocs/sidebar/cast-cli-reference.ts`
+1. Reads command definitions from `/commands/sidebar/cast-cli-reference.ts`
 2. Creates missing command pages in `/app/(commands)/`
 3. Removes pages for deleted commands
 4. Updates navigation data in `/app/lib/navigation-data.json`

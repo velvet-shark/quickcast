@@ -22,7 +22,7 @@ interface Command {
 
 // Parse the cast-cli-reference.ts file
 async function parseSidebarFile(): Promise<SidebarItem> {
-  const sidebarPath = path.join(projectRoot, "commands/vocs/sidebar/cast-cli-reference.ts");
+  const sidebarPath = path.join(projectRoot, "commands/sidebar/cast-cli-reference.ts");
   const content = await fs.promises.readFile(sidebarPath, "utf-8");
   
   // Extract the exported object using regex (simple approach)
@@ -43,8 +43,8 @@ function extractCommands(item: SidebarItem, category: string = ""): Command[] {
   const commands: Command[] = [];
   
   if (item.link && item.text.startsWith("cast ")) {
-    // Convert link format: "/cast/reference/4byte" -> "cast-4byte"
-    const pathMatch = item.link.match(/\/cast\/reference\/(.+)$/);
+    // Convert link format: "/reference/cast/4byte" -> "cast-4byte"
+    const pathMatch = item.link.match(/\/reference\/cast\/(.+)$/);
     if (pathMatch) {
       // Convert slashes to dashes for nested paths
       const commandPath = "cast-" + pathMatch[1].replace(/\//g, "-");

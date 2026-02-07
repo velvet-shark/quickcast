@@ -24,7 +24,7 @@ async function resolveInclude(
   try {
     content = await fs.promises.readFile(fullPath, "utf8");
   } catch {
-    // If not found, try from commands/vocs/docs/pages/cast/reference with proper extension handling
+    // If not found, try from commands/src/pages/reference/cast with proper extension handling
     try {
       const normalizeIncludePath = (p: string) => {
         // Handle relative paths in includes
@@ -32,8 +32,8 @@ async function resolveInclude(
         // Remove any existing .mdx or .md extension and add .mdx
         return relativePath.replace(/\.(mdx?)$/, '') + '.mdx';
       };
-      
-      fullPath = path.join(process.cwd(), "commands", "vocs", "docs", "pages", "cast", "reference", normalizeIncludePath(includePath));
+
+      fullPath = path.join(process.cwd(), "commands", "src", "pages", "reference", "cast", normalizeIncludePath(includePath));
       content = await fs.promises.readFile(fullPath, "utf8");
     } catch (innerError) {
       console.error(`Error reading include file ${includePath}:`, innerError);
@@ -103,7 +103,7 @@ function buildCandidatePaths(pagePath: string): string[] {
 export async function getPageContent(pagePath: string) {
   // Special case for the overview page
   if (pagePath === "cast.md") {
-    const overviewPath = path.join(process.cwd(), "commands", "vocs", "docs", "pages", "cast", "reference", "cast.mdx");
+    const overviewPath = path.join(process.cwd(), "commands", "src", "pages", "reference", "cast", "cast.mdx");
     try {
       return await fs.promises.readFile(overviewPath, "utf8");
     } catch (error) {
@@ -112,7 +112,7 @@ export async function getPageContent(pagePath: string) {
     }
   }
 
-  const referenceRoot = path.join(process.cwd(), "commands", "vocs", "docs", "pages", "cast", "reference");
+  const referenceRoot = path.join(process.cwd(), "commands", "src", "pages", "reference", "cast");
   const candidatePaths = buildCandidatePaths(pagePath);
 
   for (const candidate of candidatePaths) {

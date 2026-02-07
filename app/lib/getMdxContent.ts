@@ -191,11 +191,10 @@ export async function getMdxContent(pagePath: string): Promise<MdxContent | null
   const referenceRoot = path.join(
     process.cwd(),
     "commands",
-    "vocs",
-    "docs",
+    "src",
     "pages",
-    "cast",
-    "reference"
+    "reference",
+    "cast"
   );
 
   const candidatePaths = buildMdxCandidatePaths(pagePath);

@@ -5,6 +5,10 @@ function stripMdExtensions(text: string): string {
   return text.replaceAll(/\.md/g, "");
 }
 
+function stripDirectives(text: string): string {
+  return text.replace(/^:::\w*$/gm, "");
+}
+
 async function resolveInclude(
   basePath: string,
   includePath: string,
@@ -132,7 +136,7 @@ export async function getPageContent(pagePath: string) {
         }
       }
 
-      return stripMdExtensions(content);
+      return stripDirectives(stripMdExtensions(content));
     } catch (error) {
       // Try next candidate
     }

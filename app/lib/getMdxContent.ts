@@ -141,6 +141,10 @@ function stripMdExtensions(text: string): string {
   return text.replaceAll(/\.md(?!x)/g, "");
 }
 
+function stripDirectives(text: string): string {
+  return text.replace(/^:::\w*$/gm, "");
+}
+
 // Main function to get MDX content with imports
 // Build candidate relative paths for a command MDX file, supporting nested folders.
 function buildMdxCandidatePaths(pagePath: string): string[] {
@@ -217,6 +221,9 @@ export async function getMdxContent(pagePath: string): Promise<MdxContent | null
 
       // Strip .md extensions (backward compatibility)
       processedContent = stripMdExtensions(processedContent);
+
+      // Strip container directives (:::terminal, etc.) not supported by react-markdown
+      processedContent = stripDirectives(processedContent);
 
       return {
         content: processedContent,

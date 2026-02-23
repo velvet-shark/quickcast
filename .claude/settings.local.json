@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(npm install:*)",
+      "Bash(find:*)",
+      "Bash(tree:*)",
+      "Bash(node:*)",
+      "Bash(rm:*)",
+      "Bash(pkill:*)",
+      "Bash(curl:*)",
+      "Bash(mkdir:*)",
+      "Bash(for cmd in cast-wallet-import cast-wallet-list cast-wallet-new-mnemonic cast-wallet-sign-auth)",
+      "Bash(do mkdir -p app/(commands)/$cmd)",
+      "Bash(done)",
+      "Bash(npx tsx:*)"
+    ],
+    "deny": []
+  }
+}

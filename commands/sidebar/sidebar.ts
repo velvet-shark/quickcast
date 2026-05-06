@@ -58,6 +58,7 @@ const docs = [
               { text: "divide-before-multiply", link: "/forge/linting/divide-before-multiply" },
               { text: "incorrect-erc20-interface", link: "/forge/linting/incorrect-erc20-interface" },
               { text: "incorrect-erc721-interface", link: "/forge/linting/incorrect-erc721-interface" },
+              { text: "tx-origin", link: "/forge/linting/tx-origin" },
               { text: "unsafe-typecast", link: "/forge/linting/unsafe-typecast" },
             ],
           },
@@ -74,6 +75,7 @@ const docs = [
             collapsed: true,
             items: [
               { text: "boolean-equal", link: "/forge/linting/boolean-equal" },
+              { text: "inline-assembly", link: "/forge/linting/inline-assembly" },
               { text: "interface-file-naming", link: "/forge/linting/interface-file-naming" },
               { text: "interface-naming", link: "/forge/linting/interface-naming" },
               { text: "mixed-case-function", link: "/forge/linting/mixed-case-function" },

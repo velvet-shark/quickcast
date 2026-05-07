@@ -167,6 +167,7 @@ navigation on the right to browse by severity.
 #### Informational
 
 - [`boolean-equal`](/forge/linting/boolean-equal) — Flags expressions of the form `x == true`, `x == false`, `x != true`, `x != false`, which can be simplified.
+- [`name-reused`](/forge/linting/name-reused) — Flags contract, interface, or library names that are defined in more than one source file in the project.
 - [`inline-assembly`](/forge/linting/inline-assembly) — Flags every `assembly { ... }` block; inline assembly bypasses Solidity safety features and should be reviewed deliberately.
 - [`interface-file-naming`](/forge/linting/interface-file-naming) — Flags Solidity files whose only top-level declaration is an interface but whose filename is not prefixed with `I`.
 - [`interface-naming`](/forge/linting/interface-naming) — Flags `interface` declarations whose names are not prefixed with `I`.
@@ -189,6 +190,7 @@ navigation on the right to browse by severity.
 - [`could-be-immutable`](/forge/linting/could-be-immutable) — Flags state variables that are assigned only in the constructor and never written to afterward — making them eligible to be declared `immutable`.
 - [`custom-errors`](/forge/linting/custom-errors) — Flags `require(cond, "message")`, `revert("message")`, and `revert()` calls; suggests replacing them with a `revert CustomError(...)`.
 - [`unused-state-variables`](/forge/linting/unused-state-variables) — Flags state variables that are declared but never read or written anywhere in the contract or its descendants.
+- [`var-read-using-this`](/forge/linting/var-read-using-this) — Flags `this.X(...)` calls that read the contract's own state through its external interface; the unnecessary `STATICCALL` can be avoided by accessing the variable directly.
 
 #### Code size
 

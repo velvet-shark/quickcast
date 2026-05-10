@@ -44,6 +44,7 @@ const docs = [
             text: "High severity",
             collapsed: true,
             items: [
+              { text: "arbitrary-send-erc20", link: "/forge/linting/arbitrary-send-erc20" },
               { text: "erc20-unchecked-transfer", link: "/forge/linting/erc20-unchecked-transfer" },
               { text: "incorrect-shift", link: "/forge/linting/incorrect-shift" },
               { text: "rtlo", link: "/forge/linting/rtlo" },
@@ -78,6 +79,7 @@ const docs = [
               { text: "inline-assembly", link: "/forge/linting/inline-assembly" },
               { text: "interface-file-naming", link: "/forge/linting/interface-file-naming" },
               { text: "interface-naming", link: "/forge/linting/interface-naming" },
+              { text: "missing-inheritance", link: "/forge/linting/missing-inheritance" },
               { text: "mixed-case-function", link: "/forge/linting/mixed-case-function" },
               { text: "mixed-case-variable", link: "/forge/linting/mixed-case-variable" },
               { text: "multi-contract-file", link: "/forge/linting/multi-contract-file" },

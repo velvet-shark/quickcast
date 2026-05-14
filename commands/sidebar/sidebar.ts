@@ -60,6 +60,7 @@ const docs = [
               { text: "divide-before-multiply", link: "/forge/linting/divide-before-multiply" },
               { text: "incorrect-erc20-interface", link: "/forge/linting/incorrect-erc20-interface" },
               { text: "incorrect-erc721-interface", link: "/forge/linting/incorrect-erc721-interface" },
+              { text: "incorrect-strict-equality", link: "/forge/linting/incorrect-strict-equality" },
               { text: "locked-ether", link: "/forge/linting/locked-ether" },
               { text: "low-level-calls", link: "/forge/linting/low-level-calls" },
               { text: "tx-origin", link: "/forge/linting/tx-origin" },
@@ -82,6 +83,7 @@ const docs = [
             collapsed: true,
             items: [
               { text: "boolean-equal", link: "/forge/linting/boolean-equal" },
+              { text: "event-fields", link: "/forge/linting/event-fields" },
               { text: "inline-assembly", link: "/forge/linting/inline-assembly" },
               { text: "interface-file-naming", link: "/forge/linting/interface-file-naming" },
               { text: "interface-naming", link: "/forge/linting/interface-naming" },
@@ -108,6 +110,7 @@ const docs = [
               { text: "asm-keccak256", link: "/forge/linting/asm-keccak256" },
               { text: "cache-array-length", link: "/forge/linting/cache-array-length" },
               { text: "costly-loop", link: "/forge/linting/costly-loop" },
+              { text: "could-be-constant", link: "/forge/linting/could-be-constant" },
               { text: "could-be-immutable", link: "/forge/linting/could-be-immutable" },
               { text: "custom-errors", link: "/forge/linting/custom-errors" },
               { text: "external-function", link: "/forge/linting/external-function" },

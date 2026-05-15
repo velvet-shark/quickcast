@@ -66,6 +66,7 @@ const docs = [
               { text: "tx-origin", link: "/forge/linting/tx-origin" },
               { text: "type-based-tautology", link: "/forge/linting/type-based-tautology" },
               { text: "uninitialized-local", link: "/forge/linting/uninitialized-local" },
+              { text: "uninitialized-state", link: "/forge/linting/uninitialized-state" },
               { text: "unsafe-typecast", link: "/forge/linting/unsafe-typecast" },
               { text: "weak-prng", link: "/forge/linting/weak-prng" },
             ],
@@ -122,7 +123,6 @@ const docs = [
             text: "Code size",
             collapsed: true,
             items: [
-              { text: "dead-code", link: "/forge/linting/dead-code" },
               { text: "unwrapped-modifier-logic", link: "/forge/linting/unwrapped-modifier-logic" },
             ],
           },

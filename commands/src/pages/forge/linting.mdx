@@ -162,6 +162,7 @@ navigation on the right to browse by severity.
 
 #### Medium severity
 
+- [`assert-state-change`](/forge/linting/assert-state-change) — Flags expressions inside `assert()` that modify contract state.
 - [`boolean-cst`](/forge/linting/boolean-cst) — Flags expressions where a boolean constant (`true`/`false`) is used as a control-flow condition or operand of a boolean operator, which usually indicates dead code or a leftover debug toggle.
 - [`divide-before-multiply`](/forge/linting/divide-before-multiply) — Flags arithmetic expressions where division is performed before multiplication, which can cause unintended precision loss in integer arithmetic.
 - [`incorrect-erc20-interface`](/forge/linting/incorrect-erc20-interface) — Flags interfaces or contracts whose function signatures match an ERC20 method by name and parameters but use the wrong return type.
@@ -173,11 +174,13 @@ navigation on the right to browse by severity.
 - [`uninitialized-local`](/forge/linting/uninitialized-local) — Flags local variables that are declared without an initializer and read before any explicit assignment, where the silent zero-default is almost certainly unintentional.
 - [`uninitialized-state`](/forge/linting/uninitialized-state) — Flags state variables that are read in a contract's inheritance chain but never assigned, leaving them silently equal to their type's zero default.
 - [`unsafe-typecast`](/forge/linting/unsafe-typecast) — Flags explicit numeric typecasts that can silently truncate or alter the value.
+- [`unused-return`](/forge/linting/unused-return) — Flags external calls whose return value is silently discarded.
 - [`weak-prng`](/forge/linting/weak-prng) — Flags randomness-like expressions that directly derive entropy from predictable on-chain values.
 
 #### Low severity
 
 - [`block-timestamp`](/forge/linting/block-timestamp) — Flags use of `block.timestamp` as an operand of a comparison, where its value can be slightly manipulated by the block proposer.
+- [`calls-loop`](/forge/linting/calls-loop) — Flags external calls made from inside loops, which can cause denial-of-service if a callee reverts or exhausts gas.
 - [`missing-zero-check`](/forge/linting/missing-zero-check) — Flags entry-point functions and constructors where an `address` parameter flows into a state write or value transfer without a zero-address guard.
 
 #### Informational
@@ -217,4 +220,3 @@ navigation on the right to browse by severity.
 #### Code size
 
 - [`unwrapped-modifier-logic`](/forge/linting/unwrapped-modifier-logic) — Flags modifiers whose body contains non-trivial logic that should be moved into a helper function to reduce contract code size.
-

@@ -56,6 +56,7 @@ const docs = [
             text: "Medium severity",
             collapsed: true,
             items: [
+              { text: "assert-state-change", link: "/forge/linting/assert-state-change" },
               { text: "boolean-cst", link: "/forge/linting/boolean-cst" },
               { text: "divide-before-multiply", link: "/forge/linting/divide-before-multiply" },
               { text: "incorrect-erc20-interface", link: "/forge/linting/incorrect-erc20-interface" },
@@ -68,6 +69,7 @@ const docs = [
               { text: "uninitialized-local", link: "/forge/linting/uninitialized-local" },
               { text: "uninitialized-state", link: "/forge/linting/uninitialized-state" },
               { text: "unsafe-typecast", link: "/forge/linting/unsafe-typecast" },
+              { text: "unused-return", link: "/forge/linting/unused-return" },
               { text: "weak-prng", link: "/forge/linting/weak-prng" },
             ],
           },
@@ -76,6 +78,7 @@ const docs = [
             collapsed: true,
             items: [
               { text: "block-timestamp", link: "/forge/linting/block-timestamp" },
+              { text: "calls-loop", link: "/forge/linting/calls-loop" },
               { text: "missing-zero-check", link: "/forge/linting/missing-zero-check" },
             ],
           },

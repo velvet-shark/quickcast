@@ -79,7 +79,9 @@ const docs = [
             items: [
               { text: "block-timestamp", link: "/forge/linting/block-timestamp" },
               { text: "calls-loop", link: "/forge/linting/calls-loop" },
+              { text: "delegatecall-loop", link: "/forge/linting/delegatecall-loop" },
               { text: "missing-zero-check", link: "/forge/linting/missing-zero-check" },
+              { text: "return-bomb", link: "/forge/linting/return-bomb" },
             ],
           },
           {

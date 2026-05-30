@@ -45,9 +45,10 @@ const docs = [
             collapsed: true,
             items: [
               { text: "arbitrary-send-erc20", link: "/forge/linting/arbitrary-send-erc20" },
+              { text: "encode-packed-collision", link: "/forge/linting/encode-packed-collision" },
               { text: "erc20-unchecked-transfer", link: "/forge/linting/erc20-unchecked-transfer" },
               { text: "incorrect-shift", link: "/forge/linting/incorrect-shift" },
-              { text: "reentrancy-unlimited-gas", link: "/forge/linting/reentrancy-unlimited-gas" },
+              { text: "reentrancy-eth", link: "/forge/linting/reentrancy-eth" },
               { text: "rtlo", link: "/forge/linting/rtlo" },
               { text: "unchecked-call", link: "/forge/linting/unchecked-call" },
               { text: "unprotected-initializer", link: "/forge/linting/unprotected-initializer" },
@@ -126,6 +127,7 @@ const docs = [
               { text: "external-function", link: "/forge/linting/external-function" },
               { text: "unused-state-variables", link: "/forge/linting/unused-state-variables" },
               { text: "var-read-using-this", link: "/forge/linting/var-read-using-this" },
+              { text: "write-after-write", link: "/forge/linting/write-after-write" },
             ],
           },
           {

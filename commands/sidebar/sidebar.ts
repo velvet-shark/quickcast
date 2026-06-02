@@ -1,4 +1,4 @@
-import { Sidebar } from "vocs";
+import type { Sidebar } from "./types";
 import { forgeCliReference } from "./forge-cli-reference";
 import { cmdReference } from "./cmd-reference";
 import { anvilCliReference } from "./anvil-cli-reference";
@@ -45,6 +45,7 @@ const docs = [
             collapsed: true,
             items: [
               { text: "arbitrary-send-erc20", link: "/forge/linting/arbitrary-send-erc20" },
+              { text: "arbitrary-send-eth", link: "/forge/linting/arbitrary-send-eth" },
               { text: "encode-packed-collision", link: "/forge/linting/encode-packed-collision" },
               { text: "erc20-unchecked-transfer", link: "/forge/linting/erc20-unchecked-transfer" },
               { text: "incorrect-shift", link: "/forge/linting/incorrect-shift" },

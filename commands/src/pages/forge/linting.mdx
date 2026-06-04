@@ -156,6 +156,7 @@ navigation on the right to browse by severity.
 
 - [`arbitrary-send-erc20`](/forge/linting/arbitrary-send-erc20) — Flags `transferFrom` / `safeTransferFrom` calls whose `from` argument is not provably equal to `msg.sender` or `address(this)`.
 - [`arbitrary-send-eth`](/forge/linting/arbitrary-send-eth) — Flags functions that send ETH (via `transfer` / `send` / `{value:}` calls / `selfdestruct` / known OZ + Solady helpers) to a caller-controlled destination without restricting who can call them.
+- [`controlled-delegatecall`](/forge/linting/controlled-delegatecall) — Flags `delegatecall` targets that are not provably trusted.
 - [`encode-packed-collision`](/forge/linting/encode-packed-collision) — Flags `abi.encodePacked()` calls with two or more dynamic-type arguments (`string`, `bytes`, `T[]`) that can produce hash collisions.
 - [`erc20-unchecked-transfer`](/forge/linting/erc20-unchecked-transfer) — Flags calls to ERC20 `transfer` and `transferFrom` where the boolean return value is ignored.
 - [`incorrect-shift`](/forge/linting/incorrect-shift) — Flags shift operations where a literal appears on the left and a non-literal on the right, which is almost always the wrong operand order.
@@ -190,6 +191,7 @@ navigation on the right to browse by severity.
 - [`missing-events-access-control`](/forge/linting/missing-events-access-control) — Flags access-controlled updates to state used for authorization when the update function does not emit an event.
 - [`missing-events-arithmetic`](/forge/linting/missing-events-arithmetic) — Flags access-controlled updates to integer state used in arithmetic when the update path does not emit an event.
 - [`missing-zero-check`](/forge/linting/missing-zero-check) — Flags entry-point functions and constructors where an `address` parameter flows into a state write or value transfer without a zero-address guard.
+- [`msg-value-loop`](/forge/linting/msg-value-loop) — Flags `msg.value` reads inside loops reachable from externally callable payable functions.
 - [`reentrancy-events`](/forge/linting/reentrancy-events) — Flags `emit` statements reachable after an external call, where a reentrant callee can reorder or fabricate logs that off-chain consumers rely on.
 - [`return-bomb`](/forge/linting/return-bomb) — Flags external calls that set an explicit gas limit while copying unbounded dynamic returndata.
 

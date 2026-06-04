@@ -46,6 +46,7 @@ const docs = [
             items: [
               { text: "arbitrary-send-erc20", link: "/forge/linting/arbitrary-send-erc20" },
               { text: "arbitrary-send-eth", link: "/forge/linting/arbitrary-send-eth" },
+              { text: "controlled-delegatecall", link: "/forge/linting/controlled-delegatecall" },
               { text: "encode-packed-collision", link: "/forge/linting/encode-packed-collision" },
               { text: "erc20-unchecked-transfer", link: "/forge/linting/erc20-unchecked-transfer" },
               { text: "incorrect-shift", link: "/forge/linting/incorrect-shift" },
@@ -87,6 +88,7 @@ const docs = [
               { text: "missing-events-access-control", link: "/forge/linting/missing-events-access-control" },
               { text: "missing-events-arithmetic", link: "/forge/linting/missing-events-arithmetic" },
               { text: "missing-zero-check", link: "/forge/linting/missing-zero-check" },
+              { text: "msg-value-loop", link: "/forge/linting/msg-value-loop" },
               { text: "reentrancy-events", link: "/forge/linting/reentrancy-events" },
               { text: "return-bomb", link: "/forge/linting/return-bomb" },
             ],

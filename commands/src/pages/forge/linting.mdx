@@ -159,6 +159,7 @@ navigation on the right to browse by severity.
 - [`arbitrary-send-eth`](/forge/linting/arbitrary-send-eth) — Flags functions that send ETH (via `transfer` / `send` / `{value:}` calls / `selfdestruct` / known OZ + Solady helpers) to a caller-controlled destination without restricting who can call them.
 - [`controlled-delegatecall`](/forge/linting/controlled-delegatecall) — Flags `delegatecall` targets that are not provably trusted.
 - [`encode-packed-collision`](/forge/linting/encode-packed-collision) — Flags `abi.encodePacked()` calls with two or more dynamic-type arguments (`string`, `bytes`, `T[]`) that can produce hash collisions.
+- [`enumerable-loop-removal`](/forge/linting/enumerable-loop-removal) — Flags `remove` on an EnumerableSet inside a loop that also iterates a set with `at`; swap-and-pop removal corrupts the iteration.
 - [`erc20-unchecked-transfer`](/forge/linting/erc20-unchecked-transfer) — Flags calls to ERC20 `transfer` and `transferFrom` where the boolean return value is ignored.
 - [`incorrect-exp`](/forge/linting/incorrect-exp) — Flags `^` (bitwise xor) used between integer literals where `**` (exponentiation) was almost certainly intended.
 - [`incorrect-shift`](/forge/linting/incorrect-shift) — Flags shift operations where a literal appears on the left and a non-literal on the right, which is almost always the wrong operand order.
@@ -185,6 +186,7 @@ navigation on the right to browse by severity.
 - [`type-based-tautology`](/forge/linting/type-based-tautology) — Flags comparison expressions that are always true or always false due to the numeric range of the variable's type.
 - [`uninitialized-local`](/forge/linting/uninitialized-local) — Flags local variables that are declared without an initializer and read before any explicit assignment, where the silent zero-default is almost certainly unintentional.
 - [`uninitialized-state`](/forge/linting/uninitialized-state) — Flags state variables that are read in a contract's inheritance chain but never assigned, leaving them silently equal to their type's zero default.
+- [`unsafe-oz-erc721-mint`](/forge/linting/unsafe-oz-erc721-mint) — Flags calls resolving to `ERC721._mint`, which does not check that the recipient can receive the token; use `_safeMint`.
 - [`unsafe-typecast`](/forge/linting/unsafe-typecast) — Flags explicit numeric typecasts that can silently truncate or alter the value.
 - [`unused-return`](/forge/linting/unused-return) — Flags external calls whose return value is silently discarded.
 - [`weak-prng`](/forge/linting/weak-prng) — Flags randomness-like expressions that directly derive entropy from predictable on-chain values.
@@ -194,6 +196,7 @@ navigation on the right to browse by severity.
 - [`block-timestamp`](/forge/linting/block-timestamp) — Flags use of `block.timestamp` as an operand of a comparison, where its value can be slightly manipulated by the block proposer.
 - [`calls-loop`](/forge/linting/calls-loop) — Flags external calls made from inside loops, which can cause denial-of-service if a callee reverts or exhausts gas.
 - [`delegatecall-loop`](/forge/linting/delegatecall-loop) — Flags `delegatecall` operations inside loops in externally callable payable functions.
+- [`empty-block`](/forge/linting/empty-block) — Flags regular functions with an empty body; constructors, `receive`/`fallback`, `virtual` and `payable` functions are exempt.
 - [`incorrect-modifier`](/forge/linting/incorrect-modifier) — Flags modifiers that can finish without executing the modified function body or reverting.
 - [`missing-events-access-control`](/forge/linting/missing-events-access-control) — Flags access-controlled updates to state used for authorization when the update function does not emit an event.
 - [`missing-events-arithmetic`](/forge/linting/missing-events-arithmetic) — Flags access-controlled updates to integer state used in arithmetic when the update path does not emit an event.
@@ -207,6 +210,7 @@ navigation on the right to browse by severity.
 
 - [`boolean-equal`](/forge/linting/boolean-equal) — Flags expressions of the form `x == true`, `x == false`, `x != true`, `x != false`, which can be simplified.
 - [`event-fields`](/forge/linting/event-fields) — Flags event parameters of type `address`, `address payable`, or id-like `uint256`/`bytes32` that are not declared `indexed`.
+- [`function-init-state`](/forge/linting/function-init-state) — Flags state variables whose initializer depends on a non-pure function or another state variable; initializers run before the constructor body.
 - [`inline-assembly`](/forge/linting/inline-assembly) — Flags every `assembly { ... }` block; inline assembly bypasses Solidity safety features and should be reviewed deliberately.
 - [`interface-file-naming`](/forge/linting/interface-file-naming) — Flags Solidity files whose only top-level declaration is an interface but whose filename is not prefixed with `I`.
 - [`interface-naming`](/forge/linting/interface-naming) — Flags `interface` declarations whose names are not prefixed with `I`.

@@ -11,7 +11,7 @@ Foundry is installed using **foundryup**, the official installer and version man
 ### Install foundryup
 
 ```bash
-$ curl -L https://foundry.paradigm.xyz | bash
+$ curl -L https://getfoundry.sh/install | bash
 ```
 
 ### Restart your terminal
@@ -27,6 +27,10 @@ $ foundryup
 ::::
 
 This installs the latest stable versions of `forge`, `cast`, `anvil`, and `chisel`.
+
+:::tip
+By default, if neither `FOUNDRY_DIR` nor `XDG_CONFIG_HOME` is set, Foundry is installed to `~/.foundry`. If `XDG_CONFIG_HOME` is set, it defaults to `$XDG_CONFIG_HOME/.foundry`. You can override both defaults by setting the `FOUNDRY_DIR` environment variable before running `foundryup`. For details on the directory layout and environment variables, see the [Config Reference Overview](/config/reference/overview#directory-layout).
+:::
 
 :::warning[Windows]
 Foundryup requires [Git Bash](https://gitforwindows.org/) or [WSL](https://learn.microsoft.com/en-us/windows/wsl/install). PowerShell and Command Prompt are not supported.

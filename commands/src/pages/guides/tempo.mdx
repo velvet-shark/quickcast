@@ -84,6 +84,29 @@ When you fork a live Tempo RPC, Anvil can infer the network from the upstream ch
 $ anvil --fork-url $TEMPO_RPC_URL
 ```
 
+### Set TIP-20 balances
+
+In Tempo mode, use `anvil_dealTIP20` to set a TIP-20 token balance for an account. It writes the balance directly into native TIP-20 storage, so it works with precompile-backed TIP-20 balances that ERC-20 slot discovery cannot reach.
+
+```text
+anvil_dealTIP20(address, tokenAddress, balance)
+```
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `address` | `address` | Account whose balance is set |
+| `tokenAddress` | `address` | TIP-20 token deployed through the active Tempo token factory |
+| `balance` | `uint256` | Absolute balance to write |
+
+```bash
+$ cast rpc anvil_dealTIP20 $RECIPIENT $TIP20_TOKEN 100000000000000000000 \
+    --rpc-url http://127.0.0.1:8545
+```
+
+The balance is set to the exact value given, not added to the existing balance. Calling it again with a smaller value lowers the balance. No transaction is created or mined, no transaction hash is returned, and the token total supply is not changed. Anvil verifies that `tokenAddress` is a deployed TIP-20 through the Tempo token factory before writing state. This method is available only when Anvil is running in Tempo mode and is intended for local development and testing.
+
+On a Tempo node, `anvil_dealERC20` first checks whether the token is a deployed TIP-20. If it is, Anvil uses the same native direct-write path as `anvil_dealTIP20`; otherwise it falls back to the existing ERC-20 storage-slot discovery. This means `anvil_dealERC20` can be used uniformly for both standard ERC-20 and TIP-20 tokens on Tempo.
+
 See [`anvil`](/reference/anvil/anvil) for the full reference. Do not add historical hardfork flags to normal Anvil examples; pinning old hardforks should be intentional.
 
 ## Tempo transactions

@@ -14,6 +14,17 @@ export interface MdxContent {
   components: Record<string, string>;
 }
 
+function stripFrontmatter(content: string): string {
+  const normalizedContent = content.replace(/^\uFEFF/, "");
+  const frontmatter = normalizedContent.match(
+    /^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/
+  );
+
+  return frontmatter
+    ? normalizedContent.slice(frontmatter[0].length)
+    : normalizedContent;
+}
+
 // Parse MDX import statements at the beginning of the file
 function parseMdxImports(content: string, basePath: string): { imports: MdxImport[], contentWithoutImports: string } {
   const imports: MdxImport[] = [];
@@ -73,6 +84,7 @@ async function loadImportedComponents(imports: MdxImport[], allComponents: Recor
   for (const imp of imports) {
     try {
       let content = await fs.promises.readFile(imp.resolvedPath, 'utf8');
+      content = stripFrontmatter(content);
       
       // Process nested imports recursively
       const { imports: nestedImports, contentWithoutImports } = parseMdxImports(content, imp.resolvedPath);
@@ -209,6 +221,7 @@ export async function getMdxContent(pagePath: string): Promise<MdxContent | null
     try {
       // Read the main file
       let content = await fs.promises.readFile(fullPath, "utf8");
+      content = stripFrontmatter(content);
 
       // Parse MDX imports
       const { imports, contentWithoutImports } = parseMdxImports(content, fullPath);

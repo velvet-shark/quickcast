@@ -28,6 +28,9 @@ export default defineConfig({
   // light: '#f98a1a', -- darker orange than the one below
   accentColor: "light-dark(#f6b128, #f9c22f)",
   title: "foundry - Ethereum Development Framework",
+  description:
+    "Documentation for Foundry's Forge, Cast, Anvil, and Chisel Ethereum development tools.",
+  baseUrl: "https://getfoundry.sh",
   rootDir: ".",
   sidebar,
   changelog: Changelog.github({ repo: "foundry-rs/foundry" }),
@@ -71,6 +74,10 @@ export default defineConfig({
       text: "Reference",
       items: [
         {
+          text: "Overview",
+          link: "/reference",
+        },
+        {
           text: "forge",
           link: "/reference/forge/forge",
         },
@@ -93,6 +100,10 @@ export default defineConfig({
         {
           text: "Forge Std",
           link: "/reference/forge-std/overview",
+        },
+        {
+          text: "Configuration",
+          link: "/config/reference/overview",
         },
       ],
     },

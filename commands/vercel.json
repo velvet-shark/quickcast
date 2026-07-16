@@ -53,7 +53,6 @@
 
     { "source": "/forge/reference/forge-lint/", "destination": "/forge/linting" },
     { "source": "/forge/reference/forge-lint", "destination": "/forge/linting" },
-    { "source": "/forge/linting/reentrancy-unlimited-gas", "destination": "/forge/linting/reentrancy-eth" },
 
     { "source": "/cast/overview", "destination": "/cast" },
 
@@ -98,7 +97,7 @@
     { "source": "/reference/cli/chisel/:id", "destination": "/reference/chisel/:id" },
     { "source": "/reference/cli/chisel", "destination": "/reference/chisel/chisel" },
     { "source": "/reference/cli", "destination": "/reference/forge/forge" },
-    { "source": "/reference", "destination": "/reference/forge/forge" },
+    { "source": "/reference/README", "destination": "/reference" },
 
     { "source": "/cheatcodes/:id", "destination": "/reference/cheatcodes/:id" },
     { "source": "/cheatcodes", "destination": "/reference/cheatcodes/overview" },

@@ -7,6 +7,8 @@
     "dev": "vocs dev",
     "build": "bun run fetch-benchmarks && vocs build",
     "check:cheatcodes": "bun scripts/check-cheatcode-coverage.ts",
+    "check:anvil-rpc": "bun scripts/check-anvil-rpc-coverage.ts",
+    "check:commands": "bun scripts/check-narrative-commands.ts",
     "preview": "vocs preview",
     "fetch-benchmarks": "bun scripts/fetch-benchmarks.ts"
   },
@@ -14,7 +16,7 @@
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "tailwindcss": "^4.2.2",
-    "vocs": "2.5.3",
+    "vocs": "2.6.0",
     "waku": "^1.0.0-beta.0"
   },
   "devDependencies": {

@@ -37,6 +37,7 @@ const docs = [
       { text: "Overview", link: "/cast" },
       { text: "Reading Chain Data", link: "/cast/reading-chain-data" },
       { text: "Sending Transactions", link: "/cast/sending-transactions" },
+      { text: "Tokenized Vaults", link: "/cast/tokenized-vaults" },
       { text: "Wallet Operations", link: "/cast/wallet-operations" },
       { text: "EIP-7702 Delegation", link: "/cast/eip-7702-delegation" },
       { text: "ABI Encoding", link: "/cast/abi-encoding" },
@@ -102,27 +103,17 @@ export const sidebar: Sidebar = {
   "/config": docs,
   ...guidesSidebar,
   "/forge/linting": lintingSidebar,
-  "/reference/forge": [
-    forgeCliReference,
-  ],
-  "/reference/cast": [
-    castCliReference,
-  ],
-  "/reference/anvil": [
-    anvilCliReference,
-  ],
-  "/reference/chisel": [
-    chiselCliReference,
-  ],
+  "/reference/forge": [forgeCliReference],
+  "/reference/cast": [castCliReference],
+  "/reference/anvil": [anvilCliReference],
+  "/reference/chisel": [chiselCliReference],
   "/reference/cheatcodes": [
     {
       text: "Cheatcodes",
       items: cmdReference,
     },
   ],
-  "/reference/forge-std": [
-    forgeStdReference,
-  ],
+  "/reference/forge-std": [forgeStdReference],
   "/config/reference": [
     {
       text: "Configuration",

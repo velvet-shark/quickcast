@@ -48,11 +48,31 @@ test('computes diff in a worker and reuses it for presentation changes', async (
   // A plain-text placeholder is not proof that worker highlighting succeeded.
   await expect(page.locator('diffs-container').locator('code span[style]').first()).toBeVisible()
   await expect(page.locator('diffs-container').locator('[data-diff-span]').first()).toBeVisible()
+  await expect(page.locator('.diff-sides')).toBeVisible()
   expect(workers).toBe(1)
   await page.getByRole('button', { name: 'Unified', exact: true }).click()
+  await expect(page.locator('.diff-sides')).toHaveCount(0)
   await page.getByRole('button', { name: /Switch to .* theme/ }).click()
   await expect(page.locator('diffs-container').locator('pre')).toBeVisible()
   expect(workers).toBe(1)
+})
+
+test('omits side headers when only one file was published', async ({ page }) => {
+  await page.route('**/api/data/viewer.json?*', async (route) => {
+    const response = await route.fetch()
+    const data = await response.json()
+    const base = data.runs.find(
+      (run: { commit: string }) => run.commit === '8c7b6a5e4f32100123456789abcdef0123456789',
+    )
+    const file = base.artifacts['demo::factorial'].find(
+      (file: { path: string }) => file.path === 'runtime.disasm',
+    )
+    file.compilers = file.compilers.filter((compiler: string) => compiler !== 'solar')
+    await route.fulfill({ json: data })
+  })
+  await page.goto(url)
+  await expect(page.getByText(/^Published only by .*\(head\)\.$/)).toBeVisible()
+  await expect(page.locator('.diff-sides')).toHaveCount(0)
 })
 
 test('compiler switches isolate highlight caches and revisits reuse computed diffs', async ({
@@ -92,7 +112,7 @@ test('virtualizes long files and renders their last lines on scroll', async ({ p
   await expect(code).not.toContainText('0x0000')
   expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(1000)
   expect((await page.locator('.viewer-toolbar').boundingBox())!.y).toBe(0)
-  expect((await page.locator('.diff-sides').boundingBox())!.y).toBe(48)
+  await expect(page.locator('.diff-sides')).toHaveCount(0)
   await page.getByRole('button', { name: 'abi.json', exact: true }).click()
   await expect(page.locator('.viewer-filename')).toHaveText('abi.json')
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0)
@@ -181,4 +201,55 @@ test('does not retry a failed diff on visibility changes or file revisits', asyn
   await page.getByRole('button', { name: 'runtime.disasm', exact: true }).click()
   await expect(page.getByText(/Download the full files below/)).toBeVisible()
   expect(workers).toBe(1)
+})
+
+test('keeps opened directories when selecting files or changing compilers', async ({ page }) => {
+  await page.route('**/api/data/viewer.json?*', async (route) => {
+    const response = await route.fetch()
+    const data = await response.json()
+    for (const run of data.runs)
+      for (const files of Object.values(run.artifacts))
+        for (const file of files as { path: string }[])
+          if (file.path !== 'optimized.yul')
+            file.path = `sources/${file.path === 'abi.json' ? 'lib' : 'src'}/${file.path}`
+    await route.fulfill({ json: data })
+  })
+  await page.goto(url.replace('file=runtime.disasm', 'file=sources/src/runtime.disasm'))
+  const src = page.locator('summary[title="sources/src/"]')
+  const lib = page.locator('summary[title="sources/lib/"]')
+  const sourceFile = page.getByRole('button', { name: 'runtime.disasm', exact: true })
+  const libraryFile = page.getByRole('button', { name: 'abi.json', exact: true })
+  await expect(sourceFile).toBeVisible()
+  await lib.click()
+  await libraryFile.click()
+  await expect(sourceFile).toBeVisible()
+  await sourceFile.click()
+  await expect(libraryFile).toBeVisible()
+  await page.getByRole('button', { name: 'optimized.yul', exact: true }).click()
+  await expect(sourceFile).toBeVisible()
+  await expect(libraryFile).toBeVisible()
+  await page.getByRole('combobox', { name: 'Right', exact: true }).selectOption('head:solx')
+  await expect(sourceFile).toBeVisible()
+  await expect(libraryFile).toBeVisible()
+  await src.click()
+  await page.getByRole('button', { name: /Switch to .* theme/ }).click()
+  await expect(sourceFile).toBeHidden()
+  await expect(libraryFile).toBeVisible()
+})
+
+test('highlights Yul diffs with the upstream grammar in the worker', async ({ page }) => {
+  await page.goto(url.replace('file=runtime.disasm', 'file=optimized.yul'))
+  const code = page.locator('diffs-container').locator('code[data-additions]')
+  await expect(code).toContainText('object "Demo"')
+  await expect(code.locator('span[style]').filter({ hasText: /^object$/ })).toHaveAttribute(
+    'style',
+    /--diffs-token-light:#D73A49/,
+  )
+  await expect(code.locator('span[style]').filter({ hasText: /^\s*mstore$/ })).toHaveAttribute(
+    'style',
+    /--diffs-token-light:#6F42C1/,
+  )
+  await page.getByRole('button', { name: 'Unified', exact: true }).click()
+  await page.getByRole('button', { name: /Switch to .* theme/ }).click()
+  await expect(page.locator('diffs-container').locator('code')).toContainText('object "Demo"')
 })

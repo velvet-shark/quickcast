@@ -51,9 +51,10 @@
       "character-entities": "^2.0.2"
     },
     "minimatch@3.1.5": {
-      "brace-expansion": "^1.1.17"
+      "brace-expansion": "^1.1.21"
     },
     "postcss": "$postcss",
+    "postcss-selector-parser": "^7.1.6",
     "sharp": "^0.35.4",
     "sucrase": {
       "glob": "10.5.0"

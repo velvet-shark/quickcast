@@ -8,6 +8,7 @@ import { comparisonHref, navigate, replaceUrl, useNavigation } from './navigatio
 import { comparisonBase } from './comparisonBase'
 import { hasHistoryChanges, type HistoryRange } from './historySeries'
 import { HistoryRangeSelect } from './HistoryRangeSelect'
+import { Combobox } from './Combobox'
 import logo from './assets/logo.png'
 import { FileViewer } from './FileViewer'
 import type { HistorySeries, RunIndex, RunSummary, Theme } from './types'
@@ -22,6 +23,7 @@ const charts = [
   { metric: 'compile_time_seconds', title: 'Compile time', unit: 'seconds' },
   { metric: 'peak_rss_bytes', title: 'Peak memory (RSS)', unit: 'memory' },
 ]
+const metricOptions = charts.map((chart) => ({ value: chart.metric, label: chart.title }))
 
 function runRef(run: RunSummary) {
   return run.branch ?? (run.pr ? `PR #${run.pr}` : 'detached')
@@ -142,15 +144,19 @@ function ResolvedComparison({
   }, [base, head])
   if (error)
     return (
-      <p className="error" role="alert">
-        {error}
-      </p>
+      <main className="compare-page">
+        <p className="error" role="alert">
+          {error}
+        </p>
+      </main>
     )
   if (!commits)
     return (
-      <p>
-        <LoadingText>Resolving commits…</LoadingText>
-      </p>
+      <main className="compare-page">
+        <p className="empty" role="status">
+          <LoadingText>Resolving commits…</LoadingText>
+        </p>
+      </main>
     )
   return benchmark ? (
     <FileViewer base={commits[0]} head={commits[1]} benchmark={benchmark} theme={theme} />
@@ -310,13 +316,7 @@ function Home({ benchmark, navigationKey }: { benchmark: string | null; navigati
         <HistoryRangeSelect value={range} onChange={setRange} />
         <label>
           Metric
-          <select value={metric} onChange={(event) => setMetric(event.target.value)}>
-            {charts.map((chart) => (
-              <option key={chart.metric} value={chart.metric}>
-                {chart.title}
-              </option>
-            ))}
-          </select>
+          <Combobox label="Metric" value={metric} options={metricOptions} onChange={setMetric} />
         </label>
         <label>
           Benchmark

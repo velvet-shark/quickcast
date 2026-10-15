@@ -1,4 +1,5 @@
 import { LoadingText } from './LoadingText'
+import { CompareSkeleton, FilesSkeleton, GraphsSkeleton, RunsSkeleton, Skeleton } from './Skeleton'
 import { useEffect, useMemo, useState } from 'react'
 import { Moon, Sun } from 'lucide-react'
 import { HistoryGraph } from './HistoryGraph'
@@ -11,18 +12,12 @@ import { HistoryRangeSelect } from './HistoryRangeSelect'
 import { Combobox } from './Combobox'
 import logo from './assets/logo.png'
 import { FileViewer } from './FileViewer'
+import { project } from './project'
 import type { HistorySeries, RunIndex, RunSummary, Theme } from './types'
 
 const short = (commit: string) => commit.slice(0, 8)
 
-const charts = [
-  { metric: 'total_gas', title: 'Runtime gas', unit: 'gas' },
-  { metric: 'deploy_gas', title: 'Deploy gas', unit: 'gas' },
-  { metric: 'runtime_size', title: 'Runtime bytecode', unit: 'bytes' },
-  { metric: 'bytecode_size', title: 'Creation bytecode', unit: 'bytes' },
-  { metric: 'compile_time_seconds', title: 'Compile time', unit: 'seconds' },
-  { metric: 'peak_rss_bytes', title: 'Peak memory (RSS)', unit: 'memory' },
-]
+const charts = project.metrics.map(({ key, title, unit }) => ({ metric: key, title, unit }))
 const metricOptions = charts.map((chart) => ({ value: chart.metric, label: chart.title }))
 
 function runRef(run: RunSummary) {
@@ -151,12 +146,13 @@ function ResolvedComparison({
       </main>
     )
   if (!commits)
-    return (
-      <main className="compare-page">
-        <p className="empty" role="status">
-          <LoadingText>Resolving commits…</LoadingText>
-        </p>
+    return benchmark ? (
+      <main className="file-viewer">
+        <div className="viewer-toolbar" />
+        <FilesSkeleton />
       </main>
+    ) : (
+      <CompareSkeleton />
     )
   return benchmark ? (
     <FileViewer base={commits[0]} head={commits[1]} benchmark={benchmark} theme={theme} />
@@ -182,7 +178,7 @@ function SiteHeader({
   return (
     <header className={compact ? 'file-header' : ''}>
       <a className="wordmark" href={import.meta.env.BASE_URL}>
-        <img alt="Solar" src={logo} />
+        {project.id === 'solar' ? <img alt="Solar" src={logo} /> : project.name}
       </a>
       <nav>
         {compact ? (
@@ -192,7 +188,7 @@ function SiteHeader({
             <a className={dashboard ? 'nav-active' : undefined} href={import.meta.env.BASE_URL}>
               Dashboard
             </a>
-            <a href="https://github.com/paradigmxyz/solar">Repository</a>
+            <a href={`https://github.com/${project.repository}`}>Repository</a>
           </>
         )}
         <button
@@ -290,7 +286,9 @@ function Home({ benchmark, navigationKey }: { benchmark: string | null; navigati
           <h1>Performance</h1>
           <p>Main branch benchmark history</p>
         </div>
-        <span>{index?.totalMainRuns ?? mainRuns.length} runs</span>
+        <span>
+          {index ? `${index.totalMainRuns ?? mainRuns.length} runs` : <Skeleton width={56} />}
+        </span>
       </section>
       <form
         className="compare-box"
@@ -318,7 +316,7 @@ function Home({ benchmark, navigationKey }: { benchmark: string | null; navigati
           Metric
           <Combobox label="Metric" value={metric} options={metricOptions} onChange={setMetric} />
         </label>
-        <label>
+        <label className="history-filter">
           Benchmark
           <input
             type="search"
@@ -335,21 +333,22 @@ function Home({ benchmark, navigationKey }: { benchmark: string | null; navigati
           />
           Changed only
         </label>
-        <span>Solar · {history?.runs.length ?? 0} main runs in range · lower is better</span>
+        <span>
+          {project.name} · {history ? history.runs.length : <Skeleton width={24} />} main runs in
+          range · lower is better
+        </span>
       </section>
       <p className="history-note">
-        Each graph is one benchmark. Gaps indicate failed or missing measurements. Hover to inspect
-        a run; click to compare it with the preceding commit.
-        {metric === 'compile_time_seconds' || metric === 'peak_rss_bytes'
+        Each graph is one benchmark. Gaps indicate failed or missing measurements. Hover or tap to
+        inspect a run; click it or tap it again to compare it with the preceding commit.
+        {project.metrics.find((definition) => definition.key === metric)?.noisy
           ? ' Timing and memory can vary between runs. Long histories preserve peaks and lows; hover shows raw measurements.'
           : ''}
       </p>
       {error || historyError ? (
         <p className="error">{error || historyError}</p>
       ) : history === null ? (
-        <p className="empty">
-          <LoadingText>Loading benchmark history…</LoadingText>
-        </p>
+        <GraphsSkeleton count={6} />
       ) : (
         <section className="chart-grid">
           {visibleBenchmarks.map((benchmark) => (
@@ -376,7 +375,9 @@ function Home({ benchmark, navigationKey }: { benchmark: string | null; navigati
           <span>benchmarks</span>
           <span>branch</span>
         </div>
-        {runs.length === 0 ? (
+        {!index && !error ? (
+          <RunsSkeleton />
+        ) : runs.length === 0 ? (
           <p className="empty">No published benchmark runs yet.</p>
         ) : (
           runs.slice(0, 12).map((run) => {

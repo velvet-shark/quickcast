@@ -1,4 +1,4 @@
-import { LoadingText } from './LoadingText'
+import { DiffSkeleton, FilesSkeleton, narrowQuery, TreeSkeleton } from './Skeleton'
 import { FileTree as PierreFileTree, useFileTree } from '@pierre/trees/react'
 import { lazy, Suspense, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import { PanelLeftClose, PanelLeftOpen } from 'lucide-react'
@@ -10,6 +10,7 @@ import { loadArtifact, loadViewerRuns } from './data'
 import { useImportProgress } from './importProgress'
 import { artifactSides, initialArtifactSides } from './artifactSides'
 import { replaceUrl } from './navigation'
+import { project } from './project'
 import type { RunDocument, Theme } from './types'
 
 const loadRenderer = () => import('./ArtifactDiff')
@@ -99,8 +100,10 @@ export function FileViewer({ base, head, benchmark, theme }: Props) {
   const [activeBenchmark, setActiveBenchmark] = useState(benchmark)
   const [sides, setSides] = useState(() => initialArtifactSides(params))
   const [selected, setSelected] = useState(params.get('file') || '')
-  const [diffStyle, setDiffStyle] = useState<'split' | 'unified'>('split')
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  // Narrow screens open on a unified diff, as on DiffsHub; the file tree becomes a bottom sheet.
+  const [narrow] = useState(() => matchMedia(narrowQuery).matches)
+  const [diffStyle, setDiffStyle] = useState<'split' | 'unified'>(narrow ? 'unified' : 'split')
+  const [sidebarOpen, setSidebarOpen] = useState(!narrow)
   const [sidebarWidth, setSidebarWidth] = useState(270)
   const drag = useRef<{ x: number; width: number } | null>(null)
   const resizeSidebar = (width: number) => setSidebarWidth(Math.max(200, Math.min(480, width)))
@@ -174,10 +177,10 @@ export function FileViewer({ base, head, benchmark, theme }: Props) {
   )
   const left =
     choices.find((choice) => choice.id === sides.left) ||
-    choices.find((choice) => choice.id === 'base:solar')
+    choices.find((choice) => choice.id === `base:${project.compiler}`)
   const right =
     choices.find((choice) => choice.id === sides.right) ||
-    choices.find((choice) => choice.id === 'head:solar')
+    choices.find((choice) => choice.id === `head:${project.compiler}`)
   const visibleFiles = useMemo(
     () =>
       left && right
@@ -223,6 +226,7 @@ export function FileViewer({ base, head, benchmark, theme }: Props) {
   const selectFile = (path: string) => {
     setSelected(path)
     updateUrl('file', path)
+    if (matchMedia(narrowQuery).matches) setSidebarOpen(false)
   }
 
   return (
@@ -258,9 +262,7 @@ export function FileViewer({ base, head, benchmark, theme }: Props) {
       {loadError ? (
         <p className="error">{loadError}</p>
       ) : !runs ? (
-        <p className="empty" role="status">
-          <LoadingText>{importProgress || 'Loading files…'}</LoadingText>
-        </p>
+        <FilesSkeleton sidebarOpen={sidebarOpen} progress={importProgress} />
       ) : (
         <div className={`file-viewer-body${sidebarOpen ? '' : ' sidebar-collapsed'}`}>
           <aside id="artifact-sidebar" hidden={!sidebarOpen}>
@@ -300,9 +302,7 @@ export function FileViewer({ base, head, benchmark, theme }: Props) {
               ))}
             </div>
             {loading ? (
-              <p className="empty" role="status">
-                <LoadingText>Loading files…</LoadingText>
-              </p>
+              <TreeSkeleton />
             ) : (
               <ArtifactFileTree
                 paths={visiblePaths}
@@ -311,6 +311,13 @@ export function FileViewer({ base, head, benchmark, theme }: Props) {
               />
             )}
           </aside>
+          {sidebarOpen && (
+            <button
+              className="sidebar-backdrop"
+              aria-label="Close file tree"
+              onClick={() => setSidebarOpen(false)}
+            />
+          )}
           {sidebarOpen && (
             <div
               className="sidebar-resizer"
@@ -353,9 +360,7 @@ export function FileViewer({ base, head, benchmark, theme }: Props) {
           )}
           <div className="file-diff">
             {loading ? (
-              <p className="empty" role="status">
-                <LoadingText>Loading files…</LoadingText>
-              </p>
+              <DiffSkeleton label="Loading diff" />
             ) : selectedFile && left && right ? (
               <>
                 <div className="artifact-actions-toolbar">
@@ -379,13 +384,7 @@ export function FileViewer({ base, head, benchmark, theme }: Props) {
                     )
                   })}
                 </div>
-                <Suspense
-                  fallback={
-                    <p className="empty">
-                      <LoadingText>Loading renderer…</LoadingText>
-                    </p>
-                  }
-                >
+                <Suspense fallback={<DiffSkeleton label="Loading renderer" />}>
                   <ArtifactDiff
                     before={{
                       label: left.label,

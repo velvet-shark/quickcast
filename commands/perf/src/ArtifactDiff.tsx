@@ -1,21 +1,15 @@
 import { DiffSkeleton } from './Skeleton'
-import {
-  File,
-  FileDiff,
-  VirtualizerContext,
-  WorkerPoolContextProvider,
-  useWorkerPool,
-} from '@pierre/diffs/react'
+import { File, FileDiff, VirtualizerContext, WorkerPoolContextProvider } from '@pierre/diffs/react'
 import { Virtualizer } from '@pierre/diffs'
 import type { FileContents, FileDiffMetadata } from '@pierre/diffs'
 import { artifactThemes } from './highlight'
 import { computeDiff } from './computeDiff'
-import { intralineOptions } from './intralineOptions'
 import { useLineSelection } from './lineSelection'
 import HighlightWorker from '@pierre/diffs/worker/worker.js?worker'
 import { useEffect, useState } from 'react'
 import { Info } from 'lucide-react'
-import { loadDiffFile, maxInteractiveArtifact, type ArtifactSource } from './formattedArtifact'
+import { loadDiffFile, type ArtifactSource } from './formattedArtifact'
+import { ImageDiff, ImageView, type ImageMode } from './ImageDiff'
 import type { Theme } from './types'
 
 interface Props {
@@ -25,6 +19,9 @@ interface Props {
   language: string
   theme: Theme
   style: 'split' | 'unified'
+  /** Show images, and Graphviz sources rendered to SVG, instead of diffing their text. */
+  rendered: boolean
+  imageMode: ImageMode
 }
 
 const poolOptions = {
@@ -42,8 +39,7 @@ export default function ArtifactDiff(props: Props) {
     <VirtualizerContext.Provider value={virtualizer}>
       <WorkerPoolContextProvider
         poolOptions={poolOptions}
-        // Start safely; computed diffs opt into bounded intraline highlighting.
-        highlighterOptions={{ lineDiffType: 'none', theme: artifactThemes }}
+        highlighterOptions={{ theme: artifactThemes }}
       >
         <ArtifactDiffContents
           key={JSON.stringify([props.before, props.after, props.path, props.language])}
@@ -54,7 +50,16 @@ export default function ArtifactDiff(props: Props) {
   )
 }
 
-function ArtifactDiffContents({ before, after, path, language, theme, style }: Props) {
+function ArtifactDiffContents({
+  before,
+  after,
+  path,
+  language,
+  theme,
+  style,
+  rendered,
+  imageMode,
+}: Props) {
   const [contents, setContents] = useState<[FileContents | null, FileContents | null] | null>(null)
   const [error, setError] = useState('')
   useEffect(() => {
@@ -87,26 +92,6 @@ function ArtifactDiffContents({ before, after, path, language, theme, style }: P
   ])
   if (error) return <p className="error">Could not load artifact: {error}</p>
   if (!contents) return <DiffSkeleton label="Loading diff" />
-  if (contents.some((value) => value !== null && value.contents.length > maxInteractiveArtifact))
-    return (
-      <section className="large-artifact">
-        <p className="artifact-notice" role="status">
-          This file is too large for an interactive diff. Download the full contents below; the
-          preview is limited to 20,000 characters.
-        </p>
-        {contents.map(
-          (value, index) =>
-            value !== null && (
-              <LargeArtifact
-                key={index}
-                contents={value.contents}
-                label={(index === 0 ? before : after).label}
-                path={path}
-              />
-            ),
-        )}
-      </section>
-    )
   const [oldFile, newFile] = contents
   if (oldFile === null && newFile === null) {
     return <p className="empty">This artifact was not published by either side.</p>
@@ -122,10 +107,24 @@ function ArtifactDiffContents({ before, after, path, language, theme, style }: P
               ? `Published only by ${before.label}.`
               : 'Contents are identical.'}
         </p>
-        <SelectedFile file={oldFile ?? newFile!} theme={theme} side={newFile ? 'R' : 'L'} />
+        {rendered ? (
+          <ImageView file={oldFile ?? newFile!} />
+        ) : (
+          <SelectedFile file={oldFile ?? newFile!} theme={theme} side={newFile ? 'R' : 'L'} />
+        )}
       </>
     )
   }
+  if (rendered)
+    return (
+      <ImageDiff
+        before={oldFile}
+        after={newFile}
+        beforeLabel={before.label}
+        afterLabel={after.label}
+        mode={imageMode}
+      />
+    )
   return (
     <ComputedDiff
       before={oldFile}
@@ -171,7 +170,6 @@ function ComputedDiff({
   theme: Theme
   style: Props['style']
 }) {
-  const pool = useWorkerPool()
   const [diff, setDiff] = useState<FileDiffMetadata | null>(null)
   const selection = useLineSelection(after.name, diff ?? undefined)
   const [error, setError] = useState('')
@@ -180,23 +178,16 @@ function ComputedDiff({
     const { signal } = controller
     setDiff(null)
     setError('')
-    computeDiff(before, after, signal)
-      .then(async (value) => {
-        if (signal.aborted) return value
-        // Pool options, not FileDiff options, control worker highlighting.
-        await pool?.setRenderOptions(intralineOptions(value))
-        return value
-      })
-      .then(
-        (value) => {
-          if (!signal.aborted) setDiff(value)
-        },
-        (error: Error) => {
-          if (!signal.aborted) setError(error.message)
-        },
-      )
+    computeDiff(before, after, signal).then(
+      (value) => {
+        if (!signal.aborted) setDiff(value)
+      },
+      (error: Error) => {
+        if (!signal.aborted) setError(error.message)
+      },
+    )
     return () => controller.abort()
-  }, [before, after, pool])
+  }, [before, after])
   if (error)
     return (
       <section className="large-artifact">
@@ -222,7 +213,6 @@ function ComputedDiff({
         selectedLines={selection.selectedLines}
         options={{
           ...selection.options,
-          ...intralineOptions(diff),
           disableFileHeader: true,
           diffStyle: style,
           overflow: 'scroll',

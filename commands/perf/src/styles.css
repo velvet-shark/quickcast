@@ -443,9 +443,9 @@ button:disabled {
   padding: 0 16px;
   display: grid;
   grid-template-columns:
-    minmax(150px, 1fr)
+    minmax(120px, 1fr)
     repeat(calc(var(--compiler-count, 1) + 1), minmax(100px, 150px));
-  min-width: calc(150px + (var(--compiler-count, 1) + 1) * 116px);
+  min-width: calc(120px + (var(--compiler-count, 1) + 1) * 116px);
   column-gap: 16px;
   align-items: center;
   border: 0;
@@ -856,6 +856,9 @@ header.file-header {
   margin: 0 0 0 auto;
   flex-shrink: 0;
 }
+.viewer-toolbar .diff-tools + .diff-tools {
+  margin-left: 0;
+}
 .file-viewer > .empty {
   width: min(1100px, calc(100% - 48px));
   margin: 32px auto;
@@ -1017,6 +1020,109 @@ header.file-header {
 .diff-sides span + span {
   border-left: 1px solid var(--line);
 }
+.image-diff.two-up {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.image-diff section {
+  min-width: 0;
+}
+.image-diff.two-up section + section {
+  border-left: 1px solid var(--line);
+}
+.image-diff h3 {
+  margin: 0;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  font:
+    600 11px ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+}
+.image-view {
+  margin: 0;
+}
+.image-pane {
+  max-height: calc(100vh - var(--viewer-toolbar-height) - 180px);
+  overflow: auto;
+}
+.image-pane img {
+  display: block;
+  max-width: 100%;
+  cursor: grab;
+}
+.image-pane:active img {
+  cursor: grabbing;
+}
+.image-view.deleted .image-pane img,
+.image-frame .deleted {
+  outline: 1px solid #cf222e;
+  outline-offset: -1px;
+}
+.image-view.added .image-pane img,
+.image-frame .added {
+  outline: 1px solid #1a7f37;
+  outline-offset: -1px;
+}
+.image-view figcaption,
+.image-dimensions {
+  padding: 8px 14px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.image-diff.overlay {
+  padding: 16px;
+}
+.image-frame {
+  position: relative;
+  margin: 0 auto;
+  touch-action: none;
+  user-select: none;
+}
+.image-frame img {
+  position: absolute;
+  top: 0;
+  display: block;
+}
+.swipe-layer {
+  position: absolute;
+  inset: 0;
+}
+.image-diff.swipe .image-frame {
+  cursor: ew-resize;
+}
+.swipe-handle {
+  position: absolute;
+  top: -8px;
+  bottom: -8px;
+  width: 2px;
+  margin-left: -1px;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.6);
+  pointer-events: none;
+}
+.image-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+  font:
+    600 11px ui-monospace,
+    monospace;
+}
+.image-slider input {
+  width: min(320px, 50%);
+}
+.image-dimensions {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
 .file-diff .diff-frame {
   min-height: calc(100vh - 96px);
 }
@@ -1029,10 +1135,12 @@ header.file-header {
   .run-meta {
     line-height: 1.65;
   }
-  .diff-sides {
+  .diff-sides,
+  .image-diff.two-up {
     grid-template-columns: 1fr;
   }
-  .diff-sides span + span {
+  .diff-sides span + span,
+  .image-diff.two-up section + section {
     border-top: 1px solid var(--line);
     border-left: 0;
   }
@@ -1353,19 +1461,6 @@ header.file-header {
   .history-filter input {
     width: 100%;
   }
-  /* Wrap each benchmark row instead of hiding compiler columns off-screen. */
-  .result {
-    grid-template-columns: repeat(calc(var(--compiler-count, 1) + 1), minmax(0, 1fr));
-    min-width: 0;
-    row-gap: 6px;
-    padding: 10px 12px;
-  }
-  .result > :first-child {
-    grid-column: 1 / -1;
-  }
-  .header-row > button {
-    height: auto;
-  }
   .artifact-actions-toolbar {
     gap: 8px;
     padding: 6px 10px;
@@ -1420,5 +1515,32 @@ header.file-header {
   }
   body:has(.sidebar-backdrop) {
     overflow: hidden;
+  }
+}
+@media (max-width: 760px) {
+  /* Each row shows the benchmark and Head value, then the deltas, instead of hiding columns. */
+  .result {
+    grid-template-columns: repeat(var(--compiler-count, 1), minmax(0, 1fr));
+    height: auto;
+    min-width: 0;
+    row-gap: 6px;
+    padding: 10px 12px;
+  }
+  .result > strong {
+    font-size: 12px;
+  }
+  .result > :first-child {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    padding-right: 112px;
+  }
+  .result > :nth-child(2) {
+    grid-row: 1;
+    grid-column: -2;
+    justify-self: end;
+    white-space: nowrap;
+  }
+  .header-row > button {
+    height: auto;
   }
 }

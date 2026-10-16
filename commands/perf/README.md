@@ -79,9 +79,9 @@ Origin index/history misses coalesce for one second; immutable bodies have a bou
 Vercel logs emit `perf_api` events with route, status, API/database/SQL durations,
 read rows/bytes and ClickHouse query IDs for percentile analysis. SQL reads have a
 five-second execution limit and a ten-second transport timeout.
-Formatted artifacts are retained in a bounded browser cache. Files larger than
-512 Ki characters skip JSON formatting and interactive diffing, with a bounded
-text preview and full-content downloads to keep navigation responsive.
+Formatted artifacts are retained in a bounded browser cache. Files of any size are
+formatted and diffed; the library renders files over 100,000 lines without syntax
+highlighting.
 Interactive diff computation uses patience line matching in a cancellable browser
 worker with a five-second limit. Unlike unbounded Myers diffing, patience anchors
 unique lines and replaces unmatched regions rather than searching for a minimal edit
@@ -92,15 +92,15 @@ both files remain downloadable with bounded previews; the failed content pair st
 failed for the page session, with no automatic retries on revisits or visibility changes.
 Theme and split/unified changes reuse the computed diff. Syntax highlighting
 uses the library's worker pool (one worker, retained across file/compiler switches);
-intraline word decorations are enabled only when both sides together contain at most
-2,000 lines, 200 changed lines, and 32,768 characters. Lines longer than 256 characters
-skip word matching. Large diffs retain syntax colors and added/deleted line colors
-without intraline decorations, whose Shiki processing becomes quadratic on generated
-files. These are whole-diff limits: Pierre does not expose per-block decoration budgets.
-Changing between decorated and undecorated diffs clears the library's highlighting
-caches through `setRenderOptions`; the worker and our computed-diff cache are retained.
-`@pierre/diffs` 1.4.1 includes the large-hunk stack-overflow fix upstream;
-no dependency patch is needed. Its edit-session APIs are not used by this read-only viewer.
+every diff gets Pierre's default intraline word decorations, which skip lines longer
+than 1,000 characters. Pierre's own shiki dependency is overridden to 4.x, which splits
+tokens at decoration offsets in linear time. `patches/@shikijs__core@4.5.0.patch`
+applies [shikijs/shiki#1338](https://github.com/shikijs/shiki/pull/1338), which makes
+the overlap check, position conversion and multi-line decorations linear too; remove
+it once a Shiki release includes that change. Without it, decoration cost grows with
+the square of the changed line count.
+`@pierre/diffs` 1.4.1 includes the large-hunk stack-overflow fix upstream,
+so Pierre itself needs no patch. Its edit-session APIs are not used by this read-only viewer.
 `FileDiff`/`File` use Pierre's `Virtualizer` with `setup(document)` through
 `VirtualizerContext`: the browser page scrolls normally while only visible lines
 are rendered. The file toolbar and side labels stick during scrolling. The file
@@ -111,8 +111,15 @@ closes once you pick a file. File icons use Pierre's complete colored set, as on
 [DiffsHub](https://diffshub.com). `src/artifactIcons.ts` adds icons for formats that set
 lacks: Solidity (`.sol`), EVM IR (`.evmir`) and LLVM IR (`.ll`) use
 [Simple Icons](https://simpleicons.org) marks (CC0-1.0); Solar MIR (`.mir`), Yul
-(`.yul`), disassembly (`.disasm`) and hex bytecode (`.hex`) use
+(`.yul`), disassembly (`.disasm`), hex bytecode (`.hex`) and Graphviz graphs (`.dot`) use
 [Lucide](https://lucide.dev) glyphs (ISC, the license bundled with `lucide-react`).
+SVG files open as images. Graphviz files, such as evm2's `bytecode.dot` control-flow
+graph, open as SVG images rendered by [Viz.js](https://github.com/mdaines/viz-js)
+(Graphviz compiled to WebAssembly) in a worker per side. A Source toggle shows the text
+diff instead. As on GitHub, changed images compare 2-up (side by side, with dimensions
+and file sizes), by swipe (a draggable divider over both images) or by onion skin (the
+head fades in over the base); overlays share a frame sized to the larger image. The
+image element keeps scripts and links in the SVG inert.
 File cache keys
 include a SHA-256 of the actual formatted text, path, and language, preventing
 same-name artifacts from sharing highlighting. Completed diffs reuse the existing
@@ -419,7 +426,9 @@ Already imported runs need a reimport to gain these source files.
 The viewer builds its directory and compiler selectors from the stored manifest,
 shows files present on either side, and loads only the selected file. Unknown
 extensions render as plain text; HTML is displayed as source, never executed.
-Binary files are omitted. Paths, file counts, and compressed/uncompressed sizes
+PNG, JPEG, GIF, WebP and AVIF images (by extension) are stored base64-encoded and
+shown as images, as are SVG files; Copy and Open raw use the decoded image. Other
+binary files are omitted. Paths, file counts, and compressed/uncompressed sizes
 are bounded; the local importer rejects symlinks. No artifact content is executed.
 
 Each selected side has Copy and Open raw controls for the original, unformatted

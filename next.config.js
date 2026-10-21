@@ -11,6 +11,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/reference/versions',
+        destination: 'https://www.getfoundry.sh/reference/versions',
+        permanent: false,
+      },
+      {
         source: '/cast-calldata-decode',
         destination: '/cast-decode-calldata',
         permanent: true,

@@ -1,0 +1,9 @@
+# Use the patched official Node.js runtime instead of Nixpacks' frozen Node package.
+# This deployment targets Linux x86_64.
+[phases.setup]
+nixPkgs = []
+aptPkgs = ["ca-certificates", "curl", "xz-utils", "libstdc++6", "python3", "make", "g++", "git"]
+cmds = ["curl -fsSL https://nodejs.org/dist/v22.23.4/node-v22.23.4-linux-x64.tar.xz -o /tmp/node.tar.xz && echo '1805bcd35e6815559bd2eb97db438d3fdb0eb3a5e6a977b7c1badca76337e9ce  /tmp/node.tar.xz' | sha256sum -c - && tar -xJf /tmp/node.tar.xz -C /usr/local --strip-components=1 && rm /tmp/node.tar.xz", "node --version && npm --version"]
+
+[phases.install]
+cmds = ["npm ci"]

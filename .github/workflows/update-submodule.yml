@@ -29,6 +29,18 @@ jobs:
           # Remove the nested .git directory to integrate it into the main repo
           rm -rf commands/.git
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+
+      - name: Preserve dependency security fixes
+        run: |
+          node --test scripts/apply-commands-security.test.mjs
+          node scripts/apply-commands-security.mjs
+          npm exec --yes --package=pnpm@11.25.0 -- pnpm --dir commands install --lockfile-only --ignore-scripts
+          npm exec --yes --package=pnpm@11.25.0 -- pnpm --dir commands audit
+
       - name: Check for changes
         id: changes
         run: |

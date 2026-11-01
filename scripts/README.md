@@ -2,6 +2,27 @@
 
 This directory contains the automatic command synchronization system for QuickCast.
 
+## Vendored dependency security
+
+The daily workflow imports Foundry's documentation, including its separate pnpm dependency tree.
+`commands-security-overrides.json` holds QuickCast's minimum patched versions. The workflow applies
+these overrides after each import, regenerates the vendored lockfile, and requires a clean audit
+before committing. Version selectors leave newer upstream releases unchanged.
+
+Run `node --test scripts/apply-commands-security.test.mjs` to check the importer. After changing
+the policy, run `node scripts/apply-commands-security.mjs`, then
+`npm exec --yes --package=pnpm@11.25.0 -- pnpm --dir commands install --lockfile-only --ignore-scripts`.
+
+### Remaining application tooling advisory, 2026-11-01
+
+The root npm audit still reports [GHSA-g3hv-75wg-m249](https://github.com/advisories/GHSA-g3hv-75wg-m249)
+for `minimatch@3.1.5` through ESLint 8 and its plugins. The patched v11 release changes
+the callable CommonJS export and removes `makeRe`, which those dependencies still use.
+Only the compatible v9 consumers are overridden to the patched version. Keep the
+Dependabot alert open until the lint toolchain supports patched minimatch; do not
+force v11 over v3 or suppress the audit. The application's production dependencies
+and the separate vendored documentation dependency tree pass their audits.
+
 ## Overview
 
 The `sync-commands.ts` script automatically:

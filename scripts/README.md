@@ -2,16 +2,19 @@
 
 This directory contains the automatic command synchronization system for QuickCast.
 
-## Vendored dependency security
+## Vendored documentation content
 
-The daily workflow imports Foundry's documentation, including its separate pnpm dependency tree.
-`commands-security-overrides.json` holds QuickCast's minimum patched versions. The workflow applies
-these overrides after each import, regenerates the vendored lockfile, and requires a clean audit
-before committing. Version selectors leave newer upstream releases unchanged.
+The daily workflow runs `update-submodule.sh`, which copies `src/`, `sidebar/` and the licenses
+from [foundry-rs/book](https://github.com/foundry-rs/book) into `commands/`. QuickCast reads those
+files as text: MDX pages under `commands/src/pages/` and `commands/sidebar/cast-cli-reference.ts`.
 
-Run `node --test scripts/apply-commands-security.test.mjs` to check the importer. After changing
-the policy, run `node scripts/apply-commands-security.mjs`, then
-`npm exec --yes --package=pnpm@11.25.0 -- pnpm --dir commands install --lockfile-only --ignore-scripts`.
+Upstream's `package.json`, `pnpm-lock.yaml`, workspace packages and site tooling are not vendored.
+QuickCast never installs or runs them. Until 2026-11-18 they were vendored, which put about 950
+unused documentation-site packages under Dependabot and a required `pnpm audit`. Every new advisory
+in that tree then blocked the daily import, including ones with no patched release.
+
+The script fails without touching `commands/` if upstream moves the sidebar or the cast reference
+pages. If that happens, update the paths in the script and in the content loaders under `app/lib/`.
 
 ### Remaining application tooling advisory, 2026-11-01
 
@@ -20,8 +23,12 @@ for `minimatch@3.1.5` through ESLint 8 and its plugins. The patched v11 release 
 the callable CommonJS export and removes `makeRe`, which those dependencies still use.
 Only the compatible v9 consumers are overridden to the patched version. Keep the
 Dependabot alert open until the lint toolchain supports patched minimatch; do not
-force v11 over v3 or suppress the audit. The application's production dependencies
-and the separate vendored documentation dependency tree pass their audits.
+force v11 over v3 or suppress the audit.
+
+As of 2026-11-18, [GHSA-fc5q-39xc-vjpf](https://github.com/advisories/GHSA-fc5q-39xc-vjpf)
+(picomatch ReDoS, all versions through 4.0.7) has no patched release. It reaches the
+build through Tailwind, ESLint and fast-glob, which match QuickCast's own config globs,
+not request input. Override picomatch once a fixed release is published.
 
 ## Overview
 

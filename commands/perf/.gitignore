@@ -1,9 +1,0 @@
-dist/
-node_modules/
-.wrangler/
-.vercel/
-*.tsbuildinfo
-public/data/
-.dev.vars
-.env
-.env.local

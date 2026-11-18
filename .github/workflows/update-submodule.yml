@@ -19,27 +19,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update Vendored Content
-        run: |
-          # Remove the old vendored directory
-          rm -rf commands
-
-          # Clone the latest content from the external repository
-          git clone --depth=1 https://github.com/foundry-rs/book.git commands
-
-          # Remove the nested .git directory to integrate it into the main repo
-          rm -rf commands/.git
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24.22.1'
-
-      - name: Preserve dependency security fixes
-        run: |
-          node --test scripts/apply-commands-security.test.mjs
-          node scripts/apply-commands-security.mjs
-          npm exec --yes --package=pnpm@11.25.0 -- pnpm --dir commands install --lockfile-only --ignore-scripts
-          npm exec --yes --package=pnpm@11.25.0 -- pnpm --dir commands audit
+        # Copies only the docs QuickCast reads; see scripts/README.md.
+        run: ./scripts/update-submodule.sh
 
       - name: Check for changes
         id: changes

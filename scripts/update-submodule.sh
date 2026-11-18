@@ -1,36 +1,33 @@
 #!/bin/bash
 
-# Script to update the commands submodule and commit changes
-# Usage: ./scripts/update-submodule.sh
+# Refresh the vendored Foundry documentation in commands/ from foundry-rs/book.
+# Usage: ./scripts/update-submodule.sh (the daily workflow commits the result)
+#
+# QuickCast reads only the MDX pages under src/ and the cast sidebar, as text.
+# Upstream's package manifests, lockfile and site tooling are left out on
+# purpose: QuickCast never installs them, and committing them puts an unused
+# dependency tree under Dependabot and audits.
 
-set -e
+set -euo pipefail
 
-echo "Updating commands submodule..."
+repo_root="$(cd "$(dirname "$0")/.." && pwd)"
+upstream="$(mktemp -d)"
+trap 'rm -rf "$upstream"' EXIT
 
-# Navigate to submodule directory
-cd commands
+git clone --quiet --depth=1 https://github.com/foundry-rs/book.git "$upstream/book"
 
-# Fetch latest changes
-git fetch origin
+# Fail before replacing anything if upstream moved the files QuickCast reads.
+for required in sidebar/cast-cli-reference.ts src/pages/reference/cast/cast.mdx; do
+  if [ ! -f "$upstream/book/$required" ]; then
+    echo "Upstream no longer has $required; update QuickCast's content paths." >&2
+    exit 1
+  fi
+done
 
-# Check if there are updates
-CURRENT_HASH=$(git rev-parse HEAD)
-LATEST_HASH=$(git rev-parse origin/master)
+rm -rf "$repo_root/commands"
+mkdir "$repo_root/commands"
+for path in src sidebar LICENSE-APACHE LICENSE-MIT; do
+  cp -R "$upstream/book/$path" "$repo_root/commands/"
+done
 
-if [ "$CURRENT_HASH" = "$LATEST_HASH" ]; then
-    echo "Commands submodule is already up to date."
-    exit 0
-fi
-
-# Update to latest
-git reset --hard origin/master
-
-# Go back to project root
-cd ..
-
-# Add and commit the submodule update
-git add commands
-git commit -m "Update commands submodule to latest ($(cd commands && git rev-parse --short HEAD))"
-
-echo "Submodule updated and committed successfully!"
-echo "New commit: $(cd commands && git rev-parse --short HEAD)"
+echo "Vendored foundry-rs/book@$(git -C "$upstream/book" rev-parse --short HEAD) into commands/."

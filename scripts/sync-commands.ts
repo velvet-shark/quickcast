@@ -204,36 +204,21 @@ async function syncCommands() {
 
 // Generate the navigation data file
 async function generateNavigationFile(commands: Command[]) {
+  // Categories keep the sidebar's order, so new upstream categories appear too
   const categories = generateNavigationCategories(commands);
-  
-  // Sort categories in the same order as the sidebar
-  const categoryOrder = [
-    "ABI Commands",
-    "Account Commands", 
-    "Block Commands",
-    "Chain Commands",
-    "Conversion Commands",
-    "ENS Commands",
-    "Etherscan Commands",
-    "General Commands",
-    "Transaction Commands",
-    "Utility Commands",
-    "Wallet Commands"
-  ];
-  
+
   // Generate the navigation data
-  const navigationData: any = {
+  const navigationData: {
+    categories: Record<string, { text: string; href: string }[]>;
+  } = {
     categories: {}
   };
-  
-  for (const category of categoryOrder) {
-    const categoryCommands = categories.get(category);
-    if (categoryCommands) {
-      navigationData.categories[category] = categoryCommands.map(cmd => ({
-        text: cmd.name,
-        href: `/${cmd.path}`
-      }));
-    }
+
+  for (const [category, categoryCommands] of categories) {
+    navigationData.categories[category] = categoryCommands.map(cmd => ({
+      text: cmd.name,
+      href: `/${cmd.path}`
+    }));
   }
   
   // Write navigation data file

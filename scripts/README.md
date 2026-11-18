@@ -51,7 +51,7 @@ npm run sync-commands
 ```
 
 ### Command Categorization
-Commands are categorized based on the structure in `cast-cli-reference.ts`:
+Commands are categorized based on the structure in `cast-cli-reference.ts`, in the sidebar's order. A new upstream category shows up in the navigation without code changes. Current categories:
 - ABI Commands
 - Account Commands
 - Block Commands
@@ -62,6 +62,7 @@ Commands are categorized based on the structure in `cast-cli-reference.ts`:
 - General Commands
 - Transaction Commands
 - Utility Commands
+- Vault Commands
 - Wallet Commands
 
 ### Page Generation

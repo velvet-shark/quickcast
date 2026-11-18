@@ -68,8 +68,16 @@
         "href": "/cast-proof"
       },
       {
+        "text": "cast receive-policy receipt balance",
+        "href": "/cast-receive-policy-receipt-balance"
+      },
+      {
         "text": "cast storage",
         "href": "/cast-storage"
+      },
+      {
+        "text": "cast storage-credits balance",
+        "href": "/cast-storage-credits-balance"
       }
     ],
     "Block Commands": [
@@ -156,6 +164,10 @@
       {
         "text": "cast to-base",
         "href": "/cast-to-base"
+      },
+      {
+        "text": "cast to-bytes-memory",
+        "href": "/cast-to-bytes-memory"
       },
       {
         "text": "cast to-bytes32",
@@ -254,6 +266,10 @@
         "href": "/cast-receipt"
       },
       {
+        "text": "cast receive-policy receipt",
+        "href": "/cast-receive-policy-receipt"
+      },
+      {
         "text": "cast rpc",
         "href": "/cast-rpc"
       },
@@ -292,8 +308,20 @@
         "href": "/cast-b2e-payload"
       },
       {
+        "text": "cast bal",
+        "href": "/cast-bal"
+      },
+      {
         "text": "cast base-fee",
         "href": "/cast-base-fee"
+      },
+      {
+        "text": "cast batch-mktx",
+        "href": "/cast-batch-mktx"
+      },
+      {
+        "text": "cast batch-send",
+        "href": "/cast-batch-send"
       },
       {
         "text": "cast bind",
@@ -302,6 +330,14 @@
       {
         "text": "cast call --create",
         "href": "/cast-call---create"
+      },
+      {
+        "text": "cast channel-id",
+        "href": "/cast-channel-id"
+      },
+      {
+        "text": "cast classify",
+        "href": "/cast-classify"
       },
       {
         "text": "cast codehash",
@@ -322,6 +358,10 @@
       {
         "text": "cast create2",
         "href": "/cast-create2"
+      },
+      {
+        "text": "cast create2 init-code-hash",
+        "href": "/cast-create2-init-code-hash"
       },
       {
         "text": "cast creation-code",
@@ -380,6 +420,10 @@
         "href": "/cast-erc20-token-name"
       },
       {
+        "text": "cast erc20-token permit",
+        "href": "/cast-erc20-token-permit"
+      },
+      {
         "text": "cast erc20-token symbol",
         "href": "/cast-erc20-token-symbol"
       },
@@ -394,6 +438,10 @@
       {
         "text": "cast estimate --create",
         "href": "/cast-estimate---create"
+      },
+      {
+        "text": "cast events",
+        "href": "/cast-events"
       },
       {
         "text": "cast format-units",
@@ -428,6 +476,106 @@
         "href": "/cast-keccak"
       },
       {
+        "text": "cast key-authorization",
+        "href": "/cast-key-authorization"
+      },
+      {
+        "text": "cast key-authorization encode",
+        "href": "/cast-key-authorization-encode"
+      },
+      {
+        "text": "cast key-authorization inspect",
+        "href": "/cast-key-authorization-inspect"
+      },
+      {
+        "text": "cast key-authorization sign",
+        "href": "/cast-key-authorization-sign"
+      },
+      {
+        "text": "cast keychain",
+        "href": "/cast-keychain"
+      },
+      {
+        "text": "cast keychain authorize",
+        "href": "/cast-keychain-authorize"
+      },
+      {
+        "text": "cast keychain burn-witness",
+        "href": "/cast-keychain-burn-witness"
+      },
+      {
+        "text": "cast keychain check",
+        "href": "/cast-keychain-check"
+      },
+      {
+        "text": "cast keychain doctor",
+        "href": "/cast-keychain-doctor"
+      },
+      {
+        "text": "cast keychain inspect",
+        "href": "/cast-keychain-inspect"
+      },
+      {
+        "text": "cast keychain is-admin",
+        "href": "/cast-keychain-is-admin"
+      },
+      {
+        "text": "cast keychain is-witness-burned",
+        "href": "/cast-keychain-is-witness-burned"
+      },
+      {
+        "text": "cast keychain list",
+        "href": "/cast-keychain-list"
+      },
+      {
+        "text": "cast keychain policy",
+        "href": "/cast-keychain-policy"
+      },
+      {
+        "text": "cast keychain policy add-call",
+        "href": "/cast-keychain-policy-add-call"
+      },
+      {
+        "text": "cast keychain policy remove-target",
+        "href": "/cast-keychain-policy-remove-target"
+      },
+      {
+        "text": "cast keychain policy set-limit",
+        "href": "/cast-keychain-policy-set-limit"
+      },
+      {
+        "text": "cast keychain revoke",
+        "href": "/cast-keychain-revoke"
+      },
+      {
+        "text": "cast keychain rl",
+        "href": "/cast-keychain-rl"
+      },
+      {
+        "text": "cast keychain rs",
+        "href": "/cast-keychain-rs"
+      },
+      {
+        "text": "cast keychain show",
+        "href": "/cast-keychain-show"
+      },
+      {
+        "text": "cast keychain ss",
+        "href": "/cast-keychain-ss"
+      },
+      {
+        "text": "cast keychain ul",
+        "href": "/cast-keychain-ul"
+      },
+      {
+        "text": "cast keychain verify",
+        "href": "/cast-keychain-verify"
+      },
+      {
+        "text": "cast keychain verify-admin",
+        "href": "/cast-keychain-verify-admin"
+      },
+      {
         "text": "cast max-int",
         "href": "/cast-max-int"
       },
@@ -452,8 +600,72 @@
         "href": "/cast-parse-units"
       },
       {
+        "text": "cast receive-policy",
+        "href": "/cast-receive-policy"
+      },
+      {
+        "text": "cast receive-policy claim",
+        "href": "/cast-receive-policy-claim"
+      },
+      {
+        "text": "cast receive-policy get",
+        "href": "/cast-receive-policy-get"
+      },
+      {
+        "text": "cast receive-policy receipt burn",
+        "href": "/cast-receive-policy-receipt-burn"
+      },
+      {
+        "text": "cast receive-policy receipt decode",
+        "href": "/cast-receive-policy-receipt-decode"
+      },
+      {
+        "text": "cast receive-policy set",
+        "href": "/cast-receive-policy-set"
+      },
+      {
+        "text": "cast receive-policy validate",
+        "href": "/cast-receive-policy-validate"
+      },
+      {
         "text": "cast recover-authority",
         "href": "/cast-recover-authority"
+      },
+      {
+        "text": "cast safe",
+        "href": "/cast-safe"
+      },
+      {
+        "text": "cast safe add-delegate",
+        "href": "/cast-safe-add-delegate"
+      },
+      {
+        "text": "cast safe create",
+        "href": "/cast-safe-create"
+      },
+      {
+        "text": "cast safe execute",
+        "href": "/cast-safe-execute"
+      },
+      {
+        "text": "cast safe list-delegates",
+        "href": "/cast-safe-list-delegates"
+      },
+      {
+        "text": "cast safe propose",
+        "href": "/cast-safe-propose"
+      },
+      {
+        "text": "cast safe remove-delegate",
+        "href": "/cast-safe-remove-delegate"
+      },
+      {
+        "text": "cast safe sign",
+        "href": "/cast-safe-sign"
+      },
+      {
+        "text": "cast safe simulate",
+        "href": "/cast-safe-simulate"
       },
       {
         "text": "cast send --create",
@@ -468,8 +680,120 @@
         "href": "/cast-sig-event"
       },
       {
+        "text": "cast storage-credits",
+        "href": "/cast-storage-credits"
+      },
+      {
+        "text": "cast storage-credits budget",
+        "href": "/cast-storage-credits-budget"
+      },
+      {
+        "text": "cast storage-credits mode",
+        "href": "/cast-storage-credits-mode"
+      },
+      {
+        "text": "cast storage-credits set-budget",
+        "href": "/cast-storage-credits-set-budget"
+      },
+      {
+        "text": "cast storage-credits set-mode",
+        "href": "/cast-storage-credits-set-mode"
+      },
+      {
         "text": "cast storage-root",
         "href": "/cast-storage-root"
+      },
+      {
+        "text": "cast tempo",
+        "href": "/cast-tempo"
+      },
+      {
+        "text": "cast tempo import-access-key",
+        "href": "/cast-tempo-import-access-key"
+      },
+      {
+        "text": "cast tempo login",
+        "href": "/cast-tempo-login"
+      },
+      {
+        "text": "cast tempo zone",
+        "href": "/cast-tempo-zone"
+      },
+      {
+        "text": "cast tempo zone deposit",
+        "href": "/cast-tempo-zone-deposit"
+      },
+      {
+        "text": "cast tempo zone earn",
+        "href": "/cast-tempo-zone-earn"
+      },
+      {
+        "text": "cast tempo zone earn encode-deposit",
+        "href": "/cast-tempo-zone-earn-encode-deposit"
+      },
+      {
+        "text": "cast tempo zone earn encode-redeem",
+        "href": "/cast-tempo-zone-earn-encode-redeem"
+      },
+      {
+        "text": "cast tempo zone withdraw",
+        "href": "/cast-tempo-zone-withdraw"
+      },
+      {
+        "text": "cast tip20-token",
+        "href": "/cast-tip20-token"
+      },
+      {
+        "text": "cast tip20-token create",
+        "href": "/cast-tip20-token-create"
+      },
+      {
+        "text": "cast tip20-token grant-role",
+        "href": "/cast-tip20-token-grant-role"
+      },
+      {
+        "text": "cast tip20-token has-role",
+        "href": "/cast-tip20-token-has-role"
+      },
+      {
+        "text": "cast tip20-token logo-check",
+        "href": "/cast-tip20-token-logo-check"
+      },
+      {
+        "text": "cast tip20-token logo-set",
+        "href": "/cast-tip20-token-logo-set"
+      },
+      {
+        "text": "cast tip20-token mine",
+        "href": "/cast-tip20-token-mine"
+      },
+      {
+        "text": "cast tip20-token revoke-role",
+        "href": "/cast-tip20-token-revoke-role"
+      },
+      {
+        "text": "cast tip403",
+        "href": "/cast-tip403"
+      },
+      {
+        "text": "cast tip403 blacklist",
+        "href": "/cast-tip403-blacklist"
+      },
+      {
+        "text": "cast tip403 check",
+        "href": "/cast-tip403-check"
+      },
+      {
+        "text": "cast tip403 create",
+        "href": "/cast-tip403-create"
+      },
+      {
+        "text": "cast tip403 info",
+        "href": "/cast-tip403-info"
+      },
+      {
+        "text": "cast tip403 whitelist",
+        "href": "/cast-tip403-whitelist"
       },
       {
         "text": "cast to-check-sum-address",
@@ -502,6 +826,22 @@
       {
         "text": "cast tx-pool status",
         "href": "/cast-tx-pool-status"
+      },
+      {
+        "text": "cast virtual-address",
+        "href": "/cast-virtual-address"
+      },
+      {
+        "text": "cast virtual-address create",
+        "href": "/cast-virtual-address-create"
+      },
+      {
+        "text": "cast virtual-address resolve",
+        "href": "/cast-virtual-address-resolve"
+      },
+      {
+        "text": "cast virtual-address watch",
+        "href": "/cast-virtual-address-watch"
       },
       {
         "text": "cast wallet address",
@@ -548,6 +888,18 @@
         "href": "/cast-wallet-remove"
       },
       {
+        "text": "cast wallet session",
+        "href": "/cast-wallet-session"
+      },
+      {
+        "text": "cast wallet session create",
+        "href": "/cast-wallet-session-create"
+      },
+      {
+        "text": "cast wallet session revoke",
+        "href": "/cast-wallet-session-revoke"
+      },
+      {
         "text": "cast wallet sign",
         "href": "/cast-wallet-sign"
       },
@@ -556,12 +908,110 @@
         "href": "/cast-wallet-sign-auth"
       },
       {
+        "text": "cast wallet touch-id",
+        "href": "/cast-wallet-touch-id"
+      },
+      {
+        "text": "cast wallet touch-id enroll",
+        "href": "/cast-wallet-touch-id-enroll"
+      },
+      {
+        "text": "cast wallet touch-id remove",
+        "href": "/cast-wallet-touch-id-remove"
+      },
+      {
+        "text": "cast wallet touch-id status",
+        "href": "/cast-wallet-touch-id-status"
+      },
+      {
         "text": "cast wallet vanity",
         "href": "/cast-wallet-vanity"
       },
       {
         "text": "cast wallet verify",
         "href": "/cast-wallet-verify"
+      }
+    ],
+    "Vault Commands": [
+      {
+        "text": "cast erc4626",
+        "href": "/cast-erc4626"
+      },
+      {
+        "text": "cast erc4626 asset",
+        "href": "/cast-erc4626-asset"
+      },
+      {
+        "text": "cast erc4626 check",
+        "href": "/cast-erc4626-check"
+      },
+      {
+        "text": "cast erc4626 convert-to-assets",
+        "href": "/cast-erc4626-convert-to-assets"
+      },
+      {
+        "text": "cast erc4626 convert-to-shares",
+        "href": "/cast-erc4626-convert-to-shares"
+      },
+      {
+        "text": "cast erc4626 deposit",
+        "href": "/cast-erc4626-deposit"
+      },
+      {
+        "text": "cast erc4626 info",
+        "href": "/cast-erc4626-info"
+      },
+      {
+        "text": "cast erc4626 max-deposit",
+        "href": "/cast-erc4626-max-deposit"
+      },
+      {
+        "text": "cast erc4626 max-mint",
+        "href": "/cast-erc4626-max-mint"
+      },
+      {
+        "text": "cast erc4626 max-redeem",
+        "href": "/cast-erc4626-max-redeem"
+      },
+      {
+        "text": "cast erc4626 max-withdraw",
+        "href": "/cast-erc4626-max-withdraw"
+      },
+      {
+        "text": "cast erc4626 mint",
+        "href": "/cast-erc4626-mint"
+      },
+      {
+        "text": "cast erc4626 position",
+        "href": "/cast-erc4626-position"
+      },
+      {
+        "text": "cast erc4626 preview-deposit",
+        "href": "/cast-erc4626-preview-deposit"
+      },
+      {
+        "text": "cast erc4626 preview-mint",
+        "href": "/cast-erc4626-preview-mint"
+      },
+      {
+        "text": "cast erc4626 preview-redeem",
+        "href": "/cast-erc4626-preview-redeem"
+      },
+      {
+        "text": "cast erc4626 preview-withdraw",
+        "href": "/cast-erc4626-preview-withdraw"
+      },
+      {
+        "text": "cast erc4626 redeem",
+        "href": "/cast-erc4626-redeem"
+      },
+      {
+        "text": "cast erc4626 total-assets",
+        "href": "/cast-erc4626-total-assets"
+      },
+      {
+        "text": "cast erc4626 withdraw",
+        "href": "/cast-erc4626-withdraw"
       }
     ],
     "Wallet Commands": [

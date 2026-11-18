@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { getCommandSourceFile } from "./commandSources";
 
 export interface MdxImport {
   componentName: string;
@@ -164,6 +165,12 @@ function buildMdxCandidatePaths(pagePath: string): string[] {
   const normalized = pagePath.replace(/\.(mdx?)$/, "");
   const withoutPrefix = normalized.replace(/^cast-/, "");
   const parts = withoutPrefix.split("-");
+
+  // The file from the sidebar link; the guesses below are the fallback
+  const sourceFile = getCommandSourceFile(pagePath);
+  if (sourceFile) {
+    candidates.add(sourceFile);
+  }
 
   // Existing specific mappings
   if (withoutPrefix.startsWith("wallet-")) {

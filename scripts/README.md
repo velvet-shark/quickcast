@@ -37,6 +37,7 @@ The `sync-commands.ts` script automatically:
 2. Creates missing command pages in `/app/(commands)/`
 3. Removes pages for deleted commands
 4. Updates navigation data in `/app/lib/navigation-data.json`
+5. Maps each page to its MDX file from the sidebar link in `/app/lib/command-sources.json`, so the content loaders can find nested commands such as `tempo/zone/earn`. The loaders fall back to guessing from the page name when a page has no entry.
 
 ## How it Works
 

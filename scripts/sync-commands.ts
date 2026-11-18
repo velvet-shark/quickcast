@@ -18,7 +18,10 @@ interface Command {
   link: string;
   category: string;
   path: string; // e.g., "cast-4byte" or "cast-wallet-address"
+  source: string; // e.g., "4byte" or "wallet/address", relative to commands/src/pages/reference/cast
 }
+
+const castReferenceDir = path.join(projectRoot, "commands/src/pages/reference/cast");
 
 // Parse the cast-cli-reference.ts file
 async function parseSidebarFile(): Promise<SidebarItem> {
@@ -52,7 +55,8 @@ function extractCommands(item: SidebarItem, category: string = ""): Command[] {
         name: item.text,
         link: item.link,
         category: category,
-        path: commandPath
+        path: commandPath,
+        source: pathMatch[1]
       });
     }
   }
@@ -184,7 +188,10 @@ async function syncCommands() {
     
     // Generate navigation file
     await generateNavigationFile(commands);
-    
+
+    // Generate the page-to-MDX-file map used by the content loaders
+    await generateCommandSourcesFile(commands);
+
     console.log("\nSync completed!");
     console.log(`- Created ${pagesToCreate.length} new pages`);
     console.log(`- Deleted ${pagesToDelete.length} orphaned pages`);
@@ -237,6 +244,30 @@ async function generateNavigationFile(commands: Command[]) {
   );
   
   console.log("Generated navigation data file");
+}
+
+// Generate the map from page name to MDX file, taken from the sidebar link.
+// Page names flatten slashes to dashes, so the loaders can't rebuild nested
+// paths like "tempo/zone/earn" from "cast-tempo-zone-earn" on their own.
+async function generateCommandSourcesFile(commands: Command[]) {
+  const commandSources: Record<string, string> = {};
+
+  for (const command of commands) {
+    const sourceFile = `${command.source}.mdx`;
+    if (fs.existsSync(path.join(castReferenceDir, sourceFile))) {
+      commandSources[command.path] = sourceFile;
+    } else {
+      console.warn(`No MDX file for ${command.path} at ${sourceFile}`);
+    }
+  }
+
+  const commandSourcesPath = path.join(projectRoot, "app/lib/command-sources.json");
+  await fs.promises.writeFile(
+    commandSourcesPath,
+    JSON.stringify(commandSources, null, 2)
+  );
+
+  console.log("Generated command sources file");
 }
 
 // Run the sync
